@@ -206,6 +206,16 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .pop-img.img-failed{display:none}
 
 a.waze{color:#05a5d6}
+/* menu popup */
+.menu-btn{font:inherit;font-size:.75rem;font-weight:500;margin-inline-start:6px;padding:2px 10px;border-radius:99px;border:1px solid color-mix(in srgb,#c9a227 50%,transparent);
+  background:color-mix(in srgb,#c9a227 16%,var(--surface));color:var(--ink);cursor:pointer;vertical-align:2px}
+.menu-btn:hover{background:color-mix(in srgb,#c9a227 30%,var(--surface))}
+dialog.menu-dlg{border:none;padding:0;border-radius:18px;max-width:min(420px,calc(100vw - 32px));width:100%;background:transparent;color:var(--ink)}
+dialog.menu-dlg::backdrop{background:rgba(10,20,22,.55);backdrop-filter:blur(2px)}
+dialog.menu-dlg .rest{margin:0;position:relative;padding:18px 18px 14px;box-shadow:0 20px 60px rgba(0,0,0,.35);background:var(--warm)}
+.dlg-x{position:absolute;top:10px;left:10px;width:30px;height:30px;border-radius:50%;border:none;background:rgba(0,0,0,.08);color:var(--ink);font-size:.95rem;cursor:pointer}
+.dlg-x:hover{background:rgba(0,0,0,.16)}
+
 /* back to top */
 .to-top{position:fixed;left:16px;bottom:18px;z-index:40;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
   background:var(--brand);color:#fff;font-size:1.35rem;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.25);
@@ -353,8 +363,8 @@ footer a{color:var(--muted)}
       <div class="ph" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg|88299 Leutkirch im Allgäu, Germany - panoramio.jpg" data-fallback="🌲"></div>
       <div class="body">
         <span class="nights">לילות 1–3 · 23–26.4</span>
-        <h3>כפר הנופש אלגוי</h3>
-        <p>Center Parcs Park Allgäu, ליד לויטקירך. בכפר יש את פארק המים Aqua Mundo (הכניסה כלולה), שמושלם לערבים.</p>
+        <h3>סנטר פארקס אלגוי</h3>
+        <p>Center Parcs Park Allgäu, ליד לויטקירך. בסנטר פארקס יש את פארק המים Aqua Mundo (הכניסה כלולה), שמושלם לערבים.</p>
       </div>
     </article>
     <article class="stay garmisch">
@@ -393,54 +403,41 @@ footer a{color:var(--muted)}
     <div class="ph" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg|88299 Leutkirch im Allgäu, Germany - panoramio.jpg" data-fallback="🛬"></div>
     <div class="day-title">
       <span class="day-num">יום שישי · 23.4</span>
-      <h3>נחיתה במינכן ← קניות ← כפר הנופש ופארק המים</h3>
+      <h3>נחיתה במינכן ← קניות ← סנטר פארקס אלגוי ופארק המים</h3>
     </div>
   </div>
   <div class="day-body">
     <div class="daysum" data-day="1"></div>
     <div class="meta">
       <span class="chip">🛬 נחיתה 09:05 · מינכן (MUC)</span>
-      <span class="chip stay-allgau">🛏️ כפר נופש אלגוי</span>
+      <span class="chip stay-allgau">🛏️ סנטר פארקס אלגוי</span>
     </div>
     <div class="grid">
       <ol class="timeline">
         <li class="key"><time>09:05</time><div class="what"><b>נחיתה בשדה התעופה מינכן (MUC)</b><small>ביקורת דרכונים ואיסוף מזוודות</small></div></li>
         <li><time>10:15</time><div class="what"><b>איסוף הרכב השכור: VW Tiguan<span data-car></span></b><small>מרכז השכרת הרכב (Mietwagenzentrum) בשדה. לוודא שהבוסטר מותקן ושיש וסט זוהר ומשולש ברכב</small></div></li>
         <li class="drive"><time>10:30</time><div class="what">🚗 נסיעה מערבה בכבישים A92 ← A99 ← A96 לכיוון לויטקירך (כ־190 ק״מ, כשעתיים)</div></li>
-        <li class="key"><time>12:30</time><div class="what"><b>🛒 קניות לבית בסופר ALDI SÜD לויטקירך</b><small>Künkelinstraße 9, Leutkirch, בערך 10 דקות מהכפר · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=ALDI+S%C3%9CD+K%C3%BCnkelinstra%C3%9Fe+9+Leutkirch">🗺️ גוגל מפות</a></small></div></li>
-        <li class="drive"><time>13:15</time><div class="what">🚗 לכפר הנופש (כ־10 דק׳)</div></li>
-        <li class="food"><time>13:30</time><div class="what"><b>🍔 צהריים בכפר, במסעדת Rocket's בפארק המים</b><small>המבורגר, צ׳יפס, נאגטס וגלידה</small></div></li>
+        <li class="key"><time>12:30</time><div class="what"><b>🛒 קניות לבית בסופר ALDI SÜD לויטקירך</b><small>Künkelinstraße 9, Leutkirch, בערך 10 דקות מסנטר פארקס · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=ALDI+S%C3%9CD+K%C3%BCnkelinstra%C3%9Fe+9+Leutkirch">🗺️ גוגל מפות</a></small></div></li>
+        <li class="drive"><time>13:15</time><div class="what">🚗 לסנטר פארקס (כ־10 דק׳)</div></li>
+        <li class="food"><time>13:30</time><div class="what"><b>🍔 צהריים בסנטר פארקס, במסעדת Rocket's בפארק המים<button class="menu-btn" type="button" data-menu="menu-day1">📋 תפריט</button></b><small>המבורגר, צ׳יפס, נאגטס וגלידה</small></div></li>
         <li><time>14:00</time><div class="what"><b>🌊 פארק המים Aqua Mundo</b><small>מגלשות, בריכת גלים ומסלול מים גועשים באורך 165 מ׳. זה הזמן לפרוק אנרגיה אחרי הטיסה</small></div></li>
-        <li class="key"><time>15:00</time><div class="what"><b>קבלת הבית בכפר</b><small>Center Parcs Park Allgäu · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Center+Parcs+Park+Allg%C3%A4u+Leutkirch">🗺️ גוגל מפות</a></small></div></li>
+        <li class="key"><time>15:00</time><div class="what"><b>קבלת הבית בסנטר פארקס</b><small>Center Parcs Park Allgäu · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Center+Parcs+Park+Allg%C3%A4u+Leutkirch">🗺️ גוגל מפות</a></small></div></li>
         <li class="food"><time>18:30</time><div class="what"><b>🏠 ארוחת ערב בבית</b><small>מבשלים משהו פשוט ממה שקנינו בסופר</small></div></li>
       </ol>
       <div>
         <div class="gallery">
-          <div class="ph wide" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg" data-label="כפר הנופש Park Allgäu" data-fallback="🌲"></div>
+          <div class="ph wide" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg" data-label="סנטר פארקס אלגוי Park Allgäu" data-fallback="🌲"></div>
         </div>
         <div class="rest shop">
           <span class="tag">🛒 הסופר המומלץ</span>
           <h4>ALDI SÜD לויטקירך</h4>
-          <p>הדיסקאונט הזול והאיכותי בגרמניה, עם לחמים טריים, מוצרי חלב, פירות, חטיפים ומים. הוא ממוקם בעיר, כ־10 דקות מהכפר. הסופר שבתוך הכפר יקר יותר (לפי מבקרים, חלק מהמוצרים כפולים במחיר).</p>
+          <p>הדיסקאונט הזול והאיכותי בגרמניה, עם לחמים טריים, מוצרי חלב, פירות, חטיפים ומים. הוא ממוקם בעיר, כ־10 דקות מסנטר פארקס. הסופר שבתוך סנטר פארקס יקר יותר (לפי מבקרים, חלק מהמוצרים כפולים במחיר).</p>
           <p><b>חלופה קרובה:</b> Lidl, ‏Bahnhofsarkaden 19, לויטקירך · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Lidl+Bahnhofsarkaden+19+Leutkirch">🗺️ גוגל מפות</a></p>
           <p>⚠️ <b>ביום ראשון (25.4) הסופרים בגרמניה סגורים</b>, אז קונים עכשיו לשלושה ימים. ברשימה: לחם, ממרחים, גבינות, פירות, חטיפים לדרך, מים, קפה וחלב.</p>
         </div>
         <div class="rest">
-          <span class="tag">🍽️ צהריים</span>
-          <h4>Rocket's, בתוך פארק המים</h4>
-          <p>מזנון בתוך Aqua Mundo, עם המבורגרים, צ׳יפס, סלטים וגלידה. אוכלים בלי לצאת מהמים.</p>
-          <table class="menu">
-            <tr><td>ארוחת ילדים: נאגטס עם צ׳יפס<i>Kids Menu: Chicken Nuggets mit Pommes</i></td><td class="pr">~€8</td></tr>
-            <tr><td>המבורגר ילדים עם צ׳יפס<i>Kids Burger mit Pommes</i></td><td class="pr">~€8.5</td></tr>
-            <tr><td>המבורגר למבוגרים<i>Burger</i></td><td class="pr">~€12</td></tr>
-            <tr><td>מנת צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€4.5</td></tr>
-            <tr><td>גלידה / מאפין<i>Eis · Muffin</i></td><td class="pr">~€3.5</td></tr>
-          </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
-        </div>
-        <div class="rest">
           <span class="tag">🏠 ארוחת ערב</span>
-          <h4>אוכלים בבית בכפר</h4>
+          <h4>אוכלים בבית בסנטר פארקס</h4>
           <p>מבשלים משהו פשוט ממה שקנינו בסופר: פסטה, שניצל מוכן, נקניקיות או טוסטים.</p>
         </div>
       </div>
@@ -461,16 +458,16 @@ footer a{color:var(--muted)}
     <div class="daysum" data-day="2"></div>
     <div class="meta">
       <span class="chip depart">⏰ יציאה 09:00</span>
-      <span class="chip stay-allgau">🛏️ כפר נופש אלגוי</span>
+      <span class="chip stay-allgau">🛏️ סנטר פארקס אלגוי</span>
     </div>
     <div class="grid">
       <ol class="timeline">
-        <li class="drive"><time>09:00</time><div class="what">🚗 נסיעה ישירה מהכפר לסקייווק אלגוי בשיידג (כ־50 דק׳)</div></li>
+        <li class="drive"><time>09:00</time><div class="what">🚗 נסיעה ישירה מסנטר פארקס לסקייווק אלגוי בשיידג (כ־50 דק׳)</div></li>
         <li class="key"><time>09:50</time><div class="what"><b>🌳 סקייווק אלגוי (היום נקרא Waldwelt Allgäu)<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">השביל בין העצים, רוב השבילים והמסעדה נגישים לעגלות</small><small>שביל בין צמרות העצים בגובה 40 מ׳, עם תצפית לאלפים ולאגם בודן. יש גם גשרים מתנדנדים, מתחם משחקים ופינת ליטוף. מהחניון הולכים כ־500 מ׳ בעלייה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Waldwelt+skywalk+allg%C3%A4u+Scheidegg">🗺️ גוגל מפות</a></small></div></li>
         <li class="drive"><time>12:30</time><div class="what">🚗 ללינדאו (כ־30 דק׳)</div></li>
-        <li class="food"><time>13:00</time><div class="what"><b>🍽️ ארוחת צהריים בלינדאו ב־Gasthaus zum Sünfzen</b><small>Maximilianstraße 1, בלב האי · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Gasthaus+zum+S%C3%BCnfzen+Lindau">🗺️ גוגל מפות</a></small></div></li>
+        <li class="food"><time>13:00</time><div class="what"><b>🍽️ ארוחת צהריים בלינדאו ב־Gasthaus zum Sünfzen<button class="menu-btn" type="button" data-menu="menu-day2">📋 תפריט</button></b><small>Maximilianstraße 1, בלב האי · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Gasthaus+zum+S%C3%BCnfzen+Lindau">🗺️ גוגל מפות</a></small></div></li>
         <li class="key"><time>14:15</time><div class="what"><b>⛵ העיר העתיקה של לינדאו<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">שטוח, עם קצת אבני מרצפת</small><small>אי באגם בודן: הנמל עם האריה הבווארי והמגדלור, סמטאות ציוריות וגלידה על הטיילת · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Lindau+Hafen">🗺️ גוגל מפות</a></small></div></li>
-        <li class="drive"><time>16:30</time><div class="what">🚗 חזרה לכפר הנופש (כ־50 דק׳)</div></li>
+        <li class="drive"><time>16:30</time><div class="what">🚗 חזרה לסנטר פארקס (כ־50 דק׳)</div></li>
         <li class="key"><time>17:30</time><div class="what"><b>🌊 פארק המים Aqua Mundo</b><small>מגלשות, בריכת גלים ומסלול מים גועשים</small></div></li>
         <li class="food"><time>19:30</time><div class="what"><b>🏠 ארוחת ערב בבית</b></div></li>
       </ol>
@@ -478,24 +475,11 @@ footer a{color:var(--muted)}
         <div class="gallery">
           <div class="ph wide" data-img="Lindau Leuchtturm Löwe.jpg|Lindau - Hafeneinfahrt mit Löwen und Leuchtturm (9534402866).jpg" data-label="לינדאו" data-fallback="⛵"></div>
           <div class="ph" data-img="Baumwipfelpfad mit Alpenblick.JPG|Scheidegger Wasserfälle (38).jpg" data-label="סקייווק אלגוי" data-fallback="🌳"></div>
-          <div class="ph" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg" data-label="כפר הנופש ו־Aqua Mundo" data-fallback="🌊"></div>
-        </div>
-        <div class="rest">
-          <span class="tag">🍽️ צהריים</span>
-          <h4>Gasthaus zum Sünfzen, לינדאו</h4>
-          <p>אחד הבתים הוותיקים והמוכרים באי, עם אוכל בווארי ביתי. המיקום מרכזי, ומשם ממשיכים לטייל ברגל.</p>
-          <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
-            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9</td></tr>
-            <tr><td>שפצלה עם רוטב<i>Spätzle mit Soße</i></td><td class="pr">~€8</td></tr>
-            <tr><td>נקניקיות עם צ׳יפס<i>Wiener Würstchen mit Pommes</i></td><td class="pr">~€7.5</td></tr>
-            <tr><td>גלידת ילדים<i>Kinder-Eis</i></td><td class="pr">~€4.5</td></tr>
-          </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום. ליד הסקייווק יש גם מסעדה בשירות עצמי, אם מישהו רעב באמצע הבוקר.</div>
+          <div class="ph" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg" data-label="סנטר פארקס אלגוי ו־Aqua Mundo" data-fallback="🌊"></div>
         </div>
         <div class="rest">
           <span class="tag">🏠 ארוחת ערב</span>
-          <h4>אוכלים בבית בכפר</h4>
+          <h4>אוכלים בבית בסנטר פארקס</h4>
           <p>מבשלים משהו פשוט ממה שקנינו בסופר: פסטה, שניצל מוכן, נקניקיות או טוסטים.</p>
         </div>
         <div class="tip"><b>💡 טיפ:</b> בחניון של הסקייווק משלמים €4 במטבעות. בלינדאו כדאי לחנות באחד החניונים שלפני הגשר ולהיכנס לאי ברגל.</div>
@@ -517,19 +501,19 @@ footer a{color:var(--muted)}
     <div class="daysum" data-day="3"></div>
     <div class="meta">
       <span class="chip depart">⏰ יציאה 09:00</span>
-      <span class="chip stay-allgau">🛏️ כפר נופש אלגוי</span>
+      <span class="chip stay-allgau">🛏️ סנטר פארקס אלגוי</span>
     </div>
     <div class="grid">
       <ol class="timeline">
         <li class="drive"><time>09:00</time><div class="what">🚗 יציאה לאימנשטאדט (כ־50 דק׳)</div></li>
         <li class="key"><time>10:00</time><div class="what"><b>🎢 Alpsee Bergwelt<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">ברכבל הכיסאות ובמגלשה אין מקום לעגלה. משאירים אותה בתחנה התחתונה</small><small>רכבל כיסאות, מגלשת ההרים Alpsee Coaster (מהארוכות בגרמניה), פארק חבלים ותצפית על אגם אלפזה הגדול · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Alpsee+Bergwelt+B%C3%BChl+am+Alpsee">🗺️ גוגל מפות</a></small></div></li>
-        <li class="food"><time>12:15</time><div class="what"><b>🍽️ צהריים בבקתת ההרים "Bärenfalle"</b><small>בגובה כ־1,100 מ׳, ליד התחנה העליונה של הרכבל</small></div></li>
+        <li class="food"><time>12:15</time><div class="what"><b>🍽️ צהריים בבקתת ההרים "Bärenfalle"<button class="menu-btn" type="button" data-menu="menu-day3">📋 תפריט</button></b><small>בגובה כ־1,100 מ׳, ליד התחנה העליונה של הרכבל</small></div></li>
         <li class="drive"><time>13:30</time><div class="what">🚗 לאוברסטדורף (כ־25 דק׳)</div></li>
         <li><time>14:00</time><div class="what"><b>🏘️ אוברסטדורף</b><small>עיירת הרים מקסימה עם רחוב הולכי רגל · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Oberstdorf+Marktplatz">🗺️ גוגל מפות</a></small></div></li>
         <li class="key"><time>14:45</time><div class="what"><b>💎 אגם כריסטלזה (Christlessee)<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">דרך רחבה ונוחה לאורך הנחל</small><small>אגם טורקיז צלול שלא קופא אף פעם. הגישה ברכב פרטי מוגבלת, לכן חונים באוברסטדורף ומגיעים ברגל או באופניים (כ־4 ק״מ בשביל נוח לאורך נחל הטרטאך). בעונה יש גם רכבת תיירים. ליד האגם יש בית קפה לעוגה ולקייזרשמארן · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Christlessee+Oberstdorf">🗺️ גוגל מפות</a></small></div></li>
-        <li class="drive"><time>17:30</time><div class="what">🚗 חזרה לכפר (כשעה ורבע)</div></li>
+        <li class="drive"><time>17:30</time><div class="what">🚗 חזרה לסנטר פארקס (כשעה ורבע)</div></li>
         <li class="food"><time>18:45</time><div class="what"><b>🏠 ארוחת ערב בבית</b></div></li>
-        <li><time>19:30</time><div class="what"><b>🌊 ערב אחרון בפארק המים</b><small>ולארוז, כי מחר עוזבים את הכפר</small></div></li>
+        <li><time>19:30</time><div class="what"><b>🌊 ערב אחרון בפארק המים</b><small>ולארוז, כי מחר עוזבים את סנטר פארקס</small></div></li>
       </ol>
       <div>
         <div class="gallery">
@@ -538,20 +522,8 @@ footer a{color:var(--muted)}
           <div class="ph" data-img="Oberstdorf - Trettach, Mädelegabel, Hochfrottspitze.JPG|20150730 xl P1010004 Illerursprung Zusammenfluss von Trettach Stillach und Breitach bei Oberstdorf.JPG" data-label="אוברסטדורף והטרטאך" data-fallback="🏘️"></div>
         </div>
         <div class="rest">
-          <span class="tag">🍽️ צהריים</span>
-          <h4>Berghütte Bärenfalle, ב־Alpsee Bergwelt</h4>
-          <p>בקתת הרים גדולה ליד התחנה העליונה, עם נוף לאגם. אוכלים בין סיבוב אחד במגלשה לסיבוב הבא, בלי לנסוע.</p>
-          <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
-            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9.5</td></tr>
-            <tr><td>מנת צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€4.5</td></tr>
-            <tr><td>קייזרשמארן (פנקייק קרוע עם רסק תפוחים)<i>Kaiserschmarrn mit Apfelmus</i></td><td class="pr">~€12</td></tr>
-          </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום. בדרך חזרה מהאגם אפשר לעצור לעוגה בבית הקפה Café-Restaurant Christlessee.</div>
-        </div>
-        <div class="rest">
           <span class="tag">🏠 ארוחת ערב</span>
-          <h4>אוכלים בבית בכפר</h4>
+          <h4>אוכלים בבית בסנטר פארקס</h4>
           <p>מבשלים משהו פשוט ממה שקנינו בסופר: פסטה, שניצל מוכן, נקניקיות או טוסטים.</p>
         </div>
         <div class="tip"><b>⚠️ יום ראשון:</b> החנויות והסופרים סגורים, אבל המסעדות והאטרקציות פתוחות. עונת הקיץ של Alpsee Bergwelt נפתחת בדרך כלל בתחילת אפריל, והמגלשה תלויה במזג האוויר.</div>
@@ -578,10 +550,10 @@ footer a{color:var(--muted)}
     </div>
     <div class="grid">
       <ol class="timeline">
-        <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מהכפר</b><small>להעמיס את הרכב לפני היציאה</small></div></li>
+        <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מסנטר פארקס</b><small>להעמיס את הרכב לפני היציאה</small></div></li>
         <li class="drive"><time>09:00</time><div class="what">🚗 יציאה לשוואנגאו (כשעה ו־20 דק׳)</div></li>
         <li class="key"><time>10:30</time><div class="what"><b>🏰 טירת נוישוונשטיין<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">העלייה סלולה אבל תלולה. בתוך הטירה יש מדרגות ואין כניסה עם עגלה</small><small>עולים ברגל (כ־40 דק׳), באוטובוס או בכרכרה. סיור מודרך בתוך הטירה בשעה שהוזמנה מראש, ותצפית מגשר מריה (Marienbrücke) · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Neuschwanstein+Castle">🗺️ גוגל מפות</a></small></div></li>
-        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Restaurant Café Kainz</b><small>Alpseestraße 5, הוהנשוואנגאו. יש מרפסת עם נוף לטירה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Restaurant+Cafe+Kainz+Hohenschwangau">🗺️ גוגל מפות</a></small></div></li>
+        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Restaurant Café Kainz<button class="menu-btn" type="button" data-menu="menu-day4">📋 תפריט</button></b><small>Alpseestraße 5, הוהנשוואנגאו. יש מרפסת עם נוף לטירה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Restaurant+Cafe+Kainz+Hohenschwangau">🗺️ גוגל מפות</a></small></div></li>
         <li class="drive"><time>14:00</time><div class="what">🚗 לרכבל טגלברג (5 דק׳)</div></li>
         <li class="key"><time>14:15</time><div class="what"><b>🚡 רכבל טגלברג (Tegelbergbahn)<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">לא מצאנו מידע רשמי על עגלות ברכבל. אזור המשחקים למטה מתאים</small><small>עולים לתצפית מעל הטירה והאגמים. למטה יש מגלשות, מגלשת הרים (Sommerrodelbahn), דשא ופרות · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Tegelbergbahn+Schwangau">🗺️ גוגל מפות</a></small></div></li>
         <li class="drive"><time>16:30</time><div class="what">🚗 נסיעה לגרמיש-פרטנקירכן (כשעה)</div></li>
@@ -593,18 +565,6 @@ footer a{color:var(--muted)}
           <div class="ph wide" data-img="Neuschwanstein-c1.jpg|Neuschwanstein Castle.jpg" data-label="נוישוונשטיין מגשר מריה" data-fallback="🏰"></div>
           <div class="ph" data-img="Neue Kabine (2021) der Tegelbergbahn.jpg" data-label="רכבל טגלברג" data-fallback="🚡"></div>
           <div class="ph" data-img="Garmisch-Partenkirchen.JPG|Garmisch-Partenkirchen-Panorama.jpg" data-label="גרמיש-פרטנקירכן" data-fallback="🏔️"></div>
-        </div>
-        <div class="rest">
-          <span class="tag">🍽️ צהריים</span>
-          <h4>Restaurant Café Kainz, הוהנשוואנגאו</h4>
-          <p>במסעדה יש תפריט ילדים מיוחד ומרפסת גדולה עם נוף לנוישוונשטיין. מנות חמות מוגשות ברצף מ־10:30 עד 16:00.</p>
-          <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
-            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9</td></tr>
-            <tr><td>אצבעות דג עם צ׳יפס<i>Fischstäbchen mit Pommes</i></td><td class="pr">~€9</td></tr>
-            <tr><td>נאגטס עוף עם צ׳יפס<i>Chicken Nuggets mit Pommes</i></td><td class="pr">~€9</td></tr>
-          </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
         </div>
         <div class="rest">
           <span class="tag">🌙 ארוחת ערב קלה</span>
@@ -637,7 +597,7 @@ footer a{color:var(--muted)}
         <li class="drive"><time>09:00</time><div class="what">🚗 לתחנת הרכבל באיבזה (כ־20 דק׳)</div></li>
         <li class="key"><time>09:30</time><div class="what"><b>🚡 רכבל Seilbahn Zugspitze לפסגה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">הרכבל והמרפסות בפסגה נגישים. על השלג בקרחון כבר לא</small><small>10 דקות עד גובה 2,962 מ׳, הנקודה הגבוהה בגרמניה. מהפסגה רואים 4 מדינות, ויש שלג גם באפריל · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Seilbahn+Zugspitze+Talstation+Eibsee">🗺️ גוגל מפות</a></small></div></li>
         <li><time>10:00</time><div class="what"><b>🏔️ בפסגה ובקרחון</b><small>אפשר לרדת לרמת הקרחון (Zugspitzplatt) ברכבל הקרחון, ולחזור לאיבזה ברכבת השיניים</small></div></li>
-        <li class="food"><time>12:30</time><div class="what"><b>🍽️ צהריים ב־Seerestaurant Eibsee Pavillon</b><small>על שפת האגם (Seeweg 2). כדאי לשבת בחוץ בשביל הנוף · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Eibsee+Pavillon+Grainau">🗺️ גוגל מפות</a></small></div></li>
+        <li class="food"><time>12:30</time><div class="what"><b>🍽️ צהריים ב־Seerestaurant Eibsee Pavillon<button class="menu-btn" type="button" data-menu="menu-day5">📋 תפריט</button></b><small>על שפת האגם (Seeweg 2). כדאי לשבת בחוץ בשביל הנוף · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Eibsee+Pavillon+Grainau">🗺️ גוגל מפות</a></small></div></li>
         <li class="key"><time>13:30</time><div class="what"><b>💙 טיול קצר לאורך אגם איבזה<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">החלק הצפוני נוח, ובשאר המסלול יש קטעים עם שורשים ומדרגות</small><small>ובעונה גם סירות פדלים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Eibsee">🗺️ גוגל מפות</a></small></div></li>
         <li class="drive"><time>14:30</time><div class="what">🚗 לרויטה שבאוסטריה (כ־40 דק׳, דרך ארוואלד)</div></li>
         <li class="key"><time>15:15</time><div class="what"><b>🌉 גשר היילין 179 (Highline179)<span class="pram no">👶 לא לעגלה</span></b><small class="pn">לפי האתר הרשמי אסור לעלות עם עגלה על הגשר. מגיל 4 משלמים</small><small>גשר תלוי להולכי רגל באורך 406 מ׳ ובגובה 114 מ׳, בין חורבות טירת ארנברג · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=highline179+Reutte">🗺️ גוגל מפות</a></small></div></li>
@@ -649,18 +609,6 @@ footer a{color:var(--muted)}
           <div class="ph wide" data-img="Zugspitze Gipfelkreuz 2021.jpg|Gipfelkreuz Zugspitze.jpg|Zugspitze Westansicht.JPG" data-label="צלב הפסגה בצוגשפיצה" data-fallback="🏔️"></div>
           <div class="ph" data-img="Seilbahn Zugspitze von Eibsee.jpg|Eibsee & Zugspitze.jpg" data-label="אגם איבזה" data-fallback="💙"></div>
           <div class="ph" data-img="Highline179.jpg|Panorama of Highline179 and Burg Ehrenberg.jpg|20150723 ReutteTirol Highline179 BW DSC03837 PtrQs.jpg" data-label="היילין 179" data-fallback="🌉"></div>
-        </div>
-        <div class="rest">
-          <span class="tag">🍽️ צהריים</span>
-          <h4>Seerestaurant Eibsee Pavillon</h4>
-          <p>מסעדה ממש על שפת האגם, על שביל ההליכה ולא רחוק מהשכרת סירות הפדלים.</p>
-          <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€11</td></tr>
-            <tr><td>אצבעות דג עם צ׳יפס<i>Fischstäbchen mit Pommes</i></td><td class="pr">~€9.5</td></tr>
-            <tr><td>מנת צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€5</td></tr>
-            <tr><td>קייזרשמארן<i>Kaiserschmarrn</i></td><td class="pr">~€13</td></tr>
-          </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
         </div>
         <div class="rest">
           <span class="tag">🌙 ארוחת ערב קלה</span>
@@ -699,7 +647,7 @@ footer a{color:var(--muted)}
         <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מהמלון בגרמיש</b></div></li>
         <li class="drive"><time>09:00</time><div class="what">🚗 לגינצבורג (כשעתיים ורבע)</div></li>
         <li class="key"><time>11:15</time><div class="what"><b>🧱 לגולנד גרמניה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">כל הפארק נגיש, ויש גם השכרת עגלות</small><small>מינילנד, עולם נינג׳גו, ארץ הפיראטים, האבירים ועוד. יום כיף מלא · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=LEGOLAND+Deutschland+Resort+G%C3%BCnzburg">🗺️ גוגל מפות</a></small></div></li>
-        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Schnitzel Depot בתוך הפארק</b><small>יש גם ארוחות ילדים קבועות במסעדות האחרות של הפארק</small></div></li>
+        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Schnitzel Depot בתוך הפארק<button class="menu-btn" type="button" data-menu="menu-day6">📋 תפריט</button></b><small>יש גם ארוחות ילדים קבועות במסעדות האחרות של הפארק</small></div></li>
         <li class="drive"><time>17:30</time><div class="what">🚗 נסיעה לאזור שדה התעופה (כשעה ו־45 דק׳)</div></li>
         <li class="food"><time>19:15</time><div class="what"><b>🍔 ארוחת ערב קלה במקדונלדס של שדה התעופה</b><small>במרכז MAC, קומה 03, לפני הבידוק הביטחוני. פתוח עד מאוחר · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=McDonald%27s+Munich+Airport+Center">🗺️ גוגל מפות</a></small></div></li>
         <li><time>20:30</time><div class="what"><b>⛽ תדלוק מלא</b><small>כדי שלא נצטרך לעצור בבוקר</small></div></li>
@@ -710,16 +658,6 @@ footer a{color:var(--muted)}
           <div class="ph wide" data-img="Flying Ninjago Legoland Deutschland (207022357).jpeg|Miniland - Berlin (Legoland) (1).jpg" data-label="לגולנד גרמניה" data-fallback="🧱"></div>
           <div class="ph" data-img="Miniland - Berlin (Legoland) (2).jpg|Miniland - Berlin (Legoland) (1).jpg" data-label="מינילנד" data-fallback="🧱"></div>
           <div class="ph" data-img="Lageplan Legoland Deutschland.jpg" data-label="מפת הפארק" data-fallback="🗺️"></div>
-        </div>
-        <div class="rest">
-          <span class="tag">🍽️ צהריים</span>
-          <h4>Schnitzel Depot ומסעדות הפארק</h4>
-          <table class="menu">
-            <tr><td>ארוחת ילדים (מנה, שתייה והפתעה)<i>Kindermenü</i></td><td class="pr">~€10</td></tr>
-            <tr><td>שניצל עם צ׳יפס<i>Schnitzel mit Pommes</i></td><td class="pr">~€14</td></tr>
-            <tr><td>פיצה / פסטה<i>Pizza · Pasta</i></td><td class="pr">~€12</td></tr>
-          </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
         </div>
         <div class="rest">
           <span class="tag">🌙 ארוחת ערב קלה</span>
@@ -793,7 +731,7 @@ footer a{color:var(--muted)}
           <li>סקייווק: €15.80 למבוגר, €11.70 לילד · Alpsee Bergwelt (רכבל ומגלשה): כ־€17 למבוגר, כ־€14.50 לילד</li>
           <li>לגולנד: כ־€45 לאדם באונליין · Aqua Mundo כלול בלינה</li>
           <li>ארוחות: צהריים במסעדה (כ־€17 למבוגר, כ־€10 לילד). ערב קל של פיצה או מקדונלדס (כ־€10 למבוגר, כ־€7 לילד). הילד בן ה־3 לא נספר</li>
-          <li>בימי הכפר אוכלים ערב בבית. הקניות בסופר לא נכללות בחישוב</li>
+          <li>בימי סנטר פארקס אוכלים ערב בבית. הקניות בסופר לא נכללות בחישוב</li>
           <li>הילד בן ה־3 נכנס בחינם לרוב האטרקציות (בסקייווק מתחת ל־1 מ׳). בלגולנד הוא משלם</li>
           <li>דלק: VW Tiguan אוטומט, וברירת המחדל היא דיזל. בנזין בכ־7.8 ל׳/100 ק״מ, דיזל בכ־6.3 ל׳/100 ק״מ. זו צריכה בפועל עם משפחה מלאה ונסיעה בהרים, קצת יותר מהנתון הרשמי של היצרן</li>
           <li>לא כולל מזכרות ו־AlpspiX</li>
@@ -813,11 +751,107 @@ footer a{color:var(--muted)}
     <div class="tipcard"><div class="ico">🌦️</div><h3>פתיחת העונה</h3><p>חלק מהאטרקציות (מגלשות הרים, גשר מריה, רכבת התיירים לכריסטלזה) נפתחות לפי מזג האוויר. כדאי לבדוק יום לפני.</p></div>
     <div class="tipcard"><div class="ico">🇦🇹</div><h3>יציאה לאוסטריה</h3><p>היילין 179 נמצא באוסטריה. בכבישים הרגילים דרך ארוואלד לא צריך ויניטה (מדבקת כבישים מהירים). לא להיכנס לאוטובאן האוסטרי בלי ויניטה.</p></div>
     <div class="tipcard"><div class="ico">🅿️</div><h3>חניה</h3><p>ברוב החניונים משלמים במטבעות או באפליקציה. כדאי להחזיק ברכב מטבעות של יורו.</p></div>
-    <div class="tipcard"><div class="ico">🛒</div><h3>יום ראשון סגור</h3><p>ביום ראשון 25.4 הסופרים בגרמניה סגורים. לכן קונים ביום שישי, בדרך לכפר. בסופר שבתוך הכפר אפשר להשלים חוסרים.</p></div>
+    <div class="tipcard"><div class="ico">🛒</div><h3>יום ראשון סגור</h3><p>ביום ראשון 25.4 הסופרים בגרמניה סגורים. לכן קונים ביום שישי, בדרך לסנטר פארקס. בסופר שבתוך סנטר פארקס אפשר להשלים חוסרים.</p></div>
   </div>
 </section>
 
 </main>
+
+<dialog class="menu-dlg" id="menu-day1" aria-label="תפריט">
+  <div class="rest">
+    <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
+          <span class="tag">📋 תפריט צהריים</span>
+          <h4>Rocket's, בתוך פארק המים</h4>
+          <p>מזנון בתוך Aqua Mundo, עם המבורגרים, צ׳יפס, סלטים וגלידה. אוכלים בלי לצאת מהמים.</p>
+          <table class="menu">
+            <tr><td>ארוחת ילדים: נאגטס עם צ׳יפס<i>Kids Menu: Chicken Nuggets mit Pommes</i></td><td class="pr">~€8</td></tr>
+            <tr><td>המבורגר ילדים עם צ׳יפס<i>Kids Burger mit Pommes</i></td><td class="pr">~€8.5</td></tr>
+            <tr><td>המבורגר למבוגרים<i>Burger</i></td><td class="pr">~€12</td></tr>
+            <tr><td>מנת צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€4.5</td></tr>
+            <tr><td>גלידה / מאפין<i>Eis · Muffin</i></td><td class="pr">~€3.5</td></tr>
+          </table>
+          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+  </div>
+</dialog>
+
+<dialog class="menu-dlg" id="menu-day2" aria-label="תפריט">
+  <div class="rest">
+    <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
+          <span class="tag">📋 תפריט צהריים</span>
+          <h4>Gasthaus zum Sünfzen, לינדאו</h4>
+          <p>אחד הבתים הוותיקים והמוכרים באי, עם אוכל בווארי ביתי. המיקום מרכזי, ומשם ממשיכים לטייל ברגל.</p>
+          <table class="menu">
+            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
+            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9</td></tr>
+            <tr><td>שפצלה עם רוטב<i>Spätzle mit Soße</i></td><td class="pr">~€8</td></tr>
+            <tr><td>נקניקיות עם צ׳יפס<i>Wiener Würstchen mit Pommes</i></td><td class="pr">~€7.5</td></tr>
+            <tr><td>גלידת ילדים<i>Kinder-Eis</i></td><td class="pr">~€4.5</td></tr>
+          </table>
+          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום. ליד הסקייווק יש גם מסעדה בשירות עצמי, אם מישהו רעב באמצע הבוקר.</div>
+  </div>
+</dialog>
+
+<dialog class="menu-dlg" id="menu-day3" aria-label="תפריט">
+  <div class="rest">
+    <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
+          <span class="tag">📋 תפריט צהריים</span>
+          <h4>Berghütte Bärenfalle, ב־Alpsee Bergwelt</h4>
+          <p>בקתת הרים גדולה ליד התחנה העליונה, עם נוף לאגם. אוכלים בין סיבוב אחד במגלשה לסיבוב הבא, בלי לנסוע.</p>
+          <table class="menu">
+            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
+            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9.5</td></tr>
+            <tr><td>מנת צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€4.5</td></tr>
+            <tr><td>קייזרשמארן (פנקייק קרוע עם רסק תפוחים)<i>Kaiserschmarrn mit Apfelmus</i></td><td class="pr">~€12</td></tr>
+          </table>
+          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום. בדרך חזרה מהאגם אפשר לעצור לעוגה בבית הקפה Café-Restaurant Christlessee.</div>
+  </div>
+</dialog>
+
+<dialog class="menu-dlg" id="menu-day4" aria-label="תפריט">
+  <div class="rest">
+    <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
+          <span class="tag">📋 תפריט צהריים</span>
+          <h4>Restaurant Café Kainz, הוהנשוואנגאו</h4>
+          <p>במסעדה יש תפריט ילדים מיוחד ומרפסת גדולה עם נוף לנוישוונשטיין. מנות חמות מוגשות ברצף מ־10:30 עד 16:00.</p>
+          <table class="menu">
+            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
+            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9</td></tr>
+            <tr><td>אצבעות דג עם צ׳יפס<i>Fischstäbchen mit Pommes</i></td><td class="pr">~€9</td></tr>
+            <tr><td>נאגטס עוף עם צ׳יפס<i>Chicken Nuggets mit Pommes</i></td><td class="pr">~€9</td></tr>
+          </table>
+          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+  </div>
+</dialog>
+
+<dialog class="menu-dlg" id="menu-day5" aria-label="תפריט">
+  <div class="rest">
+    <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
+          <span class="tag">📋 תפריט צהריים</span>
+          <h4>Seerestaurant Eibsee Pavillon</h4>
+          <p>מסעדה ממש על שפת האגם, על שביל ההליכה ולא רחוק מהשכרת סירות הפדלים.</p>
+          <table class="menu">
+            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€11</td></tr>
+            <tr><td>אצבעות דג עם צ׳יפס<i>Fischstäbchen mit Pommes</i></td><td class="pr">~€9.5</td></tr>
+            <tr><td>מנת צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€5</td></tr>
+            <tr><td>קייזרשמארן<i>Kaiserschmarrn</i></td><td class="pr">~€13</td></tr>
+          </table>
+          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+  </div>
+</dialog>
+
+<dialog class="menu-dlg" id="menu-day6" aria-label="תפריט">
+  <div class="rest">
+    <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
+          <span class="tag">📋 תפריט צהריים</span>
+          <h4>Schnitzel Depot ומסעדות הפארק</h4>
+          <table class="menu">
+            <tr><td>ארוחת ילדים (מנה, שתייה והפתעה)<i>Kindermenü</i></td><td class="pr">~€10</td></tr>
+            <tr><td>שניצל עם צ׳יפס<i>Schnitzel mit Pommes</i></td><td class="pr">~€14</td></tr>
+            <tr><td>פיצה / פסטה<i>Pizza · Pasta</i></td><td class="pr">~€12</td></tr>
+          </table>
+          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+  </div>
+</dialog>
 
 <button class="to-top" id="toTop" aria-label="חזרה לראש הדף" title="חזרה לראש הדף">↑</button>
 
@@ -895,6 +929,18 @@ document.querySelectorAll('a[href*="google.com/maps/dir/"]').forEach(function(a)
   w.className = (a.className ? a.className + " " : "") + "waze";
   w.textContent = "🚙 Waze";
   a.after(document.createTextNode(" · "), w);
+});
+
+/* ---------- menu popups ---------- */
+document.querySelectorAll(".menu-btn").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    var d = document.getElementById(btn.getAttribute("data-menu"));
+    if (d && d.showModal) d.showModal(); else if (d) d.setAttribute("open", "");
+  });
+});
+document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
+  d.querySelector(".dlg-x").addEventListener("click", function(){ d.close(); });
+  d.addEventListener("click", function(e){ if (e.target === d) d.close(); });
 });
 
 /* ---------- back to top ---------- */
@@ -1199,7 +1245,7 @@ document.querySelectorAll('a[href*="google.com/maps/dir/"]').forEach(function(a)
   if (!window.L){ el.innerHTML = '<div class="map-fallback">לא הצלחנו לטעון את המפה. בדקו את החיבור לאינטרנט ורעננו.</div>'; return; }
 
   var HOTELS = [
-    { n: "Center Parcs Park Allgäu", ph: "Ferienpark Leutkirch Centerparc Allgäu Seeterrasse beim Market Dome.jpg|Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg", d: "כפר הנופש · לילות 1–3 (23–26.4)", ll: [47.788, 10.056], c: "#2f8a4f", day: "day1", short: "כפר הנופש" },
+    { n: "Center Parcs Park Allgäu", ph: "Ferienpark Leutkirch Centerparc Allgäu Seeterrasse beim Market Dome.jpg|Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg", d: "סנטר פארקס אלגוי · לילות 1–3 (23–26.4)", ll: [47.788, 10.056], c: "#2f8a4f", day: "day1", short: "סנטר פארקס" },
     { n: "Hotel Rheinischer Hof", d: "גרמיש · לילות 4–5 (26–28.4)", ll: [47.4925, 11.083], c: "#2d6fa8", day: "day4", short: "גרמיש" },
     { n: "Atomis Hotel Munich Airport", d: "ליד שדה התעופה · לילה 6 (28.4)", ll: [48.336, 11.802], c: "#8a4fb0", day: "day6", short: "Atomis" }
   ];
