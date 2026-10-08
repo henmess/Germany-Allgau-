@@ -9,6 +9,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script>
+/* Wikimedia Commons thumbnail with a fallback chain: <img data-alt="a.jpg|b.jpg" onerror="nextImg(this)"> */
+window.COMMONS = "https://commons.wikimedia.org/wiki/Special:FilePath/";
+window.commonsUrl = function(name, w){ return COMMONS + encodeURIComponent(name.replace(/ /g,"_")) + "?width=" + (w || 120); };
+window.nextImg = function(img){
+  var list = (img.getAttribute("data-alt") || "").split("|").filter(Boolean);
+  if (list.length){ img.setAttribute("data-alt", list.slice(1).join("|")); img.src = commonsUrl(list[0], img.getAttribute("data-w")); }
+  else { img.onerror = null; img.classList.add("img-failed"); }
+};
+window.commonsImg = function(names, w, cls, alt){
+  var list = names.split("|");
+  return '<img class="' + (cls || "") + '" alt="' + (alt || "") + '" loading="lazy" data-w="' + (w || 120) + '" data-alt="' + list.slice(1).join("|") + '" src="' + commonsUrl(list[0], w) + '" onerror="nextImg(this)">';
+};
+window.CAR_IMG = "VW Tiguan 1.5 eTSI R-Line (III) – h 18052025.jpg|Volkswagen Tiguan III IMG 8388.jpg|2021 Volkswagen Tiguan R Line.jpg";
+</script>
 <style>
 :root{
   --bg:#f5f3ee; --surface:#ffffff; --ink:#1d2a2e; --muted:#5d6b6f; --line:#e3ded3;
@@ -165,10 +180,10 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .map-legend{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:center;padding:10px 14px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line)}
 .map-legend span{display:inline-flex;align-items:center;gap:6px}
 .lg-hotel{width:22px;height:22px;border-radius:7px;display:inline-grid;place-items:center;font-size:12px;color:#fff;background:#2d6fa8;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)}
-.lg-attr{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-sizing:border-box}
+.lg-attr{width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-sizing:border-box}
 .lg-route{width:26px;border-top:3px dashed #1f6f68}
 .mk-hotel{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px;color:#fff;border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35);transform:rotate(0)}
-.mk-attr{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:15px;background:#fff;border:3px solid #e07a3f;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.mk-attr{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:#fff;border:3px solid #e07a3f;box-shadow:0 2px 8px rgba(0,0,0,.35)}
 .mk-air{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:16px;background:#1d2a2e;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
 .leaflet-popup-content{direction:rtl;text-align:right;font-family:"Rubik",system-ui,sans-serif;font-size:.9rem;line-height:1.5;margin:10px 14px}
 .leaflet-popup-content b{display:block;font-size:.98rem}
@@ -176,6 +191,17 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .leaflet-tooltip.mk-tip{font-family:"Rubik",system-ui,sans-serif;font-weight:700;font-size:.75rem;padding:2px 8px;border-radius:99px;direction:rtl}
 .map-fallback{display:grid;place-items:center;height:100%;color:var(--muted);font-size:.95rem;padding:20px;text-align:center}
 @media (max-width:480px){ #tripMap{height:320px} }
+
+/* car thumbnails */
+.car-thumb{width:46px;height:30px;object-fit:cover;border-radius:7px;vertical-align:middle;border:2px solid rgba(255,255,255,.7);background:#cfd8da;margin-inline-start:6px}
+.car-thumb.lg{width:74px;height:46px;display:block;margin:0 auto 4px}
+.car-thumb.sm{width:34px;height:22px;border-width:1px;border-radius:5px}
+.car-thumb.img-failed{display:none}
+.mk-attr{position:relative;overflow:hidden}
+.mk-attr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
+.mk-attr img.img-failed{display:none}
+.pop-img{width:100%;height:110px;object-fit:cover;border-radius:8px;margin-bottom:6px;display:block}
+.pop-img.img-failed{display:none}
 
 /* back to top */
 .to-top{position:fixed;left:16px;bottom:18px;z-index:40;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
@@ -280,7 +306,7 @@ footer a{color:var(--muted)}
       <div class="stat"><b>7</b><span>ימים</span></div>
       <div class="stat"><b>3</b><span>מקומות לינה</span></div>
       <div class="stat"><b id="statKm">~1,080</b><span>ק״מ נסיעה</span></div>
-      <div class="stat"><b>🚙 Tiguan</b><span>פולקסווגן · אוטומט</span></div>
+      <div class="stat"><span data-car="lg"></span><b>VW Tiguan</b><span>אוטומט</span></div>
       <div class="stat"><b id="statTotal">—</b><span>עלות כוללת משוערת</span></div>
     </div>
   </div>
@@ -312,7 +338,7 @@ footer a{color:var(--muted)}
     <div id="tripMap" dir="ltr" role="region" aria-label="מפת הטיול"></div>
     <div class="map-legend">
       <span><i class="lg-hotel">🛏</i> מלון / לינה</span>
-      <span><i class="lg-attr"></i> אטרקציה</span>
+      <span><i class="lg-attr"></i> אטרקציה (תמונה אמיתית)</span>
       <span><i class="lg-hotel" style="background:#1d2a2e;border-radius:50%">✈</i> שדה תעופה</span>
       <span><i class="lg-route"></i> מסלול הנסיעה בין המלונות</span>
     </div>
@@ -376,7 +402,7 @@ footer a{color:var(--muted)}
     <div class="grid">
       <ol class="timeline">
         <li class="key"><time>09:05</time><div class="what"><b>נחיתה בשדה התעופה מינכן (MUC)</b><small>ביקורת דרכונים ואיסוף מזוודות</small></div></li>
-        <li><time>10:15</time><div class="what"><b>איסוף הרכב השכור</b><small>מרכז השכרת הרכב (Mietwagenzentrum) בשדה. לוודא שהבוסטר מותקן ושיש וסט זוהר ומשולש ברכב</small></div></li>
+        <li><time>10:15</time><div class="what"><b>איסוף הרכב השכור: VW Tiguan<span data-car></span></b><small>מרכז השכרת הרכב (Mietwagenzentrum) בשדה. לוודא שהבוסטר מותקן ושיש וסט זוהר ומשולש ברכב</small></div></li>
         <li class="drive"><time>10:30</time><div class="what">🚗 נסיעה מערבה בכבישים A92 ← A99 ← A96 לכיוון לויטקירך (כ־190 ק״מ, כשעתיים)</div></li>
         <li class="key"><time>12:30</time><div class="what"><b>🛒 קניות לבית בסופר ALDI SÜD לויטקירך</b><small>Künkelinstraße 9, Leutkirch, בערך 10 דקות מהכפר · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=ALDI+S%C3%9CD+K%C3%BCnkelinstra%C3%9Fe+9+Leutkirch">ניווט ↗</a></small></div></li>
         <li class="drive"><time>13:15</time><div class="what">🚗 לכפר הנופש (כ־10 דק׳)</div></li>
@@ -751,7 +777,7 @@ footer a{color:var(--muted)}
         <label>ילדים 6–15<input type="number" id="inKids" min="0" max="10" value="2"></label>
         <label>ילדים 3–5 (לא נספרים בארוחות)<input type="number" id="inSmall" min="0" max="10" value="1"></label>
         <label>שער יורו (₪)<input type="number" id="inRate" min="1" max="10" step="0.01" value="3.80"></label>
-        <label>הרכב: VW Tiguan אוטומט<select id="inFuelType"><option value="petrol" selected>בנזין (1.5 TSI DSG)</option><option value="diesel">דיזל (2.0 TDI DSG)</option></select></label>
+        <label><span>הרכב: VW Tiguan אוטומט<span data-car="sm"></span></span><select id="inFuelType"><option value="petrol" selected>בנזין (1.5 TSI DSG)</option><option value="diesel">דיזל (2.0 TDI DSG)</option></select></label>
         <label>מחיר דלק לליטר (€)<input type="number" id="inFuel" min="0.5" max="5" step="0.01" value="1.80"></label>
         <label>צריכת הטיגואן (ל׳/100 ק״מ)<input type="number" id="inCons" min="3" max="20" step="0.1" value="7.8"></label>
       </div>
@@ -768,7 +794,7 @@ footer a{color:var(--muted)}
           <li>ארוחות: צהריים במסעדה (כ־€17 למבוגר, כ־€10 לילד). ערב קל של פיצה או מקדונלדס (כ־€10 למבוגר, כ־€7 לילד). הילד בן ה־3 לא נספר</li>
           <li>בימי הכפר אוכלים ערב בבית. הקניות בסופר לא נכללות בחישוב</li>
           <li>הילד בן ה־3 נכנס בחינם לרוב האטרקציות (בסקייווק מתחת ל־1 מ׳). בלגולנד הוא משלם</li>
-          <li>דלק: VW Tiguan אוטומט. בנזין בכ־7.8 ל׳/100 ק״מ, דיזל בכ־6.3 ל׳/100 ק״מ. זו צריכה בפועל עם משפחה מלאה ונסיעה בהרים, קצת יותר מהנתון הרשמי של היצרן</li>
+          <li>דלק: VW Tiguan אוטומט, וברירת המחדל היא בנזין. בנזין בכ־7.8 ל׳/100 ק״מ, דיזל בכ־6.3 ל׳/100 ק״מ. זו צריכה בפועל עם משפחה מלאה ונסיעה בהרים, קצת יותר מהנתון הרשמי של היצרן</li>
           <li>לא כולל מזכרות ו־AlpspiX</li>
         </ul>
       </div>
@@ -850,6 +876,12 @@ footer a{color:var(--muted)}
   });
 })();
 
+/* ---------- car thumbnails ---------- */
+document.querySelectorAll("[data-car]").forEach(function(el){
+  var size = el.getAttribute("data-car");
+  el.outerHTML = commonsImg(CAR_IMG, size === "lg" ? 240 : 120, "car-thumb" + (size ? " " + size : ""), "VW Tiguan");
+});
+
 /* ---------- back to top ---------- */
 (function(){
   var btn = document.getElementById("toTop");
@@ -921,7 +953,7 @@ footer a{color:var(--muted)}
     ["🌲 סנטר פארקס (3 לילות)", 2520],
     ["🏔️ מלון בגרמיש (2 לילות)", 1355],
     ["🛏️ מלון ליד שדה התעופה (לילה)", 643],
-    ["🚗 רכב שכור (כולל בוסטר)", 2000]
+    ["🚙 VW Tiguan שכור (כולל בוסטר)" + commonsImg(CAR_IMG, 120, "car-thumb sm", "VW Tiguan"), 2000]
   ];
 
   function $(id){ return document.getElementById(id); }
@@ -1031,8 +1063,8 @@ footer a{color:var(--muted)}
     if (state.rate) items.push('💶 1 € = <b>' + state.rate.toFixed(3) + ' ₪</b>' + (state.rateDate ? ' <small>(' + state.rateDate + ')</small>' : ''));
     else items.push('💶 שער היורו: ' + wait);
     if (state.fuel) items.push('⛽ ' + (fuelType() === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>€' + state.fuel.toFixed(2) + '</b> לליטר' + (state.rate ? ' (≈₪' + (state.fuel * state.rate).toFixed(2) + ')' : ''));
-    else items.push('⛽ מחיר דלק: ' + wait);
-    items.push('🚙 הרכב שלנו: VW Tiguan אוטומט');
+    else items.push('⛽ בנזין בגרמניה: <b>~€1.80</b> לליטר' + (state.done ? ' (הערכה)' : '') + (state.rate ? ' (≈₪' + (1.8 * state.rate).toFixed(2) + ')' : ''));
+    items.push('הרכב שלנו: <b>VW Tiguan</b> אוטומט' + commonsImg(CAR_IMG, 120, 'car-thumb sm', 'VW Tiguan'));
     items.push('🛫 נחיתה במינכן: שישי 23.4 · 09:05');
     var one = items.map(function(t){ return '<span class="item"><span class="live"></span>' + t + '</span>'; }).join("");
     $("tickerTrack").innerHTML = one + one;
@@ -1158,18 +1190,18 @@ footer a{color:var(--muted)}
   ];
   var AIRPORT = { n: "שדה התעופה מינכן (MUC)", d: "נחיתה 23.4 · 09:05 · המראה 29.4 · 10:20", ll: [48.3538, 11.7861], day: "day1" };
   var ATTR = [
-    { n: "מפלי איסטובל", e: "💧", d: "שבת 24.4", ll: [47.627, 10.013], day: "day2" },
-    { n: "סקייווק אלגוי", e: "🌳", d: "שבת 24.4", ll: [47.5905, 9.8678], day: "day2" },
-    { n: "העיר העתיקה של לינדאו", e: "⛵", d: "שבת 24.4", ll: [47.544, 9.6845], day: "day2" },
-    { n: "Alpsee Bergwelt", e: "🎢", d: "ראשון 25.4", ll: [47.5565, 10.1405], day: "day3" },
-    { n: "אוברסטדורף", e: "🏘️", d: "ראשון 25.4", ll: [47.4097, 10.2793], day: "day3" },
-    { n: "אגם כריסטלזה", e: "💎", d: "ראשון 25.4", ll: [47.3836, 10.2964], day: "day3" },
-    { n: "טירת נוישוונשטיין", e: "🏰", d: "שני 26.4", ll: [47.5576, 10.7498], day: "day4" },
-    { n: "רכבל טגלברג", e: "🚡", d: "שני 26.4", ll: [47.5686, 10.7586], day: "day4" },
-    { n: "פסגת הצוגשפיצה", e: "🏔️", d: "שלישי 27.4", ll: [47.4211, 10.9853], day: "day5" },
-    { n: "אגם איבזה ותחנת הרכבל", e: "💙", d: "שלישי 27.4", ll: [47.4567, 10.9917], day: "day5" },
-    { n: "גשר היילין 179", e: "🌉", d: "שלישי 27.4", ll: [47.4747, 10.7369], day: "day5" },
-    { n: "לגולנד גרמניה", e: "🧱", d: "רביעי 28.4", ll: [48.4253, 10.2988], day: "day6" }
+    { n: "מפלי איסטובל", ph: "Eistobel (003).jpg|Der Eistobel.jpg|D-BY - Obere Argen 193.JPG", e: "💧", d: "שבת 24.4", ll: [47.627, 10.013], day: "day2" },
+    { n: "סקייווק אלגוי", ph: "Baumwipfelpfad mit Alpenblick.JPG|Scheidegger Wasserfälle (38).jpg", e: "🌳", d: "שבת 24.4", ll: [47.5905, 9.8678], day: "day2" },
+    { n: "העיר העתיקה של לינדאו", ph: "Lindau Leuchtturm Löwe.jpg|Lindau - Hafeneinfahrt mit Löwen und Leuchtturm (9534402866).jpg|Lindau - Hafen6.jpg", e: "⛵", d: "שבת 24.4", ll: [47.544, 9.6845], day: "day2" },
+    { n: "Alpsee Bergwelt", ph: "Immenstadt - Gr Alpsee v N, Bühl a Alpsee.JPG|Grosser Alpsee (2).JPG", e: "🎢", d: "ראשון 25.4", ll: [47.5565, 10.1405], day: "day3" },
+    { n: "אוברסטדורף", ph: "Oberstdorf - Trettach, Mädelegabel, Hochfrottspitze.JPG", e: "🏘️", d: "ראשון 25.4", ll: [47.4097, 10.2793], day: "day3" },
+    { n: "אגם כריסטלזה", ph: "Christlessee.JPG|Edward Theodore Compton Christlessee bei Gerstruben mit Blick auf die Trettachspitze 1907.jpg", e: "💎", d: "ראשון 25.4", ll: [47.3836, 10.2964], day: "day3" },
+    { n: "טירת נוישוונשטיין", ph: "Schloss Neuschwanstein 2013.jpg|Neuschwanstein Castle.jpg|Neuschwanstein-c1.jpg", e: "🏰", d: "שני 26.4", ll: [47.5576, 10.7498], day: "day4" },
+    { n: "רכבל טגלברג", ph: "Neue Kabine (2021) der Tegelbergbahn.jpg", e: "🚡", d: "שני 26.4", ll: [47.5686, 10.7586], day: "day4" },
+    { n: "פסגת הצוגשפיצה", ph: "Zugspitze Gipfelkreuz 2021.jpg|Gipfelkreuz Zugspitze.jpg|Zugspitze Westansicht.JPG", e: "🏔️", d: "שלישי 27.4", ll: [47.4211, 10.9853], day: "day5" },
+    { n: "אגם איבזה ותחנת הרכבל", ph: "Eibsee & Zugspitze.jpg|Seilbahn Zugspitze von Eibsee.jpg", e: "💙", d: "שלישי 27.4", ll: [47.4567, 10.9917], day: "day5" },
+    { n: "גשר היילין 179", ph: "Highline179.jpg|Panorama of Highline179 and Burg Ehrenberg.jpg", e: "🌉", d: "שלישי 27.4", ll: [47.4747, 10.7369], day: "day5" },
+    { n: "לגולנד גרמניה", ph: "Flying Ninjago Legoland Deutschland (207022357).jpeg|Miniland - Berlin (Legoland) (1).jpg", e: "🧱", d: "רביעי 28.4", ll: [48.4253, 10.2988], day: "day6" }
   ];
 
   var map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
@@ -1179,7 +1211,7 @@ footer a{color:var(--muted)}
   }).addTo(map);
 
   function popup(o){
-    return "<b>" + o.n + "</b><span class='pd'>" + o.d + "</span><br><a href='#" + o.day + "'>לפרטי היום ←</a>" +
+    return (o.ph ? commonsImg(o.ph, 400, "pop-img", o.n) : "") + "<b>" + o.n + "</b><span class='pd'>" + o.d + "</span><br><a href='#" + o.day + "'>לפרטי היום ←</a>" +
       " · <a target='_blank' rel='noopener' href='https://www.google.com/maps/search/?api=1&query=" + o.ll[0] + "," + o.ll[1] + "'>ניווט ↗</a>";
   }
 
@@ -1188,8 +1220,8 @@ footer a{color:var(--muted)}
 
   var all = [];
   ATTR.forEach(function(o){
-    var m = L.marker(o.ll, { icon: L.divIcon({ className: "", html: '<div class="mk-attr">' + o.e + '</div>', iconSize: [30,30], iconAnchor: [15,15], popupAnchor: [0,-14] }), zIndexOffset: 0 })
-      .bindPopup(popup(o)).bindTooltip(o.n, { direction: "top", offset: [0,-14], className: "mk-tip" }).addTo(map);
+    var m = L.marker(o.ll, { icon: L.divIcon({ className: "", html: '<div class="mk-attr">' + o.e + commonsImg(o.ph, 120, "", o.n) + '</div>', iconSize: [44,44], iconAnchor: [22,22], popupAnchor: [0,-20] }), zIndexOffset: 0 })
+      .bindPopup(popup(o), { maxWidth: 240 }).bindTooltip(o.n, { direction: "top", offset: [0,-20], className: "mk-tip" }).addTo(map);
     all.push(o.ll);
   });
   HOTELS.forEach(function(o){
