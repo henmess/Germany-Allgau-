@@ -182,7 +182,7 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .lg-hotel{width:22px;height:22px;border-radius:7px;display:inline-grid;place-items:center;font-size:12px;color:#fff;background:#2d6fa8;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .lg-attr{width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-sizing:border-box}
 .lg-route{width:26px;border-top:3px dashed #1f6f68}
-.mk-hotel{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px;color:#fff;border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35);transform:rotate(0)}
+.mk-hotel{position:relative;overflow:hidden;width:46px;height:46px;border-radius:10px;display:grid;place-items:center;font-size:19px;color:#fff;border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35);transform:rotate(0)}
 .mk-attr{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:18px;background:#fff;border:3px solid #e07a3f;box-shadow:0 2px 8px rgba(0,0,0,.35)}
 .mk-air{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:16px;background:#1d2a2e;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
 .leaflet-popup-content{direction:rtl;text-align:right;font-family:"Rubik",system-ui,sans-serif;font-size:.9rem;line-height:1.5;margin:10px 14px}
@@ -200,6 +200,8 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .mk-attr{position:relative;overflow:hidden}
 .mk-attr img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
 .mk-attr img.img-failed{display:none}
+.mk-hotel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mk-hotel img.img-failed{display:none}
 .pop-img{width:100%;height:110px;object-fit:cover;border-radius:8px;margin-bottom:6px;display:block}
 .pop-img.img-failed{display:none}
 
@@ -338,8 +340,8 @@ footer a{color:var(--muted)}
   <div class="map-card">
     <div id="tripMap" dir="ltr" role="region" aria-label="מפת הטיול"></div>
     <div class="map-legend">
-      <span><i class="lg-hotel">🛏</i> מלון / לינה</span>
-      <span><i class="lg-attr"></i> אטרקציה (תמונה אמיתית)</span>
+      <span><i class="lg-hotel">🛏</i> מלון / לינה (ריבוע)</span>
+      <span><i class="lg-attr"></i> אטרקציה (עיגול)</span>
       <span><i class="lg-hotel" style="background:#1d2a2e;border-radius:50%">✈</i> שדה תעופה</span>
       <span><i class="lg-route"></i> מסלול הנסיעה בין המלונות</span>
     </div>
@@ -452,7 +454,7 @@ footer a{color:var(--muted)}
     <div class="ph" data-img="Lindau Leuchtturm Löwe.jpg|Lindau - Hafeneinfahrt mit Löwen und Leuchtturm (9534402866).jpg|Lindau - Hafen6.jpg" data-fallback="⛵"></div>
     <div class="day-title">
       <span class="day-num">שבת · 24.4</span>
-      <h3>מפלי איסטובל · סקייווק אלגוי · לינדאו</h3>
+      <h3>סקייווק אלגוי · לינדאו · פארק המים</h3>
     </div>
   </div>
   <div class="day-body">
@@ -463,35 +465,33 @@ footer a{color:var(--muted)}
     </div>
     <div class="grid">
       <ol class="timeline">
-        <li class="drive"><time>09:00</time><div class="what">🚗 יציאה מהכפר (כ־30 דק׳)</div></li>
-        <li class="key"><time>09:30</time><div class="what"><b>💧 מפלי איסטובל (Eistobel)<span class="pram no">👶 לא לעגלה</span></b><small class="pn">בכניסה יש מדרגות, ובתוך הערוץ שבילי חצץ ושורשים. עדיף מנשא לבן ה־3</small><small>ערוץ עם מפלים ובריכות טבעיות. מסלול הליכה קל של כשעה וחצי, שמתאים לילדים מגיל 4 · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Eistobel+Parkplatz+Maierh%C3%B6fen">🗺️ גוגל מפות</a></small></div></li>
-        <li class="drive"><time>11:15</time><div class="what">🚗 לשיידג (כ־25 דק׳)</div></li>
-        <li class="key"><time>11:45</time><div class="what"><b>🌳 סקייווק אלגוי (היום נקרא Waldwelt Allgäu)<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">השביל בין העצים, רוב השבילים והמסעדה נגישים לעגלות</small><small>שביל בין צמרות העצים בגובה 40 מ׳, עם תצפית לאלפים ולאגם בודן. יש גם גשרים מתנדנדים, מתחם משחקים ופינת ליטוף. מהחניון הולכים כ־500 מ׳ בעלייה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Waldwelt+skywalk+allg%C3%A4u+Scheidegg">🗺️ גוגל מפות</a></small></div></li>
-        <li class="food"><time>13:00</time><div class="what"><b>🥨 צהריים במסעדה של הסקייווק</b><small>מסעדה בשירות עצמי, עם מרפסת וגן בירה</small></div></li>
-        <li class="drive"><time>14:15</time><div class="what">🚗 ללינדאו (כ־30 דק׳)</div></li>
-        <li class="key"><time>14:45</time><div class="what"><b>⛵ העיר העתיקה של לינדאו<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">שטוח, עם קצת אבני מרצפת</small><small>אי באגם בודן: הנמל עם האריה הבווארי והמגדלור, סמטאות ציוריות וגלידה על הטיילת · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Lindau+Hafen">🗺️ גוגל מפות</a></small></div></li>
-                <li class="drive"><time>17:30</time><div class="what">🚗 חזרה לכפר (כ־50 דק׳)</div></li>
-        <li class="food"><time>18:30</time><div class="what"><b>🏠 ארוחת ערב בבית</b></div></li>
-        <li><time>19:15</time><div class="what"><b>🌊 ערב בפארק המים</b></div></li>
+        <li class="drive"><time>09:00</time><div class="what">🚗 נסיעה ישירה מהכפר לסקייווק אלגוי בשיידג (כ־50 דק׳)</div></li>
+        <li class="key"><time>09:50</time><div class="what"><b>🌳 סקייווק אלגוי (היום נקרא Waldwelt Allgäu)<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">השביל בין העצים, רוב השבילים והמסעדה נגישים לעגלות</small><small>שביל בין צמרות העצים בגובה 40 מ׳, עם תצפית לאלפים ולאגם בודן. יש גם גשרים מתנדנדים, מתחם משחקים ופינת ליטוף. מהחניון הולכים כ־500 מ׳ בעלייה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Waldwelt+skywalk+allg%C3%A4u+Scheidegg">🗺️ גוגל מפות</a></small></div></li>
+        <li class="drive"><time>12:30</time><div class="what">🚗 ללינדאו (כ־30 דק׳)</div></li>
+        <li class="food"><time>13:00</time><div class="what"><b>🍽️ ארוחת צהריים בלינדאו ב־Gasthaus zum Sünfzen</b><small>Maximilianstraße 1, בלב האי · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Gasthaus+zum+S%C3%BCnfzen+Lindau">🗺️ גוגל מפות</a></small></div></li>
+        <li class="key"><time>14:15</time><div class="what"><b>⛵ העיר העתיקה של לינדאו<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">שטוח, עם קצת אבני מרצפת</small><small>אי באגם בודן: הנמל עם האריה הבווארי והמגדלור, סמטאות ציוריות וגלידה על הטיילת · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Lindau+Hafen">🗺️ גוגל מפות</a></small></div></li>
+        <li class="drive"><time>16:30</time><div class="what">🚗 חזרה לכפר הנופש (כ־50 דק׳)</div></li>
+        <li class="key"><time>17:30</time><div class="what"><b>🌊 פארק המים Aqua Mundo</b><small>מגלשות, בריכת גלים ומסלול מים גועשים</small></div></li>
+        <li class="food"><time>19:30</time><div class="what"><b>🏠 ארוחת ערב בבית</b></div></li>
       </ol>
       <div>
         <div class="gallery">
-          <div class="ph wide" data-img="Eistobel (003).jpg|Der Eistobel.jpg|D-BY - Obere Argen 193.JPG" data-label="מפלי איסטובל" data-fallback="💧"></div>
+          <div class="ph wide" data-img="Lindau Leuchtturm Löwe.jpg|Lindau - Hafeneinfahrt mit Löwen und Leuchtturm (9534402866).jpg" data-label="לינדאו" data-fallback="⛵"></div>
           <div class="ph" data-img="Baumwipfelpfad mit Alpenblick.JPG|Scheidegger Wasserfälle (38).jpg" data-label="סקייווק אלגוי" data-fallback="🌳"></div>
-          <div class="ph" data-img="Lindau - Hafeneinfahrt mit Löwen und Leuchtturm (9534402866).jpg|Lindau - Hafen6.jpg" data-label="הנמל של לינדאו" data-fallback="⛵"></div>
+          <div class="ph" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg" data-label="כפר הנופש ו־Aqua Mundo" data-fallback="🌊"></div>
         </div>
         <div class="rest">
           <span class="tag">🍽️ צהריים</span>
-          <h4>המסעדה של Waldwelt / סקייווק</h4>
-          <p>מסעדה בשירות עצמי במבנה הראשי, עם מרפסת וגן בירה. לפי מבקרים המחירים הוגנים והאוכל טעים.</p>
+          <h4>Gasthaus zum Sünfzen, לינדאו</h4>
+          <p>אחד הבתים הוותיקים והמוכרים באי, עם אוכל בווארי ביתי. המיקום מרכזי, ומשם ממשיכים לטייל ברגל.</p>
           <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€9</td></tr>
-            <tr><td>נקניקיות עם צ׳יפס<i>Wiener Würstchen mit Pommes</i></td><td class="pr">~€7</td></tr>
+            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
             <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9</td></tr>
-            <tr><td>קארי־וורסט עם צ׳יפס (למבוגרים)<i>Currywurst mit Pommes</i></td><td class="pr">~€9.5</td></tr>
-            <tr><td>עוגה ביתית<i>Kuchen</i></td><td class="pr">~€4</td></tr>
+            <tr><td>שפצלה עם רוטב<i>Spätzle mit Soße</i></td><td class="pr">~€8</td></tr>
+            <tr><td>נקניקיות עם צ׳יפס<i>Wiener Würstchen mit Pommes</i></td><td class="pr">~€7.5</td></tr>
+            <tr><td>גלידת ילדים<i>Kinder-Eis</i></td><td class="pr">~€4.5</td></tr>
           </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום. ליד הסקייווק יש גם מסעדה בשירות עצמי, אם מישהו רעב באמצע הבוקר.</div>
         </div>
         <div class="rest">
           <span class="tag">🏠 ארוחת ערב</span>
@@ -956,7 +956,7 @@ document.querySelectorAll('a[href*="google.com/maps/dir/"]').forEach(function(a)
   var MEAL = { rest: [17, 10], light: [10, 7], home: [0, 0] };
   var DAYS = {
     1: { lat: 47.826, lon: 10.022, place: "לויטקירך", drive: "~2:10", km: 200, parking: 0,  attr: [], wx: "⛅ 15°/4°",  lunch: "rest", dinner: "home" },
-    2: { lat: 47.546, lon: 9.684, place: "לינדאו", drive: "~2:00", km: 125, parking: 15, attr: ["skywalk"], wx: "🌤️ 16°/6°", lunch: "rest", dinner: "home" },
+    2: { lat: 47.546, lon: 9.684, place: "לינדאו", drive: "~2:10", km: 130, parking: 12, attr: ["skywalk"], wx: "🌤️ 16°/6°", lunch: "rest", dinner: "home" },
     3: { lat: 47.409, lon: 10.279, place: "אוברסטדורף", drive: "~2:30", km: 150, parking: 11, attr: ["alpsee"], wx: "⛅ 14°/3°", lunch: "rest", dinner: "home" },
     4: { lat: 47.577, lon: 10.738, place: "שוואנגאו", drive: "~2:30", km: 160, parking: 14, attr: ["neusch","tegel"], wx: "⛅ 15°/3°", lunch: "rest", dinner: "light" },
     5: { lat: 47.492, lon: 11.095, place: "גרמיש", drive: "~1:45", km: 90,  parking: 15, attr: ["zug","highline"], wx: "🏔️ 15°/3°", lunch: "rest", dinner: "light" },
@@ -1199,13 +1199,12 @@ document.querySelectorAll('a[href*="google.com/maps/dir/"]').forEach(function(a)
   if (!window.L){ el.innerHTML = '<div class="map-fallback">לא הצלחנו לטעון את המפה. בדקו את החיבור לאינטרנט ורעננו.</div>'; return; }
 
   var HOTELS = [
-    { n: "Center Parcs Park Allgäu", d: "כפר הנופש · לילות 1–3 (23–26.4)", ll: [47.788, 10.056], c: "#2f8a4f", day: "day1", short: "כפר הנופש" },
+    { n: "Center Parcs Park Allgäu", ph: "Ferienpark Leutkirch Centerparc Allgäu Seeterrasse beim Market Dome.jpg|Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg", d: "כפר הנופש · לילות 1–3 (23–26.4)", ll: [47.788, 10.056], c: "#2f8a4f", day: "day1", short: "כפר הנופש" },
     { n: "Hotel Rheinischer Hof", d: "גרמיש · לילות 4–5 (26–28.4)", ll: [47.4925, 11.083], c: "#2d6fa8", day: "day4", short: "גרמיש" },
     { n: "Atomis Hotel Munich Airport", d: "ליד שדה התעופה · לילה 6 (28.4)", ll: [48.336, 11.802], c: "#8a4fb0", day: "day6", short: "Atomis" }
   ];
   var AIRPORT = { n: "שדה התעופה מינכן (MUC)", d: "נחיתה 23.4 · 09:05 · המראה 29.4 · 10:20", ll: [48.3538, 11.7861], day: "day1" };
   var ATTR = [
-    { n: "מפלי איסטובל", ph: "Eistobel (003).jpg|Der Eistobel.jpg|D-BY - Obere Argen 193.JPG", e: "💧", d: "שבת 24.4", ll: [47.627, 10.013], day: "day2" },
     { n: "סקייווק אלגוי", ph: "Baumwipfelpfad mit Alpenblick.JPG|Scheidegger Wasserfälle (38).jpg", e: "🌳", d: "שבת 24.4", ll: [47.5905, 9.8678], day: "day2" },
     { n: "העיר העתיקה של לינדאו", ph: "Lindau Leuchtturm Löwe.jpg|Lindau - Hafeneinfahrt mit Löwen und Leuchtturm (9534402866).jpg|Lindau - Hafen6.jpg", e: "⛵", d: "שבת 24.4", ll: [47.544, 9.6845], day: "day2" },
     { n: "Alpsee Bergwelt", ph: "Immenstadt - Gr Alpsee v N, Bühl a Alpsee.JPG|Grosser Alpsee (2).JPG", e: "🎢", d: "ראשון 25.4", ll: [47.5565, 10.1405], day: "day3" },
@@ -1241,8 +1240,8 @@ document.querySelectorAll('a[href*="google.com/maps/dir/"]').forEach(function(a)
     all.push(o.ll);
   });
   HOTELS.forEach(function(o){
-    L.marker(o.ll, { icon: L.divIcon({ className: "", html: '<div class="mk-hotel" style="background:' + o.c + '">🛏️</div>', iconSize: [38,38], iconAnchor: [19,19], popupAnchor: [0,-18] }), zIndexOffset: 1000 })
-      .bindPopup(popup(o)).bindTooltip(o.short, { permanent: true, direction: "bottom", offset: [0,18], className: "mk-tip" }).addTo(map);
+    L.marker(o.ll, { icon: L.divIcon({ className: "", html: '<div class="mk-hotel" style="background:' + o.c + '">🛏️' + (o.ph ? commonsImg(o.ph, 120, "", o.n) : "") + '</div>', iconSize: [46,46], iconAnchor: [23,23], popupAnchor: [0,-22] }), zIndexOffset: 1000 })
+      .bindPopup(popup(o), { maxWidth: 240 }).bindTooltip(o.short, { permanent: true, direction: "bottom", offset: [0,22], className: "mk-tip" }).addTo(map);
     all.push(o.ll);
   });
   L.marker(AIRPORT.ll, { icon: L.divIcon({ className: "", html: '<div class="mk-air">✈️</div>', iconSize: [32,32], iconAnchor: [16,16], popupAnchor: [0,-16] }), zIndexOffset: 900 })
