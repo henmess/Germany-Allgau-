@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
 :root{
   --bg:#f5f3ee; --surface:#ffffff; --ink:#1d2a2e; --muted:#5d6b6f; --line:#e3ded3;
@@ -158,6 +159,24 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pram.ok{color:#7fd39a} :root:not([data-theme="light"]) .pram.part{color:#f0c75a} :root:not([data-theme="light"]) .pram.no{color:#f19584}}
 .what small.pn{color:var(--muted);font-size:.8rem}
 
+/* map */
+.map-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:22px}
+#tripMap{height:380px;width:100%;background:var(--sky)}
+.map-legend{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:center;padding:10px 14px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line)}
+.map-legend span{display:inline-flex;align-items:center;gap:6px}
+.lg-hotel{width:22px;height:22px;border-radius:7px;display:inline-grid;place-items:center;font-size:12px;color:#fff;background:#2d6fa8;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+.lg-attr{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--accent);box-sizing:border-box}
+.lg-route{width:26px;border-top:3px dashed #1f6f68}
+.mk-hotel{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;font-size:19px;color:#fff;border:3px solid #fff;box-shadow:0 3px 10px rgba(0,0,0,.35);transform:rotate(0)}
+.mk-attr{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:15px;background:#fff;border:3px solid #e07a3f;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.mk-air{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:16px;background:#1d2a2e;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3)}
+.leaflet-popup-content{direction:rtl;text-align:right;font-family:"Rubik",system-ui,sans-serif;font-size:.9rem;line-height:1.5;margin:10px 14px}
+.leaflet-popup-content b{display:block;font-size:.98rem}
+.leaflet-popup-content .pd{color:#5d6b6f;font-size:.8rem}
+.leaflet-tooltip.mk-tip{font-family:"Rubik",system-ui,sans-serif;font-weight:700;font-size:.75rem;padding:2px 8px;border-radius:99px;direction:rtl}
+.map-fallback{display:grid;place-items:center;height:100%;color:var(--muted);font-size:.95rem;padding:20px;text-align:center}
+@media (max-width:480px){ #tripMap{height:320px} }
+
 /* back to top */
 .to-top{position:fixed;left:16px;bottom:18px;z-index:40;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
   background:var(--brand);color:#fff;font-size:1.35rem;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.25);
@@ -288,6 +307,16 @@ footer a{color:var(--muted)}
 <!-- ================= OVERVIEW ================= -->
 <section id="overview">
   <h2 class="sec">המסלול במבט אחד</h2>
+  <p class="sec-sub">לחיצה על נקודה במפה פותחת את הפרטים שלה ואת הקישור ליום המתאים.</p>
+  <div class="map-card">
+    <div id="tripMap" dir="ltr" role="region" aria-label="מפת הטיול"></div>
+    <div class="map-legend">
+      <span><i class="lg-hotel">🛏</i> מלון / לינה</span>
+      <span><i class="lg-attr"></i> אטרקציה</span>
+      <span><i class="lg-hotel" style="background:#1d2a2e;border-radius:50%">✈</i> שדה תעופה</span>
+      <span><i class="lg-route"></i> מסלול הנסיעה בין המלונות</span>
+    </div>
+  </div>
   <p class="sec-sub">נוחתים במינכן ומשם נוסעים לאלגוי לשלושה לילות. אחר כך שני לילות בגרמיש, ולילה אחרון ליד שדה התעופה של מינכן. הטיסה הביתה יוצאת מאותו שדה.</p>
 
   <div class="route">
@@ -1113,6 +1142,68 @@ footer a{color:var(--muted)}
   });
   [pRate, pFuel, pWx].forEach(function(p){ p.then(function(){ renderTicker(); if (window.TRIP) window.TRIP.calc(); }); });
   setInterval(renderTicker, 60 * 60 * 1000);
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+/* ---------- trip map ---------- */
+(function(){
+  var el = document.getElementById("tripMap");
+  if (!window.L){ el.innerHTML = '<div class="map-fallback">לא הצלחנו לטעון את המפה. בדקו את החיבור לאינטרנט ורעננו.</div>'; return; }
+
+  var HOTELS = [
+    { n: "Center Parcs Park Allgäu", d: "כפר הנופש · לילות 1–3 (23–26.4)", ll: [47.788, 10.056], c: "#2f8a4f", day: "day1", short: "כפר הנופש" },
+    { n: "Hotel Rheinischer Hof", d: "גרמיש · לילות 4–5 (26–28.4)", ll: [47.4925, 11.083], c: "#2d6fa8", day: "day4", short: "גרמיש" },
+    { n: "Atomis Hotel Munich Airport", d: "ליד שדה התעופה · לילה 6 (28.4)", ll: [48.336, 11.802], c: "#8a4fb0", day: "day6", short: "Atomis" }
+  ];
+  var AIRPORT = { n: "שדה התעופה מינכן (MUC)", d: "נחיתה 23.4 · 09:05 · המראה 29.4 · 10:20", ll: [48.3538, 11.7861], day: "day1" };
+  var ATTR = [
+    { n: "מפלי איסטובל", e: "💧", d: "שבת 24.4", ll: [47.627, 10.013], day: "day2" },
+    { n: "סקייווק אלגוי", e: "🌳", d: "שבת 24.4", ll: [47.5905, 9.8678], day: "day2" },
+    { n: "העיר העתיקה של לינדאו", e: "⛵", d: "שבת 24.4", ll: [47.544, 9.6845], day: "day2" },
+    { n: "Alpsee Bergwelt", e: "🎢", d: "ראשון 25.4", ll: [47.5565, 10.1405], day: "day3" },
+    { n: "אוברסטדורף", e: "🏘️", d: "ראשון 25.4", ll: [47.4097, 10.2793], day: "day3" },
+    { n: "אגם כריסטלזה", e: "💎", d: "ראשון 25.4", ll: [47.3836, 10.2964], day: "day3" },
+    { n: "טירת נוישוונשטיין", e: "🏰", d: "שני 26.4", ll: [47.5576, 10.7498], day: "day4" },
+    { n: "רכבל טגלברג", e: "🚡", d: "שני 26.4", ll: [47.5686, 10.7586], day: "day4" },
+    { n: "פסגת הצוגשפיצה", e: "🏔️", d: "שלישי 27.4", ll: [47.4211, 10.9853], day: "day5" },
+    { n: "אגם איבזה ותחנת הרכבל", e: "💙", d: "שלישי 27.4", ll: [47.4567, 10.9917], day: "day5" },
+    { n: "גשר היילין 179", e: "🌉", d: "שלישי 27.4", ll: [47.4747, 10.7369], day: "day5" },
+    { n: "לגולנד גרמניה", e: "🧱", d: "רביעי 28.4", ll: [48.4253, 10.2988], day: "day6" }
+  ];
+
+  var map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+    maxZoom: 18, subdomains: "abcd",
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  }).addTo(map);
+
+  function popup(o){
+    return "<b>" + o.n + "</b><span class='pd'>" + o.d + "</span><br><a href='#" + o.day + "'>לפרטי היום ←</a>" +
+      " · <a target='_blank' rel='noopener' href='https://www.google.com/maps/search/?api=1&query=" + o.ll[0] + "," + o.ll[1] + "'>ניווט ↗</a>";
+  }
+
+  // drive route between the stays
+  L.polyline([AIRPORT.ll, HOTELS[0].ll, HOTELS[1].ll, HOTELS[2].ll], { color: "#1f6f68", weight: 3, opacity: .8, dashArray: "8 8" }).addTo(map);
+
+  var all = [];
+  ATTR.forEach(function(o){
+    var m = L.marker(o.ll, { icon: L.divIcon({ className: "", html: '<div class="mk-attr">' + o.e + '</div>', iconSize: [30,30], iconAnchor: [15,15], popupAnchor: [0,-14] }), zIndexOffset: 0 })
+      .bindPopup(popup(o)).bindTooltip(o.n, { direction: "top", offset: [0,-14], className: "mk-tip" }).addTo(map);
+    all.push(o.ll);
+  });
+  HOTELS.forEach(function(o){
+    L.marker(o.ll, { icon: L.divIcon({ className: "", html: '<div class="mk-hotel" style="background:' + o.c + '">🛏️</div>', iconSize: [38,38], iconAnchor: [19,19], popupAnchor: [0,-18] }), zIndexOffset: 1000 })
+      .bindPopup(popup(o)).bindTooltip(o.short, { permanent: true, direction: "bottom", offset: [0,18], className: "mk-tip" }).addTo(map);
+    all.push(o.ll);
+  });
+  L.marker(AIRPORT.ll, { icon: L.divIcon({ className: "", html: '<div class="mk-air">✈️</div>', iconSize: [32,32], iconAnchor: [16,16], popupAnchor: [0,-16] }), zIndexOffset: 900 })
+    .bindPopup(popup(AIRPORT)).addTo(map);
+  all.push(AIRPORT.ll);
+
+  map.fitBounds(L.latLngBounds(all), { padding: [28, 28] });
+  map.on("click", function(){ map.scrollWheelZoom.enable(); });
+  window.addEventListener("resize", function(){ map.invalidateSize(); });
 })();
 </script>
 </body>
