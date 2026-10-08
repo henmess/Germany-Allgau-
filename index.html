@@ -1,0 +1,560 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>הטיול שלנו לאלגוי</title>
+<meta name="description" content="מסלול הטיול המשפחתי שלנו לאלגוי ולגרמיש-פרטנקירכן, 23–29 באפריל: לו״ז יומי, אטרקציות, לינה ותמונות.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f3ee; --surface:#ffffff; --ink:#1d2a2e; --muted:#5d6b6f; --line:#e3ded3;
+  --brand:#1f6f68; --brand-2:#2c8c7f; --accent:#e07a3f; --sky:#d9ece9;
+  --stay-allgau:#2f8a4f; --stay-garmisch:#2d6fa8; --stay-munich:#8a4fb0;
+  --shadow:0 10px 30px rgba(20,40,40,.10);
+  --radius:20px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11181a; --surface:#1a2427; --ink:#e9efee; --muted:#9fb0b1; --line:#2a3a3d;
+    --brand:#4fb3a6; --brand-2:#62c4b6; --accent:#f09a63; --sky:#1e3134;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11181a; --surface:#1a2427; --ink:#e9efee; --muted:#9fb0b1; --line:#2a3a3d;
+  --brand:#4fb3a6; --brand-2:#62c4b6; --accent:#f09a63; --sky:#1e3134;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Rubik",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:var(--brand)}
+img{display:block;max-width:100%}
+
+/* ---------- photos with fallback ---------- */
+.ph{position:relative;overflow:hidden;background:linear-gradient(135deg,#2c8c7f,#1f4f6f 60%,#14343f);}
+.ph img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease, transform 6s ease}
+.ph img.ok{opacity:1}
+.ph:hover img.ok{transform:scale(1.04)}
+.ph .ph-label{position:absolute;inset:auto 0 0 0;padding:28px 14px 10px;color:#fff;font-weight:500;font-size:.92rem;
+  background:linear-gradient(transparent,rgba(0,0,0,.65));pointer-events:none}
+.ph .ph-fallback{position:absolute;inset:0;display:none;place-items:center;color:#fff;font-size:2.6rem;opacity:.85}
+.ph.failed .ph-fallback{display:grid}
+.ph a.credit{position:absolute;top:8px;left:8px;font-size:.7rem;color:#fff;background:rgba(0,0,0,.45);padding:2px 8px;border-radius:99px;text-decoration:none;opacity:0;transition:opacity .2s}
+.ph:hover a.credit,.ph:focus-within a.credit{opacity:1}
+
+/* ---------- hero ---------- */
+.hero{position:relative;min-height:88vh;display:flex;align-items:flex-end;color:#fff}
+.hero .ph{position:absolute;inset:0}
+.hero .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.05) 35%,rgba(8,25,28,.85) 100%)}
+.hero-inner{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:0 20px 56px}
+.kicker{display:inline-block;background:rgba(255,255,255,.18);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:99px;font-size:.9rem;letter-spacing:.02em}
+.hero h1{font-size:clamp(2.4rem,7vw,5rem);line-height:1.05;margin:16px 0 10px;font-weight:800;text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.hero p.lead{font-size:clamp(1.05rem,2.2vw,1.35rem);max-width:640px;margin:0 0 26px;opacity:.95}
+.hero-stats{display:flex;flex-wrap:wrap;gap:10px}
+.stat{background:rgba(255,255,255,.14);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:14px;padding:10px 16px;min-width:120px}
+.stat b{display:block;font-size:1.5rem;line-height:1.1}
+.stat span{font-size:.85rem;opacity:.9}
+
+/* ---------- nav ---------- */
+nav.days{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.days .wrap{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+nav.days .wrap::-webkit-scrollbar{display:none}
+nav.days a{flex:0 0 auto;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);padding:6px 14px;border-radius:99px;font-size:.9rem;font-weight:500;white-space:nowrap}
+nav.days a:hover{border-color:var(--brand);color:var(--brand)}
+
+main{max-width:1100px;margin:0 auto;padding:0 16px 60px}
+section{margin-top:64px}
+h2.sec{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:0 0 6px}
+p.sec-sub{color:var(--muted);margin:0 0 24px}
+
+/* ---------- overview ---------- */
+.route{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.stay{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border-top:6px solid var(--c)}
+.stay .ph{height:170px}
+.stay .body{padding:16px 18px 18px}
+.stay h3{margin:0 0 2px;font-size:1.15rem}
+.stay .nights{color:var(--c);font-weight:700;font-size:.9rem}
+.stay p{margin:6px 0 0;color:var(--muted);font-size:.93rem}
+.stay.allgau{--c:var(--stay-allgau)} .stay.garmisch{--c:var(--stay-garmisch)} .stay.munich{--c:var(--stay-munich)}
+
+.changes{margin-top:22px;background:var(--sky);border-radius:var(--radius);padding:20px 22px}
+.changes h3{margin:0 0 10px;font-size:1.1rem}
+.changes ul{margin:0;padding-inline-start:20px}
+.changes li{margin:6px 0}
+
+/* ---------- day cards ---------- */
+.day{background:var(--surface);border-radius:26px;box-shadow:var(--shadow);overflow:hidden;margin-top:34px;scroll-margin-top:70px}
+.day-head{position:relative;height:clamp(240px,40vw,380px)}
+.day-head .ph{position:absolute;inset:0}
+.day-head .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(5,20,24,.82))}
+.day-head .ph .ph-label{display:none}
+.day-title{position:absolute;z-index:2;inset:auto 0 0 0;padding:22px 24px;color:#fff}
+.day-num{display:inline-flex;align-items:center;gap:8px;font-weight:700;background:var(--accent);color:#fff;padding:4px 12px;border-radius:99px;font-size:.88rem}
+.day-title h3{margin:8px 0 0;font-size:clamp(1.4rem,3.6vw,2.1rem);line-height:1.2;text-shadow:0 2px 16px rgba(0,0,0,.4)}
+.day-body{padding:22px 24px 26px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:.86rem;padding:5px 12px;border-radius:99px;background:var(--bg);border:1px solid var(--line)}
+.chip.stay-allgau{background:color-mix(in srgb,var(--stay-allgau) 14%,var(--surface));border-color:color-mix(in srgb,var(--stay-allgau) 40%,transparent)}
+.chip.stay-garmisch{background:color-mix(in srgb,var(--stay-garmisch) 14%,var(--surface));border-color:color-mix(in srgb,var(--stay-garmisch) 40%,transparent)}
+.chip.stay-munich{background:color-mix(in srgb,var(--stay-munich) 14%,var(--surface));border-color:color-mix(in srgb,var(--stay-munich) 40%,transparent)}
+.chip.depart{background:var(--accent);color:#fff;border-color:transparent;font-weight:700}
+
+.grid{display:grid;grid-template-columns:1.25fr 1fr;gap:26px;align-items:start}
+.timeline{list-style:none;margin:0;padding:0;position:relative}
+.timeline::before{content:"";position:absolute;top:8px;bottom:8px;right:67px;width:2px;background:var(--line)}
+.timeline li{display:grid;grid-template-columns:52px 1fr;gap:32px;padding:8px 0;position:relative}
+.timeline time{font-weight:700;color:var(--brand);font-variant-numeric:tabular-nums;font-size:.95rem;text-align:left;padding-top:1px}
+.timeline li::after{content:"";position:absolute;right:62px;top:15px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:3px solid var(--brand)}
+.timeline li.drive::after{border-color:var(--muted);background:var(--muted)}
+.timeline li.key::after{border-color:var(--accent);background:var(--accent)}
+.timeline li.drive .what{color:var(--muted);font-size:.93rem}
+.what b{display:block}
+.what small{display:block;color:var(--muted);font-size:.88rem}
+.what a.nav{font-size:.8rem;text-decoration:none;white-space:nowrap}
+
+.gallery{display:grid;gap:10px;grid-template-columns:1fr 1fr}
+.gallery .ph{border-radius:14px;aspect-ratio:4/3}
+.gallery .ph.wide{grid-column:1/-1;aspect-ratio:16/9}
+.tip{margin-top:14px;background:color-mix(in srgb,var(--accent) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);border-radius:14px;padding:12px 14px;font-size:.92rem}
+.tip b{color:var(--accent)}
+.alt{margin-top:12px;border:1px dashed var(--line);border-radius:14px;padding:12px 14px;font-size:.92rem;color:var(--muted)}
+
+/* ---------- tips ---------- */
+.tips{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tipcard{background:var(--surface);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.tipcard .ico{font-size:1.6rem}
+.tipcard h3{margin:6px 0 4px;font-size:1.05rem}
+.tipcard p{margin:0;color:var(--muted);font-size:.93rem}
+
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:30px 16px 50px;border-top:1px solid var(--line)}
+footer a{color:var(--muted)}
+
+@media (max-width:860px){
+  .grid{grid-template-columns:1fr}
+  .route,.tips{grid-template-columns:1fr}
+  .gallery{order:-1}
+}
+@media (max-width:480px){
+  .day-body{padding:18px 16px 22px}
+  .day-title{padding:18px 16px}
+  .hero-inner{padding-bottom:40px}
+}
+@media print{
+  nav.days,.hero{display:none} .day{break-inside:avoid;box-shadow:none;border:1px solid #ccc}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="ph" data-img="Eibsee & Zugspitze.jpg|Garmisch-Partenkirchen-Panorama.jpg|Schloss Neuschwanstein 2013.jpg" data-fallback="🏔️"></div>
+  <div class="hero-inner">
+    <span class="kicker">🇩🇪 23–29 באפריל · אלגוי · גרמיש · מינכן</span>
+    <h1>הטיול שלנו<br>לאלגוי</h1>
+    <p class="lead">אגמים טורקיז, טירות מהאגדות, רכבלים לפסגה הגבוהה בגרמניה, פארק מים, לגולנד — והמון ירוק. כל בוקר יוצאים ב־9:00.</p>
+    <div class="hero-stats">
+      <div class="stat"><b>7</b><span>ימים</span></div>
+      <div class="stat"><b>3</b><span>מקומות לינה</span></div>
+      <div class="stat"><b>2,962 מ׳</b><span>פסגת הצוגשפיצה</span></div>
+      <div class="stat"><b>09:00</b><span>יציאה כל בוקר</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="days" aria-label="ניווט בין הימים">
+  <div class="wrap">
+    <a href="#overview">סקירה</a>
+    <a href="#day1">יום 1 · 23.4</a>
+    <a href="#day2">יום 2 · 24.4</a>
+    <a href="#day3">יום 3 · 25.4</a>
+    <a href="#day4">יום 4 · 26.4</a>
+    <a href="#day5">יום 5 · 27.4</a>
+    <a href="#day6">יום 6 · 28.4</a>
+    <a href="#day7">יום 7 · 29.4</a>
+    <a href="#tips">טיפים</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ================= OVERVIEW ================= -->
+<section id="overview">
+  <h2 class="sec">המסלול במבט אחד</h2>
+  <p class="sec-sub">נוחתים בפרנקפורט, מתמקמים 3 לילות באלגוי, 2 לילות בגרמיש, ולילה אחרון ליד שדה התעופה של מינכן.</p>
+
+  <div class="route">
+    <article class="stay allgau">
+      <div class="ph" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg|88299 Leutkirch im Allgäu, Germany - panoramio.jpg" data-fallback="🌲"></div>
+      <div class="body">
+        <span class="nights">לילות 1–3 · 23–26.4</span>
+        <h3>כפר הנופש אלגוי</h3>
+        <p>Center Parcs Park Allgäu, ליד לויטקירך. פארק המים Aqua Mundo בתוך הכפר — מושלם לערבים.</p>
+      </div>
+    </article>
+    <article class="stay garmisch">
+      <div class="ph" data-img="Garmisch-Partenkirchen-Panorama.jpg|Garmisch-Partenkirchen.JPG" data-fallback="🏔️"></div>
+      <div class="body">
+        <span class="nights">לילות 4–5 · 26–28.4</span>
+        <h3>Hotel Rheinischer Hof</h3>
+        <p>גרמיש-פרטנקירכן, למרגלות הצוגשפיצה. 20 דקות לאגם איבזה ולרכבל לפסגה.</p>
+      </div>
+    </article>
+    <article class="stay munich">
+      <div class="ph" data-img="Miniland - Berlin (Legoland) (1).jpg|Flying Ninjago Legoland Deutschland (207022357).jpeg" data-fallback="✈️"></div>
+      <div class="body">
+        <span class="nights">לילה 6 · 28–29.4</span>
+        <h3>Atomis Hotel Munich Airport</h3>
+        <p>Freisinger Str. 80, אוברדינג-שוואיג — כ־10 דקות נסיעה מהטרמינלים. מגיעים אליו אחרי לגולנד.</p>
+      </div>
+    </article>
+  </div>
+
+  <div class="changes">
+    <h3>✨ מה סידרנו מחדש — ולמה</h3>
+    <ul>
+      <li><b>אגם כריסטלזה ואוברסטדורף עברו לימי אלגוי.</b> מגרמיש זו נסיעה של כשעתיים לכל כיוון (אין כביש ישיר דרך ההרים). מהכפר זה כשעה ורבע, ו־25 דקות בלבד מ־Alpsee Bergwelt — אז הם נכנסו ליום 3 ביחד.</li>
+      <li><b>מפלי איסטובל עברו ליום 2.</b> הם נמצאים בדיוק על הדרך מהכפר לסקייווק (כ־25 דקות ביניהם), וכך יום 3 מתפנה להר האטרקציות ולאוברסטדורף.</li>
+      <li><b>טירת נוישוונשטיין ורכבל טגלברג נכנסו ליום המעבר (יום 4).</b> פיסן ושוואנגאו נמצאות בדיוק באמצע הדרך בין האלגוי לגרמיש — עוצרים בדרך במקום לחזור אחורה.</li>
+      <li><b>הצוגשפיצה, אגם איבזה וגשר היילין 179 קיבלו יום מלא (יום 5)</b> שמתחיל ונגמר במלון בגרמיש, בלי לסחוב מזוודות.</li>
+      <li><b>לגולנד (גינצבורג) ביום 6</b> — בדרך למינכן, ומשם ישר למלון ליד שדה התעופה.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= DAY 1 ================= -->
+<article class="day" id="day1">
+  <div class="day-head">
+    <div class="ph" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg|88299 Leutkirch im Allgäu, Germany - panoramio.jpg" data-fallback="🛬"></div>
+    <div class="day-title">
+      <span class="day-num">יום 1 · 23.4</span>
+      <h3>נחיתה בפרנקפורט ← כפר הנופש ופארק המים</h3>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="meta">
+      <span class="chip">🛬 נחיתה 09:05</span>
+      <span class="chip">🚗 ~390 ק״מ · כ־4 שעות</span>
+      <span class="chip stay-allgau">🛏️ כפר נופש אלגוי</span>
+    </div>
+    <div class="grid">
+      <ol class="timeline">
+        <li class="key"><time>09:05</time><div class="what"><b>נחיתה בפרנקפורט (FRA)</b><small>ביקורת דרכונים ואיסוף מזוודות</small></div></li>
+        <li><time>10:15</time><div class="what"><b>איסוף הרכב השכור</b><small>לוודא כיסאות בטיחות לילדים וכרטיס חנייה לאזור רגיל</small></div></li>
+        <li class="drive"><time>10:45</time><div class="what">🚗 יציאה דרומה בכביש A5 ← A8 ← A7 לכיוון לויטקירך</div></li>
+        <li><time>12:45</time><div class="what"><b>עצירת צהריים ותדלוק</b><small>תחנת Rasthof על האוטובאן, או קניות בסופר לבית בכפר</small></div></li>
+        <li class="drive"><time>13:30</time><div class="what">🚗 המשך נסיעה (כשעה וחצי)</div></li>
+        <li class="key"><time>15:00</time><div class="what"><b>הגעה וצ׳ק־אין בכפר הנופש</b><small>Center Parcs Park Allgäu · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Center+Parcs+Park+Allg%C3%A4u+Leutkirch">ניווט ↗</a></small></div></li>
+        <li><time>16:00</time><div class="what"><b>🌊 פארק המים Aqua Mundo</b><small>מגלשות, בריכת גלים ונהר זורם — פריקת אנרגיה אחרי הטיסה</small></div></li>
+        <li><time>19:30</time><div class="what"><b>ארוחת ערב ושינה מוקדמת</b></div></li>
+      </ol>
+      <div>
+        <div class="gallery">
+          <div class="ph wide" data-img="Holztiere im Ferienpark Leutkirch Centerparc Allgäu.jpg" data-label="כפר הנופש Park Allgäu" data-fallback="🌲"></div>
+        </div>
+        <div class="tip"><b>💡 טיפ:</b> צ׳ק־אין בסנטר פארקס בדרך כלל מ־15:00 (חלק מהמתקנים זמינים כבר מהצהריים). אם מגיעים מוקדם — אפשר להיכנס לפארק המים לפני קבלת הבית.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ================= DAY 2 ================= -->
+<article class="day" id="day2">
+  <div class="day-head">
+    <div class="ph" data-img="Lindau Leuchtturm Löwe.jpg|Lindau - Hafeneinfahrt mit Löwen und Leuchtturm (9534402866).jpg|Lindau - Hafen6.jpg" data-fallback="⛵"></div>
+    <div class="day-title">
+      <span class="day-num">יום 2 · 24.4</span>
+      <h3>מפלי איסטובל · סקייווק אלגוי · לינדאו</h3>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="meta">
+      <span class="chip depart">⏰ יציאה 09:00</span>
+      <span class="chip">🚗 מערב האלגוי · ~2 שעות נסיעה בסה״כ</span>
+      <span class="chip stay-allgau">🛏️ כפר נופש אלגוי</span>
+    </div>
+    <div class="grid">
+      <ol class="timeline">
+        <li class="drive"><time>09:00</time><div class="what">🚗 יציאה מהכפר (כ־30 דק׳)</div></li>
+        <li class="key"><time>09:30</time><div class="what"><b>💧 מפלי איסטובל (Eistobel)</b><small>ערוץ עם מפלים ובריכות טבעיות, מסלול הליכה קל של כשעה וחצי · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eistobel+Parkplatz+Maierh%C3%B6fen">ניווט ↗</a></small></div></li>
+        <li class="drive"><time>11:15</time><div class="what">🚗 לשיידג (כ־25 דק׳)</div></li>
+        <li class="key"><time>11:45</time><div class="what"><b>🌳 סקייווק אלגוי (Skywalk Allgäu)</b><small>שביל עצים בגובה 40 מ׳ עם תצפית לאלפים ולאגם בודן, גשרים מתנדנדים ומתחם משחקים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=skywalk+allg%C3%A4u+Scheidegg">ניווט ↗</a></small></div></li>
+        <li><time>13:15</time><div class="what"><b>ארוחת צהריים במקום</b></div></li>
+        <li class="drive"><time>14:15</time><div class="what">🚗 ללינדאו (כ־30 דק׳)</div></li>
+        <li class="key"><time>14:45</time><div class="what"><b>⛵ העיר העתיקה של לינדאו — "עיר הגנבים"</b><small>אי באגם בודן: הנמל עם האריה הבווארי והמגדלור, סמטאות ציוריות, גלידה על הטיילת · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Lindau+Hafen">ניווט ↗</a></small></div></li>
+        <li class="drive"><time>17:30</time><div class="what">🚗 חזרה לכפר (כ־50 דק׳)</div></li>
+        <li><time>18:30</time><div class="what"><b>🌊 ערב בפארק המים</b></div></li>
+      </ol>
+      <div>
+        <div class="gallery">
+          <div class="ph wide" data-img="Eistobel (003).jpg|Der Eistobel.jpg|D-BY - Obere Argen 193.JPG" data-label="מפלי איסטובל" data-fallback="💧"></div>
+          <div class="ph" data-img="Baumwipfelpfad mit Alpenblick.JPG|Scheidegger Wasserfälle (38).jpg" data-label="סקייווק אלגוי" data-fallback="🌳"></div>
+          <div class="ph" data-img="Lindau - Hafeneinfahrt mit Löwen und Leuchtturm (9534402866).jpg|Lindau - Hafen6.jpg" data-label="הנמל של לינדאו" data-fallback="⛵"></div>
+        </div>
+        <div class="tip"><b>💡 טיפ:</b> בלינדאו כדאי לחנות באחד החניונים שלפני הגשר לאי ולהיכנס ברגל — האי קטן ונעים להליכה, ואפשר לשלב שיט קצר באגם.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ================= DAY 3 ================= -->
+<article class="day" id="day3">
+  <div class="day-head">
+    <div class="ph" data-img="Christlessee.JPG|Oberstdorf - Trettach, Mädelegabel, Hochfrottspitze.JPG|Immenstadt - Gr Alpsee v N, Bühl a Alpsee.JPG" data-fallback="🏞️"></div>
+    <div class="day-title">
+      <span class="day-num">יום 3 · 25.4</span>
+      <h3>הר האטרקציות Alpsee Bergwelt · אוברסטדורף · אגם כריסטלזה</h3>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="meta">
+      <span class="chip depart">⏰ יציאה 09:00</span>
+      <span class="chip">🚗 דרום האלגוי · ~2.5 שעות נסיעה בסה״כ</span>
+      <span class="chip stay-allgau">🛏️ כפר נופש אלגוי</span>
+    </div>
+    <div class="grid">
+      <ol class="timeline">
+        <li class="drive"><time>09:00</time><div class="what">🚗 יציאה לאימנשטאדט (כ־50 דק׳)</div></li>
+        <li class="key"><time>10:00</time><div class="what"><b>🎢 Alpsee Bergwelt</b><small>רכבל, מגלשת ההרים הארוכה בגרמניה (Alpsee Coaster), פארק חבלים ותצפית על אגם אלפזה הגדול · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Alpsee+Bergwelt+B%C3%BChl+am+Alpsee">ניווט ↗</a></small></div></li>
+        <li class="drive"><time>13:00</time><div class="what">🚗 לאוברסטדורף (כ־25 דק׳)</div></li>
+        <li><time>13:30</time><div class="what"><b>🏘️ אוברסטדורף — צהריים וטיול בעיירה</b><small>עיירת הרים מקסימה, רחוב הולכי רגל וקפה ועוגה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Oberstdorf+Marktplatz">ניווט ↗</a></small></div></li>
+        <li class="key"><time>14:45</time><div class="what"><b>💎 אגם כריסטלזה (Christlessee)</b><small>אגם טורקיז צלול שלא קופא אף פעם. הגישה ברכב פרטי מוגבלת — חונים באוברסטדורף ומגיעים ברגל/באופניים (כ־4 ק״מ בשביל נוח לאורך נחל הטרטאך) או ברכבת התיירים בעונה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Christlessee+Oberstdorf">ניווט ↗</a></small></div></li>
+        <li class="drive"><time>17:30</time><div class="what">🚗 חזרה לכפר (כשעה ורבע)</div></li>
+        <li><time>18:45</time><div class="what"><b>🌊 ערב אחרון בפארק המים</b><small>ולארוז — מחר עוזבים את הכפר</small></div></li>
+      </ol>
+      <div>
+        <div class="gallery">
+          <div class="ph wide" data-img="Christlessee.JPG|Oberstdorf - Trettach, Mädelegabel, Hochfrottspitze.JPG" data-label="אגם כריסטלזה" data-fallback="💎"></div>
+          <div class="ph" data-img="Immenstadt - Gr Alpsee v N, Bühl a Alpsee.JPG|Grosser Alpsee (2).JPG" data-label="אגם אלפזה הגדול" data-fallback="🎢"></div>
+          <div class="ph" data-img="Oberstdorf - Trettach, Mädelegabel, Hochfrottspitze.JPG|20150730 xl P1010004 Illerursprung Zusammenfluss von Trettach Stillach und Breitach bei Oberstdorf.JPG" data-label="אוברסטדורף והטרטאך" data-fallback="🏘️"></div>
+        </div>
+        <div class="tip"><b>💡 טיפ:</b> עונת הקיץ של Alpsee Bergwelt נפתחת בדרך כלל בתחילת אפריל, והמגלשה תלויה במזג האוויר — כדאי לבדוק באתר יום לפני.</div>
+        <div class="alt"><b>מסלול חלופי לגשם:</b> במקום הר האטרקציות — יום ארוך יותר בפארק המים בבוקר, ואחר הצהריים אוברסטדורף והאגם.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ================= DAY 4 ================= -->
+<article class="day" id="day4">
+  <div class="day-head">
+    <div class="ph" data-img="Schloss Neuschwanstein 2013.jpg|Neuschwanstein Castle.jpg|Neuschwanstein-c1.jpg" data-fallback="🏰"></div>
+    <div class="day-title">
+      <span class="day-num">יום 4 · 26.4</span>
+      <h3>טירת נוישוונשטיין · רכבל טגלברג ← גרמיש</h3>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="meta">
+      <span class="chip depart">⏰ יציאה 09:00 (עם המזוודות)</span>
+      <span class="chip">🚗 יום מעבר · ~2:20 שעות נסיעה בסה״כ</span>
+      <span class="chip stay-garmisch">🛏️ Hotel Rheinischer Hof</span>
+    </div>
+    <div class="grid">
+      <ol class="timeline">
+        <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מהכפר</b><small>להעמיס את הרכב לפני היציאה</small></div></li>
+        <li class="drive"><time>09:00</time><div class="what">🚗 יציאה לשוואנגאו (כשעה ו־20 דק׳)</div></li>
+        <li class="key"><time>10:30</time><div class="what"><b>🏰 טירת נוישוונשטיין</b><small>עלייה ברגל (כ־40 דק׳), באוטובוס או בכרכרה. סיור מודרך בתוך הטירה לפי שעה שהוזמנה מראש, ותצפית מגשר מריה (Marienbrücke) · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Neuschwanstein+Castle">ניווט ↗</a></small></div></li>
+        <li><time>13:15</time><div class="what"><b>ארוחת צהריים בהוהנשוואנגאו</b></div></li>
+        <li class="drive"><time>14:00</time><div class="what">🚗 לרכבל טגלברג (5 דק׳)</div></li>
+        <li class="key"><time>14:15</time><div class="what"><b>🚡 רכבל טגלברג (Tegelbergbahn)</b><small>עולים לתצפית מעל הטירה והאגמים. למטה — מגלשות, מגלשת הרים (Sommerrodelbahn), דשא ופרות · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tegelbergbahn+Schwangau">ניווט ↗</a></small></div></li>
+        <li class="drive"><time>16:30</time><div class="what">🚗 נסיעה לגרמיש-פרטנקירכן (כשעה)</div></li>
+        <li class="key"><time>17:30</time><div class="what"><b>צ׳ק־אין ב־Hotel Rheinischer Hof</b><small>ערב: טיול ברחוב לודוויג (Ludwigstraße) עם הבתים המצוירים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hotel+Rheinischer+Hof+Garmisch-Partenkirchen">ניווט ↗</a></small></div></li>
+      </ol>
+      <div>
+        <div class="gallery">
+          <div class="ph wide" data-img="Neuschwanstein-c1.jpg|Neuschwanstein Castle.jpg" data-label="נוישוונשטיין מגשר מריה" data-fallback="🏰"></div>
+          <div class="ph" data-img="Neue Kabine (2021) der Tegelbergbahn.jpg" data-label="רכבל טגלברג" data-fallback="🚡"></div>
+          <div class="ph" data-img="Garmisch-Partenkirchen.JPG|Garmisch-Partenkirchen-Panorama.jpg" data-label="גרמיש-פרטנקירכן" data-fallback="🏔️"></div>
+        </div>
+        <div class="tip"><b>⚠️ חובה להזמין מראש:</b> כרטיסים לטירה עם שעת כניסה — באתר הרשמי hohenschwangau.de. לבחור סיור באנגלית בסביבות 11:30–12:00.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ================= DAY 5 ================= -->
+<article class="day" id="day5">
+  <div class="day-head">
+    <div class="ph" data-img="Eibsee & Zugspitze.jpg|Seilbahn Zugspitze von Eibsee.jpg" data-fallback="🏔️"></div>
+    <div class="day-title">
+      <span class="day-num">יום 5 · 27.4</span>
+      <h3>פסגת הצוגשפיצה · אגם איבזה · גשר היילין 179</h3>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="meta">
+      <span class="chip depart">⏰ יציאה 09:00</span>
+      <span class="chip">🚗 ~1:30 שעות נסיעה בסה״כ</span>
+      <span class="chip stay-garmisch">🛏️ Hotel Rheinischer Hof</span>
+    </div>
+    <div class="grid">
+      <ol class="timeline">
+        <li class="drive"><time>09:00</time><div class="what">🚗 לתחנת הרכבל באיבזה (כ־20 דק׳)</div></li>
+        <li class="key"><time>09:30</time><div class="what"><b>🚡 רכבל Seilbahn Zugspitze לפסגה</b><small>10 דקות ל־2,962 מ׳ — הנקודה הגבוהה בגרמניה. תצפית ל־4 מדינות, שלג גם באפריל · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Seilbahn+Zugspitze+Talstation+Eibsee">ניווט ↗</a></small></div></li>
+        <li><time>10:00</time><div class="what"><b>🏔️ בפסגה ובקרחון</b><small>אפשר לרדת לרמת הקרחון (Zugspitzplatt) ברכבל הקרחון ולחזור ברכבת השיניים לאיבזה</small></div></li>
+        <li class="key"><time>12:30</time><div class="what"><b>💙 אגם איבזה (Eibsee)</b><small>צהריים על שפת האגם, טיול רגלי קצר וסירות פדלים בעונה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eibsee">ניווט ↗</a></small></div></li>
+        <li class="drive"><time>14:30</time><div class="what">🚗 לרויטה שבאוסטריה (כ־40 דק׳ דרך ארוואלד)</div></li>
+        <li class="key"><time>15:15</time><div class="what"><b>🌉 גשר היילין 179 (Highline179)</b><small>גשר תלוי להולכי רגל באורך 406 מ׳ בגובה 114 מ׳, בין חורבות טירת ארנברג · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=highline179+Reutte">ניווט ↗</a></small></div></li>
+        <li class="drive"><time>17:15</time><div class="what">🚗 חזרה לגרמיש (כ־45 דק׳)</div></li>
+        <li><time>18:30</time><div class="what"><b>ארוחת ערב בגרמיש</b></div></li>
+      </ol>
+      <div>
+        <div class="gallery">
+          <div class="ph wide" data-img="Zugspitze Gipfelkreuz 2021.jpg|Gipfelkreuz Zugspitze.jpg|Zugspitze Westansicht.JPG" data-label="צלב הפסגה בצוגשפיצה" data-fallback="🏔️"></div>
+          <div class="ph" data-img="Seilbahn Zugspitze von Eibsee.jpg|Eibsee & Zugspitze.jpg" data-label="אגם איבזה" data-fallback="💙"></div>
+          <div class="ph" data-img="Highline179.jpg|Panorama of Highline179 and Burg Ehrenberg.jpg|20150723 ReutteTirol Highline179 BW DSC03837 PtrQs.jpg" data-label="היילין 179" data-fallback="🌉"></div>
+        </div>
+        <div class="tip"><b>💡 טיפ:</b> לבדוק את מצלמות הרשת של הצוגשפיצה בבוקר. אם הפסגה בעננים — להחליף: אחר הצהריים לפסגה, ובבוקר היילין והאגם.</div>
+        <div class="alt">
+          <b>🚡 רכבל אלפספיקס (AlpspiX):</b> זו פלטפורמת תצפית בצורת X מעל תהום של 1,000 מ׳, על הר האלפשפיצה בגרמיש (לא על הצוגשפיצה). אם מעדיפים להישאר בגרמיש — אפשר להחליף בו את היילין 179 אחר הצהריים (תחנת Alpspitzbahn נמצאת 5 דק׳ מהמלון).
+          <div class="gallery" style="margin-top:10px">
+            <div class="ph wide" data-img="2016-AlpspiX.jpg|Wetterstein Alpspix 2013-08.jpg|Wetterstein Osterfelderkopf 2013-08.jpg" data-label="AlpspiX" data-fallback="❌"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ================= DAY 6 ================= -->
+<article class="day" id="day6">
+  <div class="day-head">
+    <div class="ph" data-img="Miniland - Berlin (Legoland) (1).jpg|Flying Ninjago Legoland Deutschland (207022357).jpeg" data-fallback="🧱"></div>
+    <div class="day-title">
+      <span class="day-num">יום 6 · 28.4</span>
+      <h3>לגולנד גרמניה ← מלון ליד שדה התעופה של מינכן</h3>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="meta">
+      <span class="chip depart">⏰ יציאה 09:00 (עם המזוודות)</span>
+      <span class="chip">🚗 ~4 שעות נסיעה בסה״כ</span>
+      <span class="chip stay-munich">🛏️ Atomis Hotel Munich Airport</span>
+    </div>
+    <div class="grid">
+      <ol class="timeline">
+        <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מהמלון בגרמיש</b></div></li>
+        <li class="drive"><time>09:00</time><div class="what">🚗 לגינצבורג (כשעתיים ורבע)</div></li>
+        <li class="key"><time>11:15</time><div class="what"><b>🧱 לגולנד גרמניה</b><small>מינילנד, עולם הנינג׳גו, ארץ הפיראטים, האבירים ועוד — יום כיף מלא · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=LEGOLAND+Deutschland+Resort+G%C3%BCnzburg">ניווט ↗</a></small></div></li>
+        <li class="drive"><time>17:30</time><div class="what">🚗 נסיעה למלון ליד שדה התעופה (כשעה ו־45 דק׳)</div></li>
+        <li><time>19:15</time><div class="what"><b>⛽ תדלוק מלא</b><small>כדי שבבוקר לא נצטרך לעצור</small></div></li>
+        <li class="key"><time>19:30</time><div class="what"><b>צ׳ק־אין ב־Atomis Hotel</b><small>ארוחת ערב, אריזה וסידור המזוודות לטיסה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Atomis+Hotel+Munich+Airport+by+Mercure">ניווט ↗</a></small></div></li>
+      </ol>
+      <div>
+        <div class="gallery">
+          <div class="ph wide" data-img="Flying Ninjago Legoland Deutschland (207022357).jpeg|Miniland - Berlin (Legoland) (1).jpg" data-label="לגולנד גרמניה" data-fallback="🧱"></div>
+          <div class="ph" data-img="Miniland - Berlin (Legoland) (2).jpg|Miniland - Berlin (Legoland) (1).jpg" data-label="מינילנד" data-fallback="🧱"></div>
+          <div class="ph" data-img="Lageplan Legoland Deutschland.jpg" data-label="מפת הפארק" data-fallback="🗺️"></div>
+        </div>
+        <div class="tip"><b>💡 טיפ:</b> לקנות כרטיסים לגולנד באונליין מראש (זול יותר), ולבדוק בלוח הפתיחה שהפארק פתוח בתאריך.</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ================= DAY 7 ================= -->
+<article class="day" id="day7">
+  <div class="day-head">
+    <div class="ph" data-img="Garmisch-Partenkirchen-Panorama.jpg|Eibsee & Zugspitze.jpg" data-fallback="✈️"></div>
+    <div class="day-title">
+      <span class="day-num">יום 7 · 29.4</span>
+      <h3>החזרת הרכב וטיסה הביתה ✈️</h3>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="meta">
+      <span class="chip depart">⏰ יציאה מהמלון 07:15</span>
+      <span class="chip">🛫 המראה 10:20 · מינכן (MUC)</span>
+    </div>
+    <div class="grid">
+      <ol class="timeline">
+        <li><time>06:30</time><div class="what"><b>ארוחת בוקר מוקדמת</b><small>במלון או ארוחת בוקר ארוזה</small></div></li>
+        <li class="drive"><time>07:15</time><div class="what">🚗 יציאה לשדה התעופה (כ־10–15 דק׳)</div></li>
+        <li class="key"><time>07:30</time><div class="what"><b>🚗 החזרת הרכב השכור</b><small>חניון החזרת הרכבים בשדה התעופה מינכן (Mietwagenrückgabe) · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Mietwagenr%C3%BCckgabe+Flughafen+M%C3%BCnchen">ניווט ↗</a></small></div></li>
+        <li><time>08:00</time><div class="what"><b>צ׳ק־אין ובידוק ביטחוני</b><small>כ־2 שעות ו־20 דק׳ לפני הטיסה</small></div></li>
+        <li class="key"><time>10:20</time><div class="what"><b>🛫 המראה הביתה</b><small>להתראות אלגוי!</small></div></li>
+      </ol>
+      <div>
+        <div class="tip"><b>💡 טיפ:</b> אם רוצים בוקר רגוע יותר — אפשר להחזיר את הרכב כבר בערב יום 6 ולהגיע לטרמינל בבוקר במונית/שאטל (לבדוק מול המלון אם יש שאטל לשדה).</div>
+      </div>
+    </div>
+  </div>
+</article>
+
+<!-- ================= TIPS ================= -->
+<section id="tips">
+  <h2 class="sec">טיפים חשובים לפני שיוצאים</h2>
+  <p class="sec-sub">סוף אפריל באלפים: אביב למטה, שלג למעלה.</p>
+  <div class="tips">
+    <div class="tipcard"><div class="ico">🎟️</div><h3>להזמין מראש</h3><p>טירת נוישוונשטיין (חובה, עם שעת כניסה), לגולנד, ורצוי גם הרכבל לצוגשפיצה.</p></div>
+    <div class="tipcard"><div class="ico">🧥</div><h3>שכבות</h3><p>בעמקים 10–18°, בפסגת הצוגשפיצה מתחת לאפס. מעיל, כובע, כפפות ומשקפי שמש לכל אחד.</p></div>
+    <div class="tipcard"><div class="ico">🌦️</div><h3>פתיחת עונה</h3><p>חלק מהאטרקציות (מגלשות הרים, גשר מריה, רכבת התיירים לכריסטלזה) נפתחות לפי מזג האוויר — לבדוק יום לפני.</p></div>
+    <div class="tipcard"><div class="ico">🇦🇹</div><h3>יציאה לאוסטריה</h3><p>היילין 179 נמצא באוסטריה. בכבישים הרגילים דרך ארוואלד לא צריך ויניטה (מדבקת אוטוסטרדה) — לא להיכנס לאוטובאן האוסטרי בלי אחת.</p></div>
+    <div class="tipcard"><div class="ico">🅿️</div><h3>חניה</h3><p>רוב החניונים בתשלום במטבעות או באפליקציה. כדאי להחזיק מטבעות של יורו ברכב.</p></div>
+    <div class="tipcard"><div class="ico">🛒</div><h3>ימי ראשון</h3><p>בגרמניה הסופרים סגורים בימי ראשון — לבדוק מה היום בשבוע ולהצטייד יום קודם.</p></div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  נבנה באהבה לטיול המשפחתי שלנו 🏔️ · התמונות מ־<a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> ברישיונות Creative Commons — מעבר עם העכבר על תמונה מציג קישור לעמוד הקובץ והקרדיט לצלם.<br>
+  זמני הנסיעה משוערים — מומלץ לבדוק ב־Waze / Google Maps לפני כל יום.
+</footer>
+
+<script>
+(function(){
+  var FILE = "https://commons.wikimedia.org/wiki/Special:FilePath/";
+  var PAGE = "https://commons.wikimedia.org/wiki/File:";
+  function enc(name){ return encodeURIComponent(name.replace(/ /g,"_")); }
+
+  document.querySelectorAll(".ph[data-img]").forEach(function(box){
+    var list = box.getAttribute("data-img").split("|").map(function(s){return s.trim();}).filter(Boolean);
+    var label = box.getAttribute("data-label");
+    var wide = box.closest(".hero") || box.closest(".day-head");
+    var width = wide ? 1920 : 900;
+
+    var fb = document.createElement("div");
+    fb.className = "ph-fallback";
+    fb.textContent = box.getAttribute("data-fallback") || "🏔️";
+    box.appendChild(fb);
+
+    var img = document.createElement("img");
+    img.alt = label || "";
+    img.loading = box.closest(".hero") ? "eager" : "lazy";
+    img.decoding = "async";
+    box.appendChild(img);
+
+    if (label){
+      var l = document.createElement("div");
+      l.className = "ph-label";
+      l.textContent = label;
+      box.appendChild(l);
+    }
+
+    var i = 0;
+    function tryNext(){
+      if (i >= list.length){ box.classList.add("failed"); img.remove(); return; }
+      var name = list[i++];
+      img.onload = function(){
+        img.classList.add("ok");
+        var a = document.createElement("a");
+        a.className = "credit";
+        a.href = PAGE + enc(name);
+        a.target = "_blank"; a.rel = "noopener";
+        a.textContent = "📷 קרדיט";
+        box.appendChild(a);
+      };
+      img.onerror = tryNext;
+      img.src = FILE + enc(name) + "?width=" + width;
+    }
+    tryNext();
+  });
+})();
+</script>
+</body>
+</html>
