@@ -152,6 +152,28 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .tip b{color:var(--accent)}
 .alt{margin-top:12px;border:1px dashed var(--line);border-radius:14px;padding:12px 14px;font-size:.92rem;color:var(--muted)}
 
+/* stroller badges */
+.pram{display:inline-block;font-size:.72rem;font-weight:500;padding:1px 8px;border-radius:99px;margin-inline-start:6px;vertical-align:2px;white-space:nowrap}
+.pram.ok{background:color-mix(in srgb,#2f8a4f 16%,transparent);color:#24753f}
+.pram.part{background:color-mix(in srgb,#d9a21b 20%,transparent);color:#8a6400}
+.pram.no{background:color-mix(in srgb,#c2412d 15%,transparent);color:#a3301f}
+:root[data-theme="dark"] .pram.ok{color:#7fd39a} :root[data-theme="dark"] .pram.part{color:#f0c75a} :root[data-theme="dark"] .pram.no{color:#f19584}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pram.ok{color:#7fd39a} :root:not([data-theme="light"]) .pram.part{color:#f0c75a} :root:not([data-theme="light"]) .pram.no{color:#f19584}}
+.what small.pn{color:var(--muted);font-size:.8rem}
+
+/* ticker */
+.ticker{direction:ltr;overflow:hidden;border-top:1px solid var(--line);background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#fff;font-size:.88rem;white-space:nowrap}
+.ticker .track{display:flex;width:max-content;animation:tick 45s linear infinite}
+.ticker:hover .track{animation-play-state:paused}
+.ticker .item{direction:rtl;display:inline-flex;align-items:center;gap:6px;padding:7px 26px;border-inline-end:1px solid rgba(255,255,255,.25)}
+.ticker .item b{font-variant-numeric:tabular-nums}
+.ticker .live{display:inline-block;width:7px;height:7px;border-radius:50%;background:#7CFFB2;box-shadow:0 0 0 0 rgba(124,255,178,.7);animation:pulse 2s infinite}
+@keyframes tick{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(124,255,178,.6)}70%{box-shadow:0 0 0 7px rgba(124,255,178,0)}100%{box-shadow:0 0 0 0 rgba(124,255,178,0)}}
+@media (prefers-reduced-motion: reduce){.ticker .track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}}
+.live-note{font-size:.78rem;color:var(--muted);margin-top:8px}
+.wx .fc{display:inline-block;font-size:.66rem;background:var(--accent);color:#fff;border-radius:99px;padding:0 6px;margin-top:2px}
+
 /* restaurant + shop cards */
 .rest{margin-top:14px;background:var(--warm);border-radius:16px;padding:14px 16px;border:1px solid color-mix(in srgb,#c9a227 30%,transparent)}
 .rest .tag{display:inline-block;font-size:.74rem;font-weight:700;color:#8a6d0b;background:color-mix(in srgb,#c9a227 22%,transparent);padding:2px 10px;border-radius:99px}
@@ -252,6 +274,7 @@ footer a{color:var(--muted)}
     <a href="#costs">💰 עלויות</a>
     <a href="#tips">טיפים</a>
   </div>
+  <div class="ticker" aria-label="עדכונים חיים"><div class="track" id="tickerTrack"></div></div>
 </nav>
 
 <main>
@@ -389,12 +412,12 @@ footer a{color:var(--muted)}
     <div class="grid">
       <ol class="timeline">
         <li class="drive"><time>09:00</time><div class="what">🚗 יציאה מהכפר (כ־30 דק׳)</div></li>
-        <li class="key"><time>09:30</time><div class="what"><b>💧 מפלי איסטובל (Eistobel)</b><small>ערוץ עם מפלים ובריכות טבעיות. מסלול הליכה קל של כשעה וחצי, שמתאים לילדים מגיל 4 · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eistobel+Parkplatz+Maierh%C3%B6fen">ניווט ↗</a></small></div></li>
+        <li class="key"><time>09:30</time><div class="what"><b>💧 מפלי איסטובל (Eistobel)<span class="pram no">👶 לא לעגלה</span></b><small class="pn">בכניסה יש מדרגות, ובתוך הערוץ שבילי חצץ ושורשים. עדיף מנשא לבן ה־3</small><small>ערוץ עם מפלים ובריכות טבעיות. מסלול הליכה קל של כשעה וחצי, שמתאים לילדים מגיל 4 · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eistobel+Parkplatz+Maierh%C3%B6fen">ניווט ↗</a></small></div></li>
         <li class="drive"><time>11:15</time><div class="what">🚗 לשיידג (כ־25 דק׳)</div></li>
-        <li class="key"><time>11:45</time><div class="what"><b>🌳 סקייווק אלגוי (היום נקרא Waldwelt Allgäu)</b><small>שביל בין צמרות העצים בגובה 40 מ׳, עם תצפית לאלפים ולאגם בודן. יש גם גשרים מתנדנדים, מתחם משחקים ופינת ליטוף. מהחניון הולכים כ־500 מ׳ בעלייה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Waldwelt+skywalk+allg%C3%A4u+Scheidegg">ניווט ↗</a></small></div></li>
+        <li class="key"><time>11:45</time><div class="what"><b>🌳 סקייווק אלגוי (היום נקרא Waldwelt Allgäu)<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">השביל בין העצים, רוב השבילים והמסעדה נגישים לעגלות</small><small>שביל בין צמרות העצים בגובה 40 מ׳, עם תצפית לאלפים ולאגם בודן. יש גם גשרים מתנדנדים, מתחם משחקים ופינת ליטוף. מהחניון הולכים כ־500 מ׳ בעלייה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Waldwelt+skywalk+allg%C3%A4u+Scheidegg">ניווט ↗</a></small></div></li>
         <li class="food"><time>13:00</time><div class="what"><b>🥨 צהריים במסעדה של הסקייווק</b><small>מסעדה בשירות עצמי, עם מרפסת וגן בירה</small></div></li>
         <li class="drive"><time>14:15</time><div class="what">🚗 ללינדאו (כ־30 דק׳)</div></li>
-        <li class="key"><time>14:45</time><div class="what"><b>⛵ העיר העתיקה של לינדאו</b><small>אי באגם בודן: הנמל עם האריה הבווארי והמגדלור, סמטאות ציוריות וגלידה על הטיילת · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Lindau+Hafen">ניווט ↗</a></small></div></li>
+        <li class="key"><time>14:45</time><div class="what"><b>⛵ העיר העתיקה של לינדאו<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">שטוח, עם קצת אבני מרצפת</small><small>אי באגם בודן: הנמל עם האריה הבווארי והמגדלור, סמטאות ציוריות וגלידה על הטיילת · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Lindau+Hafen">ניווט ↗</a></small></div></li>
                 <li class="drive"><time>17:30</time><div class="what">🚗 חזרה לכפר (כ־50 דק׳)</div></li>
         <li class="food"><time>18:30</time><div class="what"><b>🏠 ארוחת ערב בבית</b></div></li>
         <li><time>19:15</time><div class="what"><b>🌊 ערב בפארק המים</b></div></li>
@@ -447,11 +470,11 @@ footer a{color:var(--muted)}
     <div class="grid">
       <ol class="timeline">
         <li class="drive"><time>09:00</time><div class="what">🚗 יציאה לאימנשטאדט (כ־50 דק׳)</div></li>
-        <li class="key"><time>10:00</time><div class="what"><b>🎢 Alpsee Bergwelt</b><small>רכבל כיסאות, מגלשת ההרים Alpsee Coaster (מהארוכות בגרמניה), פארק חבלים ותצפית על אגם אלפזה הגדול · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Alpsee+Bergwelt+B%C3%BChl+am+Alpsee">ניווט ↗</a></small></div></li>
+        <li class="key"><time>10:00</time><div class="what"><b>🎢 Alpsee Bergwelt<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">ברכבל הכיסאות ובמגלשה אין מקום לעגלה. משאירים אותה בתחנה התחתונה</small><small>רכבל כיסאות, מגלשת ההרים Alpsee Coaster (מהארוכות בגרמניה), פארק חבלים ותצפית על אגם אלפזה הגדול · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Alpsee+Bergwelt+B%C3%BChl+am+Alpsee">ניווט ↗</a></small></div></li>
         <li class="food"><time>12:15</time><div class="what"><b>🍽️ צהריים בבקתת ההרים "Bärenfalle"</b><small>בגובה כ־1,100 מ׳, ליד התחנה העליונה של הרכבל</small></div></li>
         <li class="drive"><time>13:30</time><div class="what">🚗 לאוברסטדורף (כ־25 דק׳)</div></li>
         <li><time>14:00</time><div class="what"><b>🏘️ אוברסטדורף</b><small>עיירת הרים מקסימה עם רחוב הולכי רגל · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Oberstdorf+Marktplatz">ניווט ↗</a></small></div></li>
-        <li class="key"><time>14:45</time><div class="what"><b>💎 אגם כריסטלזה (Christlessee)</b><small>אגם טורקיז צלול שלא קופא אף פעם. הגישה ברכב פרטי מוגבלת, לכן חונים באוברסטדורף ומגיעים ברגל או באופניים (כ־4 ק״מ בשביל נוח לאורך נחל הטרטאך). בעונה יש גם רכבת תיירים. ליד האגם יש בית קפה לעוגה ולקייזרשמארן · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Christlessee+Oberstdorf">ניווט ↗</a></small></div></li>
+        <li class="key"><time>14:45</time><div class="what"><b>💎 אגם כריסטלזה (Christlessee)<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">דרך רחבה ונוחה לאורך הנחל</small><small>אגם טורקיז צלול שלא קופא אף פעם. הגישה ברכב פרטי מוגבלת, לכן חונים באוברסטדורף ומגיעים ברגל או באופניים (כ־4 ק״מ בשביל נוח לאורך נחל הטרטאך). בעונה יש גם רכבת תיירים. ליד האגם יש בית קפה לעוגה ולקייזרשמארן · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Christlessee+Oberstdorf">ניווט ↗</a></small></div></li>
         <li class="drive"><time>17:30</time><div class="what">🚗 חזרה לכפר (כשעה ורבע)</div></li>
         <li class="food"><time>18:45</time><div class="what"><b>🏠 ארוחת ערב בבית</b></div></li>
         <li><time>19:30</time><div class="what"><b>🌊 ערב אחרון בפארק המים</b><small>ולארוז, כי מחר עוזבים את הכפר</small></div></li>
@@ -505,10 +528,10 @@ footer a{color:var(--muted)}
       <ol class="timeline">
         <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מהכפר</b><small>להעמיס את הרכב לפני היציאה</small></div></li>
         <li class="drive"><time>09:00</time><div class="what">🚗 יציאה לשוואנגאו (כשעה ו־20 דק׳)</div></li>
-        <li class="key"><time>10:30</time><div class="what"><b>🏰 טירת נוישוונשטיין</b><small>עולים ברגל (כ־40 דק׳), באוטובוס או בכרכרה. סיור מודרך בתוך הטירה בשעה שהוזמנה מראש, ותצפית מגשר מריה (Marienbrücke) · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Neuschwanstein+Castle">ניווט ↗</a></small></div></li>
+        <li class="key"><time>10:30</time><div class="what"><b>🏰 טירת נוישוונשטיין<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">העלייה סלולה אבל תלולה. בתוך הטירה יש מדרגות ואין כניסה עם עגלה</small><small>עולים ברגל (כ־40 דק׳), באוטובוס או בכרכרה. סיור מודרך בתוך הטירה בשעה שהוזמנה מראש, ותצפית מגשר מריה (Marienbrücke) · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Neuschwanstein+Castle">ניווט ↗</a></small></div></li>
         <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Restaurant Café Kainz</b><small>Alpseestraße 5, הוהנשוואנגאו. יש מרפסת עם נוף לטירה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Restaurant+Cafe+Kainz+Hohenschwangau">ניווט ↗</a></small></div></li>
         <li class="drive"><time>14:00</time><div class="what">🚗 לרכבל טגלברג (5 דק׳)</div></li>
-        <li class="key"><time>14:15</time><div class="what"><b>🚡 רכבל טגלברג (Tegelbergbahn)</b><small>עולים לתצפית מעל הטירה והאגמים. למטה יש מגלשות, מגלשת הרים (Sommerrodelbahn), דשא ופרות · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tegelbergbahn+Schwangau">ניווט ↗</a></small></div></li>
+        <li class="key"><time>14:15</time><div class="what"><b>🚡 רכבל טגלברג (Tegelbergbahn)<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">לא מצאנו מידע רשמי על עגלות ברכבל. אזור המשחקים למטה מתאים</small><small>עולים לתצפית מעל הטירה והאגמים. למטה יש מגלשות, מגלשת הרים (Sommerrodelbahn), דשא ופרות · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Tegelbergbahn+Schwangau">ניווט ↗</a></small></div></li>
         <li class="drive"><time>16:30</time><div class="what">🚗 נסיעה לגרמיש-פרטנקירכן (כשעה)</div></li>
         <li class="key"><time>17:30</time><div class="what"><b>צ׳ק־אין ב־Hotel Rheinischer Hof</b><small><a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Hotel+Rheinischer+Hof+Garmisch-Partenkirchen">ניווט ↗</a></small></div></li>
         <li class="food"><time>18:30</time><div class="what"><b>🍕 ארוחת ערב קלה: פיצה מ־Pizzeria Puoro</b><small>Schornstraße 9. אפשר לשבת במקום או לקחת למלון · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Pizzeria+Puoro+Garmisch-Partenkirchen">ניווט ↗</a></small></div></li>
@@ -560,12 +583,12 @@ footer a{color:var(--muted)}
     <div class="grid">
       <ol class="timeline">
         <li class="drive"><time>09:00</time><div class="what">🚗 לתחנת הרכבל באיבזה (כ־20 דק׳)</div></li>
-        <li class="key"><time>09:30</time><div class="what"><b>🚡 רכבל Seilbahn Zugspitze לפסגה</b><small>10 דקות עד גובה 2,962 מ׳, הנקודה הגבוהה בגרמניה. מהפסגה רואים 4 מדינות, ויש שלג גם באפריל · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Seilbahn+Zugspitze+Talstation+Eibsee">ניווט ↗</a></small></div></li>
+        <li class="key"><time>09:30</time><div class="what"><b>🚡 רכבל Seilbahn Zugspitze לפסגה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">הרכבל והמרפסות בפסגה נגישים. על השלג בקרחון כבר לא</small><small>10 דקות עד גובה 2,962 מ׳, הנקודה הגבוהה בגרמניה. מהפסגה רואים 4 מדינות, ויש שלג גם באפריל · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Seilbahn+Zugspitze+Talstation+Eibsee">ניווט ↗</a></small></div></li>
         <li><time>10:00</time><div class="what"><b>🏔️ בפסגה ובקרחון</b><small>אפשר לרדת לרמת הקרחון (Zugspitzplatt) ברכבל הקרחון, ולחזור לאיבזה ברכבת השיניים</small></div></li>
         <li class="food"><time>12:30</time><div class="what"><b>🍽️ צהריים ב־Seerestaurant Eibsee Pavillon</b><small>על שפת האגם (Seeweg 2). כדאי לשבת בחוץ בשביל הנוף · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eibsee+Pavillon+Grainau">ניווט ↗</a></small></div></li>
-        <li class="key"><time>13:30</time><div class="what"><b>💙 טיול קצר לאורך אגם איבזה</b><small>ובעונה גם סירות פדלים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eibsee">ניווט ↗</a></small></div></li>
+        <li class="key"><time>13:30</time><div class="what"><b>💙 טיול קצר לאורך אגם איבזה<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">החלק הצפוני נוח, ובשאר המסלול יש קטעים עם שורשים ומדרגות</small><small>ובעונה גם סירות פדלים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Eibsee">ניווט ↗</a></small></div></li>
         <li class="drive"><time>14:30</time><div class="what">🚗 לרויטה שבאוסטריה (כ־40 דק׳, דרך ארוואלד)</div></li>
-        <li class="key"><time>15:15</time><div class="what"><b>🌉 גשר היילין 179 (Highline179)</b><small>גשר תלוי להולכי רגל באורך 406 מ׳ ובגובה 114 מ׳, בין חורבות טירת ארנברג · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=highline179+Reutte">ניווט ↗</a></small></div></li>
+        <li class="key"><time>15:15</time><div class="what"><b>🌉 גשר היילין 179 (Highline179)<span class="pram no">👶 לא לעגלה</span></b><small class="pn">לפי האתר הרשמי אסור לעלות עם עגלה על הגשר. מגיל 4 משלמים</small><small>גשר תלוי להולכי רגל באורך 406 מ׳ ובגובה 114 מ׳, בין חורבות טירת ארנברג · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=highline179+Reutte">ניווט ↗</a></small></div></li>
         <li class="drive"><time>17:15</time><div class="what">🚗 חזרה לגרמיש (כ־45 דק׳)</div></li>
         <li class="food"><time>18:30</time><div class="what"><b>🍔 ארוחת ערב קלה במקדונלדס גרמיש</b><small>יש בו פינת משחקים לקטנים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=McDonald%27s+Garmisch-Partenkirchen">ניווט ↗</a></small></div></li>
       </ol>
@@ -594,7 +617,7 @@ footer a{color:var(--muted)}
         </div>
         <div class="tip"><b>💡 טיפ:</b> לבדוק בבוקר את מצלמות הרשת של הצוגשפיצה. אם הפסגה בעננים, להפוך את הסדר: בבוקר היילין והאגם, ואחר הצהריים הפסגה.</div>
         <div class="alt">
-          <b>🚡 רכבל אלפספיקס (AlpspiX):</b> פלטפורמת תצפית בצורת X מעל תהום של 1,000 מ׳, על הר האלפשפיצה בגרמיש (לא על הצוגשפיצה). אם מעדיפים להישאר בגרמיש אחר הצהריים, אפשר להחליף בו את היילין 179 (תחנת Alpspitzbahn קרובה למלון). לא נכלל בחישוב העלויות.
+          <b>🚡 רכבל אלפספיקס (AlpspiX):</b><span class="pram part">👶 חלקית לעגלה</span> פלטפורמת תצפית בצורת X מעל תהום של 1,000 מ׳, על הר האלפשפיצה בגרמיש (לא על הצוגשפיצה). אם מעדיפים להישאר בגרמיש אחר הצהריים, אפשר להחליף בו את היילין 179 (תחנת Alpspitzbahn קרובה למלון). לא נכלל בחישוב העלויות.
           <div class="gallery" style="margin-top:10px">
             <div class="ph wide" data-img="2016-AlpspiX.jpg|Wetterstein Alpspix 2013-08.jpg|Wetterstein Osterfelderkopf 2013-08.jpg" data-label="AlpspiX" data-fallback="❌"></div>
           </div>
@@ -623,7 +646,7 @@ footer a{color:var(--muted)}
       <ol class="timeline">
         <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מהמלון בגרמיש</b></div></li>
         <li class="drive"><time>09:00</time><div class="what">🚗 לגינצבורג (כשעתיים ורבע)</div></li>
-        <li class="key"><time>11:15</time><div class="what"><b>🧱 לגולנד גרמניה</b><small>מינילנד, עולם נינג׳גו, ארץ הפיראטים, האבירים ועוד. יום כיף מלא · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=LEGOLAND+Deutschland+Resort+G%C3%BCnzburg">ניווט ↗</a></small></div></li>
+        <li class="key"><time>11:15</time><div class="what"><b>🧱 לגולנד גרמניה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">כל הפארק נגיש, ויש גם השכרת עגלות</small><small>מינילנד, עולם נינג׳גו, ארץ הפיראטים, האבירים ועוד. יום כיף מלא · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=LEGOLAND+Deutschland+Resort+G%C3%BCnzburg">ניווט ↗</a></small></div></li>
         <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Schnitzel Depot בתוך הפארק</b><small>יש גם ארוחות ילדים קבועות במסעדות האחרות של הפארק</small></div></li>
         <li class="drive"><time>17:30</time><div class="what">🚗 נסיעה לאזור שדה התעופה (כשעה ו־45 דק׳)</div></li>
         <li class="food"><time>19:15</time><div class="what"><b>🍔 ארוחת ערב קלה במקדונלדס של שדה התעופה</b><small>במרכז MAC, קומה 03, לפני הבידוק הביטחוני. פתוח עד מאוחר · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=McDonald%27s+Munich+Airport+Center">ניווט ↗</a></small></div></li>
@@ -690,7 +713,7 @@ footer a{color:var(--muted)}
 <!-- ================= COSTS ================= -->
 <section id="costs">
   <h2 class="sec">💰 סיכום עלויות</h2>
-  <p class="sec-sub">ההוצאות הקבועות כבר שולמו. לחישוב הוספנו דלק, חניה, כניסה לאטרקציות, ארוחות וסופר. ברירת המחדל: 2 מבוגרים וילדים בני 3, 7 ו־10. אפשר לשנות כאן את מספר המשתתפים ואת שער היורו, והסכומים בכל הימים יתעדכנו.</p>
+  <p class="sec-sub">ההוצאות הקבועות כבר שולמו. לחישוב הוספנו דלק, חניה, כניסה לאטרקציות וארוחות (בלי הסופר). ברירת המחדל: 2 מבוגרים וילדים בני 3, 7 ו־10. אפשר לשנות כאן את מספר המשתתפים ואת שער היורו, והסכומים בכל הימים יתעדכנו.</p>
   <div class="cost-wrap">
     <div class="panel">
       <h3>פירוט בשקלים</h3>
@@ -706,6 +729,7 @@ footer a{color:var(--muted)}
         <label>מחיר דלק לליטר (€)<input type="number" id="inFuel" min="0.5" max="5" step="0.01" value="1.80"></label>
         <label>צריכת דלק (ל׳/100 ק״מ)<input type="number" id="inCons" min="3" max="20" step="0.1" value="7.5"></label>
       </div>
+      <div class="live-note" id="liveNote">⏳ טוען שער יורו ומחיר דלק עדכניים…</div>
       <div class="big-total"><span>סה״כ לטיול (משוער)</span><b id="grandTotal">—</b><span id="grandSub"></span></div>
       <div class="assume">
         מחירי הכניסה לפי המחירונים העדכניים שמצאנו. חלקם יכולים להשתנות עד אפריל:
@@ -716,7 +740,7 @@ footer a{color:var(--muted)}
           <li>סקייווק: €15.80 למבוגר, €11.70 לילד · Alpsee Bergwelt (רכבל ומגלשה): כ־€17 למבוגר, כ־€14.50 לילד</li>
           <li>לגולנד: כ־€45 לאדם באונליין · Aqua Mundo כלול בלינה</li>
           <li>ארוחות: צהריים במסעדה (כ־€17 למבוגר, כ־€10 לילד). ערב קל של פיצה או מקדונלדס (כ־€10 למבוגר, כ־€7 לילד). הילד בן ה־3 לא נספר</li>
-          <li>בימי הכפר אוכלים ערב בבית. הסופר הגדול ביום שישי (כ־€160) מכסה ארוחות בוקר, ערב וחטיפים לשלושה ימים, ועוד כ־€25 לחטיפים ומים בגרמיש</li>
+          <li>בימי הכפר אוכלים ערב בבית. הקניות בסופר לא נכללות בחישוב</li>
           <li>הילד בן ה־3 נכנס בחינם לרוב האטרקציות (בסקייווק מתחת ל־1 מ׳). בלגולנד הוא משלם</li>
           <li>לא כולל מזכרות ו־AlpspiX</li>
         </ul>
@@ -846,13 +870,13 @@ footer a{color:var(--muted)}
   // lunch / dinner: "rest" = lunch out, "light" = pizza/McDonald's, "home" = eat at the apartment
   var MEAL = { rest: [17, 10], light: [10, 7], home: [0, 0] };
   var DAYS = {
-    1: { drive: "~2:10", km: 200, parking: 0,  attr: [], wx: "⛅ 15°/4°",  lunch: "rest", dinner: "home",  shop: 160 },
-    2: { drive: "~2:00", km: 125, parking: 15, attr: ["skywalk"], wx: "🌤️ 16°/6°", lunch: "rest", dinner: "home", shop: 0 },
-    3: { drive: "~2:30", km: 150, parking: 11, attr: ["alpsee"], wx: "⛅ 14°/3°", lunch: "rest", dinner: "home", shop: 0 },
-    4: { drive: "~2:30", km: 160, parking: 14, attr: ["neusch","tegel"], wx: "⛅ 15°/3°", lunch: "rest", dinner: "light", shop: 25 },
-    5: { drive: "~1:45", km: 90,  parking: 15, attr: ["zug","highline"], wx: "🏔️ 15°/3°", lunch: "rest", dinner: "light", shop: 0 },
-    6: { drive: "~4:00", km: 355, parking: 12, attr: ["lego"], wx: "🌤️ 17°/5°", lunch: "rest", dinner: "light", shop: 0 },
-    7: { drive: "~0:15", km: 10,  parking: 0,  attr: [], wx: "✈️ 16°/4°", lunch: "home", dinner: "home", shop: 0 }
+    1: { lat: 47.826, lon: 10.022, place: "לויטקירך", drive: "~2:10", km: 200, parking: 0,  attr: [], wx: "⛅ 15°/4°",  lunch: "rest", dinner: "home" },
+    2: { lat: 47.546, lon: 9.684, place: "לינדאו", drive: "~2:00", km: 125, parking: 15, attr: ["skywalk"], wx: "🌤️ 16°/6°", lunch: "rest", dinner: "home" },
+    3: { lat: 47.409, lon: 10.279, place: "אוברסטדורף", drive: "~2:30", km: 150, parking: 11, attr: ["alpsee"], wx: "⛅ 14°/3°", lunch: "rest", dinner: "home" },
+    4: { lat: 47.577, lon: 10.738, place: "שוואנגאו", drive: "~2:30", km: 160, parking: 14, attr: ["neusch","tegel"], wx: "⛅ 15°/3°", lunch: "rest", dinner: "light" },
+    5: { lat: 47.492, lon: 11.095, place: "גרמיש", drive: "~1:45", km: 90,  parking: 15, attr: ["zug","highline"], wx: "🏔️ 15°/3°", lunch: "rest", dinner: "light" },
+    6: { lat: 48.453, lon: 10.278, place: "גינצבורג", drive: "~4:00", km: 355, parking: 12, attr: ["lego"], wx: "🌤️ 17°/5°", lunch: "rest", dinner: "light" },
+    7: { lat: 48.354, lon: 11.786, place: "מינכן", drive: "~0:15", km: 10,  parking: 0,  attr: [], wx: "✈️ 16°/4°", lunch: "home", dinner: "home" }
   };
   var FIXED = [
     ["✈️ טיסות", 8760],
@@ -871,7 +895,7 @@ footer a{color:var(--muted)}
     var a = num("inAdults",2), k = num("inKids",2), s = num("inSmall",1);
     var rate = num("inRate",3.8), fuel = num("inFuel",1.8), cons = num("inCons",7.5);
     var perKm = cons / 100 * fuel;
-    var tot = { attr: 0, fuel: 0, park: 0, km: 0, meals: 0, shop: 0 };
+    var tot = { attr: 0, fuel: 0, park: 0, km: 0, meals: 0 };
     var attrLines = [];
 
     Object.keys(DAYS).forEach(function(d){
@@ -883,11 +907,11 @@ footer a{color:var(--muted)}
       }, 0);
       var f = day.km * perKm;
       var meals = [day.lunch, day.dinner].reduce(function(sum, m){ return sum + MEAL[m][0]*a + MEAL[m][1]*k; }, 0);
-      tot.attr += at; tot.fuel += f; tot.park += day.parking; tot.km += day.km; tot.meals += meals; tot.shop += day.shop;
+      tot.attr += at; tot.fuel += f; tot.park += day.parking; tot.km += day.km; tot.meals += meals;
 
       var el = document.querySelector('.daysum[data-day="'+d+'"]');
       if (el){
-        var dayEur = at + f + day.parking + meals + day.shop, dayIls = dayEur * rate;
+        var dayEur = at + f + day.parking + meals, dayIls = dayEur * rate;
         el.innerHTML =
           '<div class="ds wxs"><span class="k">מזג אוויר (ממוצע)</span><span class="v"><bdi dir="ltr">'+day.wx+'</bdi></span></div>'+
           '<div class="ds"><span class="k">🚗 זמן נסיעה</span><span class="v"><bdi dir="ltr">'+day.drive+'</bdi> <small>ש׳ · '+day.km+' ק״מ</small></span></div>'+
@@ -895,13 +919,12 @@ footer a{color:var(--muted)}
           '<div class="ds"><span class="k">⛽ דלק</span><span class="v">'+eur(f)+' <small>'+ils(f*rate)+'</small></span></div>'+
           '<div class="ds"><span class="k">🅿️ חניה</span><span class="v">'+eur(day.parking)+' <small>'+ils(day.parking*rate)+'</small></span></div>'+
           '<div class="ds"><span class="k">🍽️ ארוחות</span><span class="v">'+eur(meals)+' <small>'+ils(meals*rate)+'</small></span></div>'+
-          '<div class="ds"><span class="k">🛒 סופר</span><span class="v">'+eur(day.shop)+' <small>'+ils(day.shop*rate)+'</small></span></div>'+
           '<div class="ds total"><span class="k">סה״כ היום</span><span class="v">'+ils(dayIls)+' <small>'+eur(dayEur)+'</small></span></div>';
       }
     });
 
     var fixedSum = FIXED.reduce(function(s,r){ return s + r[1]; }, 0);
-    var varIls = (tot.attr + tot.fuel + tot.park + tot.meals + tot.shop) * rate;
+    var varIls = (tot.attr + tot.fuel + tot.park + tot.meals) * rate;
     var grand = fixedSum + varIls;
 
     var h = '<tr class="group"><td colspan="2">הוצאות קבועות (כבר ידועות)</td></tr>';
@@ -913,7 +936,6 @@ footer a{color:var(--muted)}
     h += '<tr><td>⛽ דלק <small>(~'+tot.km.toLocaleString("he-IL")+' ק״מ)</small></td><td class="n">'+ils(tot.fuel*rate)+' <small>'+eur(tot.fuel)+'</small></td></tr>';
     h += '<tr><td>🅿️ חניה</td><td class="n">'+ils(tot.park*rate)+' <small>'+eur(tot.park)+'</small></td></tr>';
     h += '<tr><td>🍽️ ארוחות <small>(צהריים בחוץ, ערב קל)</small></td><td class="n">'+ils(tot.meals*rate)+' <small>'+eur(tot.meals)+'</small></td></tr>';
-    h += '<tr><td>🛒 סופר</td><td class="n">'+ils(tot.shop*rate)+' <small>'+eur(tot.shop)+'</small></td></tr>';
     h += '<tr><td><b>סה״כ בשטח</b></td><td class="n"><b>'+ils(varIls)+'</b></td></tr>';
     h += '<tr class="grand"><td>סה״כ לטיול</td><td class="n">'+ils(grand)+'</td></tr>';
     $("costTable").innerHTML = h;
@@ -926,9 +948,147 @@ footer a{color:var(--muted)}
   }
 
   ["inAdults","inKids","inSmall","inRate","inFuel","inCons"].forEach(function(id){
-    $(id).addEventListener("input", calc);
+    $(id).addEventListener("input", function(){ $(id).dataset.touched = "1"; calc(); });
   });
+  window.TRIP = { DAYS: DAYS, calc: calc };
   calc();
+})();
+
+/* ---------- live data: euro rate, fuel price, weather + ticker ---------- */
+(function(){
+  var TRIP_START = new Date("2027-04-23T09:05:00+02:00");
+  var TRIP_DATES = { 1:"2027-04-23", 2:"2027-04-24", 3:"2027-04-25", 4:"2027-04-26", 5:"2027-04-27", 6:"2027-04-28", 7:"2027-04-29" };
+  var state = { done: false, rate: null, rateDate: null, fuel: null, fuelSrc: null, wxNow: null };
+
+  function $(id){ return document.getElementById(id); }
+  function getJSON(url){
+    return fetch(url, { cache: "no-store" }).then(function(r){ if (!r.ok) throw new Error(r.status); return r.json(); });
+  }
+  function icon(code){
+    if (code === 0) return "☀️";
+    if (code <= 2) return "🌤️";
+    if (code === 3) return "☁️";
+    if (code <= 48) return "🌫️";
+    if (code <= 57) return "🌦️";
+    if (code <= 67) return "🌧️";
+    if (code <= 77) return "🌨️";
+    if (code <= 82) return "🌧️";
+    if (code <= 86) return "🌨️";
+    return "⛈️";
+  }
+  function daysLeft(){
+    var ms = TRIP_START - new Date();
+    return Math.ceil(ms / 86400000);
+  }
+
+  /* ticker */
+  function renderTicker(){
+    var n = daysLeft(), items = [], wait = state.done ? 'לא זמין כרגע' : 'טוען…';
+    if (n > 1) items.push('⏳ עוד <b>' + n.toLocaleString("he-IL") + '</b> ימים לטיול!');
+    else if (n === 1) items.push('⏳ <b>מחר</b> טסים! ✈️');
+    else if (n > -7) items.push('🎉 <b>אנחנו בטיול!</b>');
+    else items.push('🏔️ הטיול הסתיים, מקווים שנהניתם');
+    if (state.wxNow) items.push(state.wxNow.icon + ' עכשיו בלויטקירך: <b>' + state.wxNow.t + '°</b> · רוח ' + state.wxNow.wind + ' קמ״ש');
+    else items.push('🌤️ מזג אוויר: ' + wait);
+    if (state.rate) items.push('💶 1 € = <b>' + state.rate.toFixed(3) + ' ₪</b>' + (state.rateDate ? ' <small>(' + state.rateDate + ')</small>' : ''));
+    else items.push('💶 שער היורו: ' + wait);
+    if (state.fuel) items.push('⛽ בנזין בגרמניה: <b>€' + state.fuel.toFixed(2) + '</b> לליטר' + (state.rate ? ' (≈₪' + (state.fuel * state.rate).toFixed(2) + ')' : ''));
+    else items.push('⛽ מחיר דלק: ' + wait);
+    items.push('🛫 נחיתה במינכן: שישי 23.4 · 09:05');
+    var one = items.map(function(t){ return '<span class="item"><span class="live"></span>' + t + '</span>'; }).join("");
+    $("tickerTrack").innerHTML = one + one;
+  }
+
+  function setInput(id, v, digits){
+    var el = $(id);
+    if (el && !el.dataset.touched){ el.value = v.toFixed(digits); }
+  }
+  function note(){
+    var parts = [];
+    parts.push(state.rate ? "💶 שער יורו לייב (ECB): " + state.rate.toFixed(3) + " ₪" : "💶 שער היורו לא נטען, משתמשים ב־3.80");
+    parts.push(state.fuel ? "⛽ מחיר בנזין לייב בגרמניה: €" + state.fuel.toFixed(2) : "⛽ מחיר הדלק לא נטען, משתמשים ב־€1.80");
+    $("liveNote").textContent = parts.join(" · ");
+  }
+
+  /* euro rate: Frankfurter (ECB), fallback open.er-api.com */
+  var pRate = getJSON("https://api.frankfurter.dev/v1/latest?base=EUR&symbols=ILS")
+    .then(function(j){ state.rate = j.rates.ILS; state.rateDate = j.date; })
+    .catch(function(){
+      return getJSON("https://open.er-api.com/v6/latest/EUR").then(function(j){ state.rate = j.rates.ILS; });
+    })
+    .then(function(){ if (state.rate) setInput("inRate", state.rate, 2); })
+    .catch(function(){});
+
+  /* fuel price: OpenVan.camp public API (CC BY 4.0), Germany gasoline in EUR/liter */
+  function findDE(obj){
+    if (!obj || typeof obj !== "object") return null;
+    if (obj.DE) return obj.DE;
+    if (Array.isArray(obj)) {
+      for (var i = 0; i < obj.length; i++){
+        var o = obj[i];
+        if (o && (o.country_code === "DE" || o.code === "DE" || o.country === "DE" || o.country_name === "Germany")) return o;
+      }
+    }
+    for (var k in obj){ var r = (obj[k] && typeof obj[k] === "object") ? findDE(obj[k]) : null; if (r) return r; }
+    return null;
+  }
+  function price(v){
+    if (typeof v === "number") return v;
+    if (typeof v === "string") return parseFloat(v);
+    if (v && typeof v === "object") return price(v.price != null ? v.price : (v.value != null ? v.value : v.avg));
+    return NaN;
+  }
+  var pFuel = getJSON("https://openvan.camp/api/fuel/prices")
+    .then(function(j){
+      var de = findDE(j.data || j);
+      var pr = de && (de.prices || de);
+      var v = pr ? price(pr.gasoline != null ? pr.gasoline : (pr.petrol != null ? pr.petrol : pr.e5)) : NaN;
+      if (v > 0.8 && v < 4){ state.fuel = v; setInput("inFuel", v, 2); }
+    })
+    .catch(function(){});
+
+  /* weather: Open-Meteo (no key). Current weather in Leutkirch + forecast for trip days once in range */
+  var pWx = getJSON("https://api.open-meteo.com/v1/forecast?latitude=47.826&longitude=10.022&current=temperature_2m,weather_code,wind_speed_10m&timezone=Europe%2FBerlin")
+    .then(function(j){
+      state.wxNow = { t: Math.round(j.current.temperature_2m), icon: icon(j.current.weather_code), wind: Math.round(j.current.wind_speed_10m) };
+    })
+    .catch(function(){});
+
+  function updateForecasts(){
+    var ahead = (new Date("2027-04-29T00:00:00+02:00") - new Date()) / 86400000;
+    if (ahead > 15 || ahead < -1) return Promise.resolve();   // forecast only covers ~16 days
+    var DAYS = window.TRIP && window.TRIP.DAYS;
+    if (!DAYS) return Promise.resolve();
+    return Promise.all(Object.keys(DAYS).map(function(d){
+      var day = DAYS[d], date = TRIP_DATES[d];
+      var url = "https://api.open-meteo.com/v1/forecast?latitude=" + day.lat + "&longitude=" + day.lon +
+        "&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&timezone=Europe%2FBerlin&start_date=" + date + "&end_date=" + date;
+      return getJSON(url).then(function(j){
+        var hi = Math.round(j.daily.temperature_2m_max[0]), lo = Math.round(j.daily.temperature_2m_min[0]);
+        var pr = j.daily.precipitation_probability_max[0], ic = icon(j.daily.weather_code[0]);
+        day.wx = ic + " " + hi + "°/" + lo + "°";
+        var card = document.querySelector('.wx[href="#day' + d + '"]');
+        if (card){
+          card.querySelector(".i").textContent = ic;
+          card.querySelector(".t").innerHTML = hi + "° <span>/ " + lo + "°</span>";
+          card.querySelector(".p").innerHTML = day.place + (pr != null ? " · " + pr + "% 🌧" : "") + '<br><span class="fc">תחזית</span>';
+        }
+      }).catch(function(){});
+    })).then(function(){
+      document.querySelectorAll(".ds.wxs .k").forEach(function(k){ k.textContent = "מזג אוויר (תחזית)"; });
+    });
+  }
+
+  renderTicker();
+  Promise.all([pRate, pFuel, pWx]).then(function(){
+    state.done = true; renderTicker(); note();
+    return updateForecasts();
+  }).then(function(){
+    if (window.TRIP) window.TRIP.calc();
+    if (document.querySelector('.wx .fc')) document.querySelectorAll(".ds.wxs .k").forEach(function(k){ k.textContent = "מזג אוויר (תחזית)"; });
+  });
+  [pRate, pFuel, pWx].forEach(function(p){ p.then(function(){ renderTicker(); if (window.TRIP) window.TRIP.calc(); }); });
+  setInterval(renderTicker, 60 * 60 * 1000);
 })();
 </script>
 </body>
