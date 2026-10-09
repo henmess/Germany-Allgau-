@@ -129,11 +129,11 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .day-body{padding:22px 24px 26px}
 
 /* day summary */
-.daysum{display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;margin:0 0 14px;padding:7px 6px;border:1px solid var(--line);border-radius:999px;background:var(--bg);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.daysum{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 0;margin:0 0 14px;padding:7px 6px;border:1px solid var(--line);border-radius:999px;background:var(--bg);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .daysum .it{display:inline-flex;align-items:center;gap:4px;padding:0 10px;white-space:nowrap;border-inline-end:1px solid var(--line)}
 .daysum .it:last-of-type{border-inline-end:none}
 .daysum .it b{color:var(--ink);font-weight:600}
-.daysum .tot{margin-inline-start:auto;background:var(--brand);color:#fff;border-radius:999px;padding:3px 12px;font-weight:700;white-space:nowrap}
+.daysum .tot{margin-inline-start:6px;background:var(--brand);color:#fff;border-radius:999px;padding:3px 12px;font-weight:700;white-space:nowrap}
 .daysum .tot small{font-weight:400;opacity:.8;margin-inline-start:4px}
 .wx-badge{position:absolute;z-index:3;top:14px;left:14px;display:flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;border-radius:14px;color:#fff;
   background:rgba(10,25,30,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);font-variant-numeric:tabular-nums;line-height:1.15}
@@ -1161,7 +1161,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
         var dayEur = at + f + day.parking + meals, dayIls = dayEur * rate;
         var e = function(x){ return ' title="' + eur(x) + '"'; };
         el.innerHTML =
-          '<span class="it" title="' + day.km + ' ק״מ">🚗 <b><bdi dir="ltr">' + day.drive + '</bdi></b> ש׳</span>' +
+          '<span class="it">🚗 <b><bdi dir="ltr">' + day.drive + '</bdi></b> ש׳ · <b>' + day.km + '</b> ק״מ</span>' +
           '<span class="it"' + e(at) + '>🎟️ <b>' + ils(at*rate) + '</b></span>' +
           '<span class="it"' + e(f) + '>⛽ <b>' + ils(f*rate) + '</b></span>' +
           '<span class="it"' + e(day.parking) + '>🅿️ <b>' + ils(day.parking*rate) + '</b></span>' +
@@ -1250,7 +1250,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     else items.push('💶 שער היורו: ' + wait);
     if (state.fuel) items.push('⛽ ' + (fuelType() === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>€' + state.fuel.toFixed(2) + '</b> לליטר' + (state.rate ? ' (≈₪' + (state.fuel * state.rate).toFixed(2) + ')' : ''));
     else { var fbT = fuelType(), fbP = DEFAULT_PRICE[fbT]; items.push('⛽ ' + (fbT === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>~€' + fbP.toFixed(2) + '</b> לליטר' + (state.done ? ' (הערכה)' : '') + (state.rate ? ' (≈₪' + (fbP * state.rate).toFixed(2) + ')' : '')); }
-    if (state.updated) items.push('🔄 נבדק ב־<b>' + hhmm(state.updated) + '</b>' + (state.rateLive || state.fuelLive ? '' : ' (מוצגים ערכים שמורים)'));
+    if (state.updated) items.push('🔄 עודכן ב־<b>' + hhmm(state.updated) + '</b>' + (state.rateLive || state.fuelLive ? '' : ' (מוצגים ערכים שמורים)'));
     items.push('הרכב שלנו: <b>VW Tiguan</b> אוטומט' + commonsImg(CAR_IMG, 120, 'car-thumb sm', 'VW Tiguan'));
     items.push('🛫 נחיתה במינכן: שישי 23.4 · 09:05');
     var one = items.map(function(t){ return '<span class="item"><span class="live"></span>' + t + '</span>'; }).join("");
@@ -1265,7 +1265,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     var parts = [];
     parts.push(state.rate ? (state.rateLive ? "💶 שער יורו לייב: " : "💶 שער יורו (שמור מ־" + new Date(state.rateSaved).toLocaleDateString("he-IL") + "): ") + state.rate.toFixed(3) + " ₪" : "💶 שער היורו לא נטען, משתמשים ב־3.80");
     parts.push(state.fuel ? "⛽ מחיר " + (fuelType() === "diesel" ? "דיזל" : "בנזין") + (state.fuelLive ? " לייב" : " (שמור מ־" + new Date(state.fuelSaved).toLocaleDateString("he-IL") + ")") + " בגרמניה: €" + state.fuel.toFixed(2) : "⛽ מחיר הדלק לא נטען, משתמשים בברירת המחדל");
-    if (state.updated) parts.push("🔄 נבדק ב־" + hhmm(state.updated));
+    if (state.updated) parts.push("🔄 עודכן ב־" + hhmm(state.updated));
     $("liveNote").textContent = parts.join(" · ");
   }
 
