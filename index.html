@@ -316,8 +316,54 @@ footer a{color:var(--muted)}
   .wx-strip{grid-template-columns:repeat(3,1fr)}
   .panel{padding:16px}
 }
+/* share / pdf bar */
+.actions{display:flex;justify-content:center;gap:10px;padding:12px 16px 0;max-width:1100px;margin:0 auto}
+.act-btn{font:inherit;font-size:.9rem;font-weight:500;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line);background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.act-btn:hover{border-color:var(--brand);color:var(--brand)}
+.act-btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+.act-btn.primary:hover{background:var(--brand-2);color:#fff}
+.act-btn[disabled]{opacity:.6;cursor:wait}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);z-index:1200;background:#1d2a2e;color:#fff;padding:10px 18px;border-radius:999px;font-size:.9rem;
+  opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.print-only{display:none}
+
 @media print{
-  nav.days,.hero{display:none} .day{break-inside:avoid;box-shadow:none;border:1px solid #ccc}
+  @page{size:A4;margin:11mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  :root{--bg:#fff;--surface:#fff;--ink:#1d2a2e;--muted:#5d6b6f;--line:#ddd;--shadow:none}
+  html{scroll-behavior:auto}
+  body{background:#fff;font-size:11pt}
+  nav.days,.actions,.to-top,.toast,.menu-btn,.map-card,.gallery,.ph a.credit,#open .sec-sub,.inputs,.live-note,a.waze,.chip.sos,#overview > .sec-sub{display:none !important}
+  .print-only{display:block}
+  .hero{min-height:0;height:62mm;margin-bottom:6mm;border-radius:0}
+  .hero-inner{padding-bottom:6mm}
+  .hero h1{font-size:24pt;margin:6px 0}
+  .hero p.lead,.hero-stats{display:none}
+  .hero-weather{margin:0}
+  main{padding:0}
+  section{margin-top:8mm}
+  .route{grid-template-columns:repeat(3,1fr);gap:8px}
+  .stay .ph{height:28mm}
+  .day{box-shadow:none;border:1px solid #ccc;border-radius:12px;margin-top:0;break-inside:auto;break-before:page}
+  #open,#costs,#sos{break-before:page}
+  .day-head{height:38mm;break-after:avoid}
+  .day-title{padding:8px 14px}
+  .day-title h3{font-size:15pt}
+  .day-body{padding:10px 14px}
+  .grid{grid-template-columns:1fr;gap:6px}
+  .timeline li{break-inside:avoid;padding:4px 0}
+  .tip,.alt,.rest{break-inside:avoid}
+  .daysum{border-radius:12px}
+  a{color:inherit;text-decoration:none}
+  .sos-grid,.tips{grid-template-columns:repeat(2,1fr)}
+  .sos-card,.tipcard,.panel{box-shadow:none;border:1px solid #ddd;break-inside:avoid}
+  .cost-wrap{grid-template-columns:1fr}
+  dialog.menu-dlg{display:block;position:static;max-width:none;width:auto;margin:0 0 5mm;padding:0;background:none;break-inside:avoid}
+  dialog.menu-dlg .rest{box-shadow:none}
+  .dlg-x{display:none}
+  .menus-title{margin:8mm 0 4mm;font-size:16pt;break-before:page}
 }
 </style>
 </head>
@@ -362,6 +408,12 @@ footer a{color:var(--muted)}
   </div>
   <div class="ticker" aria-label="עדכונים חיים"><div class="track" id="tickerTrack"></div></div>
 </nav>
+
+<div class="actions" role="toolbar" aria-label="שיתוף וייצוא">
+  <button class="act-btn primary" id="shareBtn" type="button">📤 שתף את המסלול</button>
+  <button class="act-btn" id="pdfBtn" type="button">📄 שמור כ־PDF</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <main>
 
@@ -837,6 +889,7 @@ footer a{color:var(--muted)}
 
 </main>
 
+<h2 class="sec menus-title print-only">📋 תפריטים</h2>
 <dialog class="menu-dlg" id="menu-day1" aria-label="תפריט">
   <div class="rest">
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
@@ -1058,6 +1111,46 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   d.querySelector(".dlg-x").addEventListener("click", function(){ d.close(); });
   d.addEventListener("click", function(e){ if (e.target === d) d.close(); });
 });
+
+/* ---------- share & PDF ---------- */
+(function(){
+  var toastEl = document.getElementById("toast"), tt;
+  function toast(msg){ toastEl.textContent = msg; toastEl.classList.add("show"); clearTimeout(tt); tt = setTimeout(function(){ toastEl.classList.remove("show"); }, 2600); }
+  function pageUrl(){ return location.href.split("#")[0]; }
+
+  document.getElementById("shareBtn").addEventListener("click", function(){
+    var data = { title: document.title, text: "המסלול שלנו לבוואריה – אלגוי, גרמיש ומינכן 🏔️", url: pageUrl() };
+    if (navigator.share){
+      navigator.share(data).catch(function(){});
+      return;
+    }
+    var done = function(){ toast("🔗 הקישור הועתק. אפשר להדביק בוואטסאפ או במייל"); };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(data.url).then(done, function(){ window.open("https://wa.me/?text=" + encodeURIComponent(data.text + " " + data.url), "_blank"); });
+    } else {
+      window.open("https://wa.me/?text=" + encodeURIComponent(data.text + " " + data.url), "_blank");
+    }
+  });
+
+  // Make sure every photo is loaded before printing (lazy images would print blank)
+  function loadAllImages(maxWait){
+    var imgs = Array.prototype.slice.call(document.images);
+    imgs.forEach(function(i){ i.loading = "eager"; });
+    var pending = imgs.filter(function(i){ return !i.complete && i.src; }).map(function(i){
+      return new Promise(function(res){ i.addEventListener("load", res, { once: true }); i.addEventListener("error", res, { once: true }); });
+    });
+    return Promise.race([Promise.all(pending), new Promise(function(res){ setTimeout(res, maxWait); })]);
+  }
+  var pdfBtn = document.getElementById("pdfBtn");
+  pdfBtn.addEventListener("click", function(){
+    pdfBtn.disabled = true; pdfBtn.textContent = "⏳ מכין PDF…";
+    loadAllImages(4000).then(function(){
+      pdfBtn.disabled = false; pdfBtn.textContent = "📄 שמור כ־PDF";
+      toast("בחלון ההדפסה בחרו \"שמירה כ־PDF\"");
+      setTimeout(function(){ window.print(); }, 300);
+    });
+  });
+})();
 
 /* ---------- back to top ---------- */
 (function(){
