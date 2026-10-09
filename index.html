@@ -390,15 +390,6 @@ footer a{color:var(--muted)}
     </article>
   </div>
 
-  <div class="wx-strip" aria-label="מזג אוויר ממוצע לכל יום">
-    <a class="wx" href="#day1"><div class="d">שישי 23.4</div><div class="i">⛅</div><div class="t">15° <span>/ 4°</span></div><div class="p">לויטקירך · 35% 🌧</div></a>
-    <a class="wx" href="#day2"><div class="d">שבת 24.4</div><div class="i">🌤️</div><div class="t">16° <span>/ 6°</span></div><div class="p">לינדאו · 35% 🌧</div></a>
-    <a class="wx" href="#day3"><div class="d">ראשון 25.4</div><div class="i">⛅</div><div class="t">14° <span>/ 3°</span></div><div class="p">אוברסטדורף · 40% 🌧</div></a>
-    <a class="wx" href="#day4"><div class="d">שני 26.4</div><div class="i">🌤️</div><div class="t">17° <span>/ 5°</span></div><div class="p">גינצבורג · 30% 🌧</div></a>
-    <a class="wx" href="#day5"><div class="d">שלישי 27.4</div><div class="i">⛅</div><div class="t">15° <span>/ 3°</span></div><div class="p">שוואנגאו · 40% 🌧</div></a>
-    <a class="wx" href="#day6"><div class="d">רביעי 28.4</div><div class="i">🏔️</div><div class="t">15° <span>/ 3°</span></div><div class="p">בפסגה −4°/−9°</div></a>
-    <a class="wx" href="#day7"><div class="d">חמישי 29.4</div><div class="i">✈️</div><div class="t">16° <span>/ 4°</span></div><div class="p">מינכן · 30% 🌧</div></a>
-  </div>
 
 </section>
 
@@ -1038,7 +1029,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     3: { lat: 47.409, lon: 10.279, place: "אוברסטדורף", drive: "~2:15", km: 150, parking: 7, attr: ["alpsee"], wx: "⛅ 14°/3°", lunch: "rest", dinner: "home" },
     4: { lat: 48.453, lon: 10.278, place: "גינצבורג", drive: "~3:20", km: 300, parking: 12, attr: ["lego"], wx: "🌤️ 17°/5°", lunch: "rest", dinner: "light" },
     5: { lat: 47.577, lon: 10.738, place: "שוואנגאו", drive: "~2:10", km: 125, parking: 19, attr: ["highline","neusch","tegel"], wx: "⛅ 15°/3°", lunch: "rest", dinner: "light" },
-    6: { lat: 47.456, lon: 10.99, place: "איבזה", drive: "~2:00", km: 150, parking: 10, attr: ["zug"], wx: "🏔️ 15°/3°", lunch: "rest", dinner: "light" },
+    6: { lat: 47.456, lon: 10.99, place: "איבזה", drive: "~2:00", km: 150, parking: 10, attr: ["zug"], wx: "🏔️ 15°/3° · בפסגה −4°/−9°", lunch: "rest", dinner: "light" },
     7: { lat: 48.354, lon: 11.786, place: "מינכן", drive: "~0:15", km: 10,  parking: 0,  attr: [], wx: "✈️ 16°/4°", lunch: "home", dinner: "home" }
   };
   var FIXED = [
@@ -1076,7 +1067,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
       if (el){
         var dayEur = at + f + day.parking + meals, dayIls = dayEur * rate;
         el.innerHTML =
-          '<div class="ds wxs"><span class="k">מזג אוויר (ממוצע)</span><span class="v"><bdi dir="ltr">'+day.wx+'</bdi></span></div>'+
+          '<div class="ds wxs"><span class="k">מזג אוויר (' + (day.fc ? 'תחזית' : 'ממוצע') + ')</span><span class="v"><bdi dir="ltr">'+day.wx+'</bdi></span></div>'+
           '<div class="ds"><span class="k">🚗 זמן נסיעה</span><span class="v"><bdi dir="ltr">'+day.drive+'</bdi> <small>ש׳ · '+day.km+' ק״מ</small></span></div>'+
           '<div class="ds"><span class="k">🎟️ אטרקציות</span><span class="v">'+eur(at)+' <small>'+ils(at*rate)+'</small></span></div>'+
           '<div class="ds"><span class="k">⛽ דלק</span><span class="v">'+eur(f)+' <small>'+ils(f*rate)+'</small></span></div>'+
@@ -1244,7 +1235,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
       return getJSON(url).then(function(j){
         var hi = Math.round(j.daily.temperature_2m_max[0]), lo = Math.round(j.daily.temperature_2m_min[0]);
         var pr = j.daily.precipitation_probability_max[0], ic = icon(j.daily.weather_code[0]);
-        day.wx = ic + " " + hi + "°/" + lo + "°";
+        day.wx = ic + " " + hi + "°/" + lo + "°" + (pr != null ? " · " + pr + "%🌧" : ""); day.fc = true;
         var card = document.querySelector('.wx[href="#day' + d + '"]');
         if (card){
           card.querySelector(".i").textContent = ic;
