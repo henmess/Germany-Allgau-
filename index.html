@@ -219,6 +219,18 @@ dialog.menu-dlg .rest{margin:0;position:relative;padding:18px 18px 14px;box-shad
 
 .open-tbl th{font-size:.82rem;color:var(--muted);font-weight:500}
 .open-tbl td:nth-child(2){white-space:nowrap;color:var(--muted);font-size:.86rem}
+/* emergency */
+.sos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sos-card{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);padding:16px 18px;border-top:5px solid #c2412d;scroll-margin-top:110px}
+.sos-card h3{margin:0;font-size:1.05rem}
+.sos-sub{margin:2px 0 10px;color:var(--muted);font-size:.82rem}
+.sos-list{display:flex;flex-direction:column;gap:6px}
+a.tel{display:flex;justify-content:space-between;align-items:center;gap:10px;text-decoration:none;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:8px 12px;font-size:.88rem}
+a.tel b{direction:ltr;unicode-bidi:isolate;white-space:nowrap;color:#c2412d;font-size:.95rem}
+a.tel:hover{border-color:#c2412d}
+.sos-note{font-size:.8rem;color:var(--muted);margin:8px 0 0}
+.chip.sos{background:color-mix(in srgb,#c2412d 12%,var(--surface));border-color:color-mix(in srgb,#c2412d 35%,transparent);text-decoration:none;color:var(--ink)}
+@media (max-width:860px){ .sos-grid{grid-template-columns:1fr} }
 /* back to top */
 .to-top{position:fixed;left:16px;bottom:18px;z-index:1100;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
   background:var(--brand);color:#fff;font-size:1.35rem;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.25);
@@ -341,6 +353,7 @@ footer a{color:var(--muted)}
     <a href="#day7">חמישי <small>29.4</small></a>
     <a href="#open">✅ פתוח?</a>
     <a href="#costs">💰 עלויות</a>
+    <a href="#sos">🚨 חירום</a>
     <a href="#tips">טיפים</a>
   </div>
   <div class="ticker" aria-label="עדכונים חיים"><div class="track" id="tickerTrack"></div></div>
@@ -405,6 +418,7 @@ footer a{color:var(--muted)}
   <div class="day-body">
     <div class="daysum" data-day="1"></div>
     <div class="meta">
+      <a class="chip sos" href="#sos-allgau">🚨 חירום באזור</a>
       <span class="chip">🛬 נחיתה 09:05 · מינכן (MUC)</span>
       <span class="chip stay-allgau">🛏️ סנטר פארקס אלגוי</span>
     </div>
@@ -447,6 +461,7 @@ footer a{color:var(--muted)}
   <div class="day-body">
     <div class="daysum" data-day="2"></div>
     <div class="meta">
+      <a class="chip sos" href="#sos-allgau">🚨 חירום באזור</a>
       <span class="chip depart">⏰ יציאה 09:00</span>
       <span class="chip stay-allgau">🛏️ סנטר פארקס אלגוי</span>
     </div>
@@ -484,6 +499,7 @@ footer a{color:var(--muted)}
   <div class="day-body">
     <div class="daysum" data-day="3"></div>
     <div class="meta">
+      <a class="chip sos" href="#sos-allgau">🚨 חירום באזור</a>
       <span class="chip depart">⏰ יציאה 09:00</span>
       <span class="chip stay-allgau">🛏️ סנטר פארקס אלגוי</span>
     </div>
@@ -521,6 +537,7 @@ footer a{color:var(--muted)}
   <div class="day-body">
     <div class="daysum" data-day="4"></div>
     <div class="meta">
+      <a class="chip sos" href="#sos-garmisch">🚨 חירום באזור</a>
       <span class="chip depart">⏰ יציאה 09:00 (עם המזוודות)</span>
       <span class="chip stay-garmisch">🛏️ Hotel Rheinischer Hof</span>
     </div>
@@ -558,6 +575,8 @@ footer a{color:var(--muted)}
   <div class="day-body">
     <div class="daysum" data-day="5"></div>
     <div class="meta">
+      <a class="chip sos" href="#sos-garmisch">🚨 חירום בגרמיש</a>
+      <a class="chip sos" href="#sos-at">🚨 חירום באוסטריה</a>
       <span class="chip depart">⏰ יציאה 09:00</span>
       <span class="chip stay-garmisch">🛏️ Hotel Rheinischer Hof</span>
     </div>
@@ -604,6 +623,7 @@ footer a{color:var(--muted)}
   <div class="day-body">
     <div class="daysum" data-day="6"></div>
     <div class="meta">
+      <a class="chip sos" href="#sos-munich">🚨 חירום באזור</a>
       <span class="chip depart">⏰ יציאה 09:00 (עם המזוודות)</span>
       <span class="chip stay-munich">🛏️ Atomis Hotel Munich Airport</span>
     </div>
@@ -646,6 +666,7 @@ footer a{color:var(--muted)}
   <div class="day-body">
     <div class="daysum" data-day="7"></div>
     <div class="meta">
+      <a class="chip sos" href="#sos-munich">🚨 חירום באזור</a>
       <span class="chip depart">⏰ יציאה מהמלון 07:15</span>
       <span class="chip">🛫 המראה 10:20 · מינכן (MUC)</span>
     </div>
@@ -729,6 +750,74 @@ footer a{color:var(--muted)}
 </section>
 
 <!-- ================= TIPS ================= -->
+<section id="sos">
+  <h2 class="sec">🚨 מספרי חירום</h2>
+  <p class="sec-sub">לחיצה על מספר מחייגת ישר מהטלפון. בכל מצב של סכנת חיים מתקשרים קודם ל־<b>112</b>. המספר עובד בכל אירופה, בחינם, וגם בלי כרטיס SIM.</p>
+  <div class="sos-grid">
+    <div class="sos-card" id="sos-de">
+      <h3>🇩🇪 בכל גרמניה</h3>
+      <p class="sos-sub">כל הימים</p>
+      <div class="sos-list">
+        <a class="tel" href="tel:112">🚑 אמבולנס, כבאות, חילוץ בהרים<b>112</b></a>
+        <a class="tel" href="tel:110">🚓 משטרה<b>110</b></a>
+        <a class="tel" href="tel:116117">🩺 רופא תורן, למקרה דחוף שאינו מסכן חיים<b>116 117</b></a>
+        <a class="tel" href="tel:+498919240">☠️ מרכז מידע לרעלים בבוואריה<b>089 19240</b></a>
+        <a class="tel" href="tel:+498920204000">🚗 ADAC, עזרה בדרכים<b>089 20 20 4000</b></a>
+      </div>
+      <p class="sos-note">🚙 לתקלה ברכב השכור מתקשרים קודם למספר החירום של חברת ההשכרה. הוא מופיע בחוזה, ובדרך כלל גם על מחזיק המפתחות.</p>
+    </div>
+    <div class="sos-card" id="sos-allgau">
+      <h3>🌲 אלגוי (סנטר פארקס)</h3>
+      <p class="sos-sub">שישי–ראשון, 23–25.4</p>
+      <div class="sos-list">
+        <a class="tel" href="tel:+498331702300">👶 בית חולים לילדים (Kinderklinik) Klinikum Memmingen<b>08331 70-2300</b></a>
+        <a class="tel" href="tel:+498331700">🏥 Klinikum Memmingen, מרכזייה<b>08331 700</b></a>
+      </div>
+      <p class="sos-note">⚠️ בתי החולים בלויטקירך ובאיסני נסגרו. המיון הקרוב לסנטר פארקס הוא בוואנגן (Westallgäu-Klinikum Wangen), כ־25 דק׳ נסיעה. לילדים עדיף Memmingen, כ־35 דק׳, ב־Bismarckstr. 23 · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Klinikum+Memmingen+Bismarckstra%C3%9Fe+23">🗺️ ניווט</a>. מספר הקבלה של סנטר פארקס מופיע בהזמנה ובאפליקציה.</p>
+    </div>
+    <div class="sos-card" id="sos-garmisch">
+      <h3>🏔️ גרמיש-פרטנקירכן</h3>
+      <p class="sos-sub">שני–רביעי, 26–28.4</p>
+      <div class="sos-list">
+        <a class="tel" href="tel:+498821771210">🚑 מיון, Klinikum Garmisch-Partenkirchen<b>08821 77-1210</b></a>
+        <a class="tel" href="tel:+498821771350">👶 מחלקת ילדים<b>08821 77-1350</b></a>
+        <a class="tel" href="tel:+498821770">🏥 מרכזייה<b>08821 77-0</b></a>
+      </div>
+      <p class="sos-note">📍 Auenstraße 6, כ־5 דק׳ מהמלון · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Klinikum+Garmisch-Partenkirchen+Auenstra%C3%9Fe+6">🗺️ ניווט</a>. בפסגת הצוגשפיצה ובאיבזה: 112.</p>
+    </div>
+    <div class="sos-card" id="sos-at">
+      <h3>🇦🇹 אוסטריה (רויטה, גשר היילין 179)</h3>
+      <p class="sos-sub">שלישי 27.4</p>
+      <div class="sos-list">
+        <a class="tel" href="tel:112">🆘 חירום אירופי<b>112</b></a>
+        <a class="tel" href="tel:144">🚑 אמבולנס<b>144</b></a>
+        <a class="tel" href="tel:133">🚓 משטרה<b>133</b></a>
+        <a class="tel" href="tel:140">⛰️ חילוץ בהרים<b>140</b></a>
+        <a class="tel" href="tel:120">🚗 ÖAMTC, עזרה בדרכים<b>120</b></a>
+      </div>
+    </div>
+    <div class="sos-card" id="sos-munich">
+      <h3>✈️ מינכן ושדה התעופה</h3>
+      <p class="sos-sub">רביעי–חמישי, 28–29.4</p>
+      <div class="sos-list">
+        <a class="tel" href="tel:+498161243000">🏥 Klinikum Freising, כ־20 דק׳ מהמלון<b>08161 24-3000</b></a>
+        <a class="tel" href="tel:112">🚑 חירום<b>112</b></a>
+      </div>
+      <p class="sos-note">📍 Alois-Steinecker-Straße 18, Freising · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Klinikum+Freising">🗺️ ניווט</a></p>
+    </div>
+    <div class="sos-card" id="sos-il">
+      <h3>🇮🇱 נציגות ישראל בגרמניה</h3>
+      <p class="sos-sub">לאובדן דרכון, מעצר או מקרה חירום</p>
+      <div class="sos-list">
+        <a class="tel" href="tel:+493089045203">📞 שגרירות ישראל בברלין, קו חירום 24/7<b>+49 30 8904 5203</b></a>
+        <a class="tel" href="tel:+4989543486500">🏛️ הקונסוליה הכללית במינכן<b>+49 89 5434 86500</b></a>
+      </div>
+      <p class="sos-note">📍 הקונסוליה נמצאת ב־Barer Straße 19 במינכן. היא סגורה בחגים יהודיים.</p>
+    </div>
+  </div>
+  <p class="sos-note" style="margin-top:12px">את המספרים לקחנו ממדריכי בתי חולים ומאתרי הנציגויות. כדאי לשמור אותם בטלפון לפני הטיסה.</p>
+</section>
+
 <section id="tips">
   <h2 class="sec">טיפים חשובים לפני שיוצאים</h2>
   <p class="sec-sub">סוף אפריל באלפים: אביב למטה, שלג למעלה.</p>
@@ -1150,6 +1239,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     else items.push('💶 שער היורו: ' + wait);
     if (state.fuel) items.push('⛽ ' + (fuelType() === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>€' + state.fuel.toFixed(2) + '</b> לליטר' + (state.rate ? ' (≈₪' + (state.fuel * state.rate).toFixed(2) + ')' : ''));
     else { var fbT = fuelType(), fbP = DEFAULT_PRICE[fbT]; items.push('⛽ ' + (fbT === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>~€' + fbP.toFixed(2) + '</b> לליטר' + (state.done ? ' (הערכה)' : '') + (state.rate ? ' (≈₪' + (fbP * state.rate).toFixed(2) + ')' : '')); }
+    if (state.updated) items.push('🔄 נבדק ב־<b>' + hhmm(state.updated) + '</b>' + (state.rateLive || state.fuelLive ? '' : ' (מוצגים ערכים שמורים)'));
     items.push('הרכב שלנו: <b>VW Tiguan</b> אוטומט' + commonsImg(CAR_IMG, 120, 'car-thumb sm', 'VW Tiguan'));
     items.push('🛫 נחיתה במינכן: שישי 23.4 · 09:05');
     var one = items.map(function(t){ return '<span class="item"><span class="live"></span>' + t + '</span>'; }).join("");
@@ -1162,19 +1252,19 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   }
   function note(){
     var parts = [];
-    parts.push(state.rate ? "💶 שער יורו לייב (ECB): " + state.rate.toFixed(3) + " ₪" : "💶 שער היורו לא נטען, משתמשים ב־3.80");
-    parts.push(state.fuel ? "⛽ מחיר " + (fuelType() === "diesel" ? "דיזל" : "בנזין") + " לייב בגרמניה: €" + state.fuel.toFixed(2) : "⛽ מחיר הדלק לא נטען, משתמשים בברירת המחדל");
+    parts.push(state.rate ? (state.rateLive ? "💶 שער יורו לייב: " : "💶 שער יורו (שמור מ־" + new Date(state.rateSaved).toLocaleDateString("he-IL") + "): ") + state.rate.toFixed(3) + " ₪" : "💶 שער היורו לא נטען, משתמשים ב־3.80");
+    parts.push(state.fuel ? "⛽ מחיר " + (fuelType() === "diesel" ? "דיזל" : "בנזין") + (state.fuelLive ? " לייב" : " (שמור מ־" + new Date(state.fuelSaved).toLocaleDateString("he-IL") + ")") + " בגרמניה: €" + state.fuel.toFixed(2) : "⛽ מחיר הדלק לא נטען, משתמשים בברירת המחדל");
+    if (state.updated) parts.push("🔄 נבדק ב־" + hhmm(state.updated));
     $("liveNote").textContent = parts.join(" · ");
   }
 
-  /* euro rate: Frankfurter (ECB), fallback open.er-api.com */
-  var pRate = getJSON("https://api.frankfurter.dev/v1/latest?base=EUR&symbols=ILS")
-    .then(function(j){ state.rate = j.rates.ILS; state.rateDate = j.date; })
-    .catch(function(){
-      return getJSON("https://open.er-api.com/v6/latest/EUR").then(function(j){ state.rate = j.rates.ILS; });
-    })
-    .then(function(){ if (state.rate) setInput("inRate", state.rate, 2); })
-    .catch(function(){});
+  /* ---- small helpers: last good values survive a failed request ---- */
+  function save(k, v){ try { localStorage.setItem("trip." + k, JSON.stringify({ v: v, t: Date.now() })); } catch(e){} }
+  function load(k){ try { var o = JSON.parse(localStorage.getItem("trip." + k)); return o && o.v != null ? o : null; } catch(e){ return null; } }
+  function firstOk(fns){ // try sources in order until one returns a value
+    return fns.reduce(function(p, fn){ return p.then(function(v){ return v != null ? v : fn().catch(function(){ return null; }); }); }, Promise.resolve(null));
+  }
+  function hhmm(t){ var d = new Date(t); return ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2); }
 
   function applyFuelType(){
     var t = fuelType();
@@ -1185,7 +1275,21 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   }
   $("inFuelType").addEventListener("change", function(){ applyFuelType(); renderTicker(); note(); if (window.TRIP) window.TRIP.calc(); });
 
-  /* fuel price: OpenVan.camp public API (CC BY 4.0), Germany gasoline in EUR/liter */
+  /* euro rate: several keyless sources, first one that answers wins */
+  function getRate(){
+    return firstOk([
+      function(){ return getJSON("https://api.frankfurter.dev/v1/latest?base=EUR&symbols=ILS").then(function(j){ state.rateDate = j.date; return j.rates.ILS; }); },
+      function(){ return getJSON("https://api.frankfurter.app/latest?from=EUR&to=ILS").then(function(j){ state.rateDate = j.date; return j.rates.ILS; }); },
+      function(){ return getJSON("https://open.er-api.com/v6/latest/EUR").then(function(j){ return j.rates.ILS; }); },
+      function(){ return getJSON("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json").then(function(j){ state.rateDate = j.date; return j.eur.ils; }); }
+    ]).then(function(v){
+      if (v > 2 && v < 8){ state.rate = v; state.rateLive = true; save("rate", { v: v, d: state.rateDate }); }
+      else { var c = load("rate"); if (c){ state.rate = c.v.v; state.rateDate = c.v.d; state.rateLive = false; state.rateSaved = c.t; } }
+      if (state.rate) setInput("inRate", state.rate, 2);
+    });
+  }
+
+  /* fuel price: OpenVan.camp public API (CC BY 4.0), Germany gasoline/diesel in EUR/liter */
   function findDE(obj){
     if (!obj || typeof obj !== "object") return null;
     if (obj.DE) return obj.DE;
@@ -1204,28 +1308,39 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     if (v && typeof v === "object") return price(v.price != null ? v.price : (v.value != null ? v.value : v.avg));
     return NaN;
   }
-  var pFuel = getJSON("https://openvan.camp/api/fuel/prices")
-    .then(function(j){
-      var de = findDE(j.data || j);
-      var pr = de && (de.prices || de);
-      var v = pr ? price(pr.gasoline != null ? pr.gasoline : (pr.petrol != null ? pr.petrol : pr.e5)) : NaN;
-      var dz = pr ? price(pr.diesel) : NaN;
-      if (v > 0.8 && v < 4) state.fuelPrices.petrol = v;
-      if (dz > 0.8 && dz < 4) state.fuelPrices.diesel = dz;
-      applyFuelType();
-    })
-    .catch(function(){});
+  function getFuel(){
+    return getJSON("https://openvan.camp/api/fuel/prices")
+      .then(function(j){
+        var de = findDE(j.data || j);
+        var pr = de && (de.prices || de);
+        var v = pr ? price(pr.gasoline != null ? pr.gasoline : (pr.petrol != null ? pr.petrol : pr.e5)) : NaN;
+        var dz = pr ? price(pr.diesel) : NaN;
+        var got = {};
+        if (v > 0.8 && v < 4) got.petrol = v;
+        if (dz > 0.8 && dz < 4) got.diesel = dz;
+        if (!got.petrol && !got.diesel) throw new Error("no DE price");
+        state.fuelPrices = got; state.fuelLive = true; save("fuel", got);
+      })
+      .catch(function(){
+        var c = load("fuel");
+        if (c){ state.fuelPrices = c.v; state.fuelLive = false; state.fuelSaved = c.t; }
+      })
+      .then(applyFuelType);
+  }
 
-  /* weather: Open-Meteo (no key). Current weather in Leutkirch + forecast for trip days once in range */
-  var pWx = getJSON("https://api.open-meteo.com/v1/forecast?latitude=47.826&longitude=10.022&current=temperature_2m,weather_code,wind_speed_10m&timezone=Europe%2FBerlin")
-    .then(function(j){
-      state.wxNow = { t: Math.round(j.current.temperature_2m), icon: icon(j.current.weather_code), wind: Math.round(j.current.wind_speed_10m) };
-    })
-    .catch(function(){});
+  /* current weather in Leutkirch: Open-Meteo (no key) */
+  function getWx(){
+    return getJSON("https://api.open-meteo.com/v1/forecast?latitude=47.826&longitude=10.022&current=temperature_2m,weather_code,wind_speed_10m&timezone=Europe%2FBerlin")
+      .then(function(j){
+        state.wxNow = { t: Math.round(j.current.temperature_2m), icon: icon(j.current.weather_code), wind: Math.round(j.current.wind_speed_10m) };
+      })
+      .catch(function(){});
+  }
 
+  /* forecast for each trip day, once the trip is within the ~16-day forecast window */
   function updateForecasts(){
     var ahead = (new Date("2027-04-29T00:00:00+02:00") - new Date()) / 86400000;
-    if (ahead > 15 || ahead < -1) return Promise.resolve();   // forecast only covers ~16 days
+    if (ahead > 15 || ahead < -1) return Promise.resolve();
     var DAYS = window.TRIP && window.TRIP.DAYS;
     if (!DAYS) return Promise.resolve();
     return Promise.all(Object.keys(DAYS).map(function(d){
@@ -1236,28 +1351,28 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
         var hi = Math.round(j.daily.temperature_2m_max[0]), lo = Math.round(j.daily.temperature_2m_min[0]);
         var pr = j.daily.precipitation_probability_max[0], ic = icon(j.daily.weather_code[0]);
         day.wx = ic + " " + hi + "°/" + lo + "°" + (pr != null ? " · " + pr + "%🌧" : ""); day.fc = true;
-        var card = document.querySelector('.wx[href="#day' + d + '"]');
-        if (card){
-          card.querySelector(".i").textContent = ic;
-          card.querySelector(".t").innerHTML = hi + "° <span>/ " + lo + "°</span>";
-          card.querySelector(".p").innerHTML = day.place + (pr != null ? " · " + pr + "% 🌧" : "") + '<br><span class="fc">תחזית</span>';
-        }
       }).catch(function(){});
-    })).then(function(){
-      document.querySelectorAll(".ds.wxs .k").forEach(function(k){ k.textContent = "מזג אוויר (תחזית)"; });
-    });
+    }));
   }
 
+  /* refresh everything: on every visit, every 30 minutes, and when coming back to the tab */
+  var lastRefresh = 0, busy = false;
+  function refresh(){
+    if (busy) return; busy = true; state.done = false;
+    var ps = [getRate(), getFuel(), getWx()];
+    ps.forEach(function(p){ p.then(function(){ renderTicker(); if (window.TRIP) window.TRIP.calc(); }); });
+    Promise.all(ps).then(function(){
+      state.done = true; state.updated = Date.now(); lastRefresh = Date.now();
+      renderTicker(); note();
+      return updateForecasts();
+    }).then(function(){ if (window.TRIP) window.TRIP.calc(); busy = false; }, function(){ busy = false; });
+  }
   renderTicker();
-  Promise.all([pRate, pFuel, pWx]).then(function(){
-    state.done = true; renderTicker(); note();
-    return updateForecasts();
-  }).then(function(){
-    if (window.TRIP) window.TRIP.calc();
-    if (document.querySelector('.wx .fc')) document.querySelectorAll(".ds.wxs .k").forEach(function(k){ k.textContent = "מזג אוויר (תחזית)"; });
+  refresh();
+  setInterval(refresh, 30 * 60 * 1000);
+  document.addEventListener("visibilitychange", function(){
+    if (document.visibilityState === "visible" && Date.now() - lastRefresh > 5 * 60 * 1000) refresh();
   });
-  [pRate, pFuel, pWx].forEach(function(p){ p.then(function(){ renderTicker(); if (window.TRIP) window.TRIP.calc(); }); });
-  setInterval(renderTicker, 60 * 60 * 1000);
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
