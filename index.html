@@ -1235,7 +1235,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     else items.push('🏔️ הטיול הסתיים, מקווים שנהניתם');
     if (state.wxNow) items.push(state.wxNow.icon + ' עכשיו בלויטקירך: <b>' + state.wxNow.t + '°</b> · רוח ' + state.wxNow.wind + ' קמ״ש');
     else items.push('🌤️ מזג אוויר: ' + wait);
-    if (state.rate) items.push('💶 1 € = <b>' + state.rate.toFixed(3) + ' ₪</b>' + (state.rateDate ? ' <small>(' + state.rateDate + ')</small>' : ''));
+    if (state.rate) items.push('💶 1 € = <b>' + state.rate.toFixed(3) + ' ₪</b>' + (state.rateDate ? ' <small>(שער של ' + dmy(state.rateDate) + ')</small>' : ''));
     else items.push('💶 שער היורו: ' + wait);
     if (state.fuel) items.push('⛽ ' + (fuelType() === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>€' + state.fuel.toFixed(2) + '</b> לליטר' + (state.rate ? ' (≈₪' + (state.fuel * state.rate).toFixed(2) + ')' : ''));
     else { var fbT = fuelType(), fbP = DEFAULT_PRICE[fbT]; items.push('⛽ ' + (fbT === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>~€' + fbP.toFixed(2) + '</b> לליטר' + (state.done ? ' (הערכה)' : '') + (state.rate ? ' (≈₪' + (fbP * state.rate).toFixed(2) + ')' : '')); }
@@ -1277,17 +1277,25 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
 
   /* euro rate: several keyless sources, first one that answers wins */
   function getRate(){
-    return firstOk([
-      function(){ return getJSON("https://api.frankfurter.dev/v1/latest?base=EUR&symbols=ILS").then(function(j){ state.rateDate = j.date; return j.rates.ILS; }); },
-      function(){ return getJSON("https://api.frankfurter.app/latest?from=EUR&to=ILS").then(function(j){ state.rateDate = j.date; return j.rates.ILS; }); },
-      function(){ return getJSON("https://open.er-api.com/v6/latest/EUR").then(function(j){ return j.rates.ILS; }); },
-      function(){ return getJSON("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json").then(function(j){ state.rateDate = j.date; return j.eur.ils; }); }
-    ]).then(function(v){
-      if (v > 2 && v < 8){ state.rate = v; state.rateLive = true; save("rate", { v: v, d: state.rateDate }); }
+    // ask all sources at once and keep the freshest rate (the ECB publishes only once a day, ~16:00 CET)
+    function src(url, pick){
+      return getJSON(url).then(function(j){ var r = pick(j); return (r && r.v > 2 && r.v < 8) ? r : null; }).catch(function(){ return null; });
+    }
+    function unixDate(u){ return u ? new Date(u * 1000).toISOString().slice(0, 10) : ""; }
+    return Promise.all([
+      src("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json", function(j){ return { v: j.eur.ils, d: j.date, s: 1 }; }),
+      src("https://latest.currency-api.pages.dev/v1/currencies/eur.json", function(j){ return { v: j.eur.ils, d: j.date, s: 1 }; }),
+      src("https://open.er-api.com/v6/latest/EUR", function(j){ return { v: j.rates.ILS, d: unixDate(j.time_last_update_unix), s: 2 }; }),
+      src("https://api.frankfurter.dev/v1/latest?base=EUR&symbols=ILS", function(j){ return { v: j.rates.ILS, d: j.date, s: 3 }; }),
+      src("https://api.frankfurter.app/latest?from=EUR&to=ILS", function(j){ return { v: j.rates.ILS, d: j.date, s: 3 }; })
+    ]).then(function(rs){
+      var best = rs.filter(Boolean).sort(function(a, b){ return (b.d || "").localeCompare(a.d || "") || (a.s - b.s); })[0];
+      if (best){ state.rate = best.v; state.rateDate = best.d; state.rateLive = true; save("rate", { v: best.v, d: best.d }); }
       else { var c = load("rate"); if (c){ state.rate = c.v.v; state.rateDate = c.v.d; state.rateLive = false; state.rateSaved = c.t; } }
       if (state.rate) setInput("inRate", state.rate, 2);
     });
   }
+  function dmy(iso){ var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || ""); return m ? (+m[3]) + "." + (+m[2]) : ""; }
 
   /* fuel price: OpenVan.camp public API (CC BY 4.0), Germany gasoline/diesel in EUR/liter */
   function findDE(obj){
