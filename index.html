@@ -82,7 +82,7 @@ img{display:block;max-width:100%}
 .hero-weather small{display:block;opacity:.85;font-size:.82rem}
 
 /* ---------- sticky day nav with scroll-spy ---------- */
-nav.days{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:box-shadow .2s}
+nav.days{position:sticky;top:0;z-index:1100;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:box-shadow .2s}
 nav.days.stuck{box-shadow:0 6px 20px rgba(0,0,0,.08)}
 nav.days .wrap{max-width:1100px;margin:0 auto;padding:10px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;scroll-behavior:smooth}
 nav.days .wrap::-webkit-scrollbar{display:none}
@@ -176,7 +176,7 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .what small.pn{color:var(--muted);font-size:.8rem}
 
 /* map */
-.map-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:22px}
+.map-card{position:relative;z-index:0;isolation:isolate;background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;margin-bottom:22px}
 #tripMap{height:380px;width:100%;background:var(--sky)}
 .map-legend{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:center;padding:10px 14px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--line)}
 .map-legend span{display:inline-flex;align-items:center;gap:6px}
@@ -220,7 +220,7 @@ dialog.menu-dlg .rest{margin:0;position:relative;padding:18px 18px 14px;box-shad
 .open-tbl th{font-size:.82rem;color:var(--muted);font-weight:500}
 .open-tbl td:nth-child(2){white-space:nowrap;color:var(--muted);font-size:.86rem}
 /* back to top */
-.to-top{position:fixed;left:16px;bottom:18px;z-index:40;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
+.to-top{position:fixed;left:16px;bottom:18px;z-index:1100;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
   background:var(--brand);color:#fff;font-size:1.35rem;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.25);
   opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .25s,transform .25s}
 .to-top.show{opacity:1;transform:none;pointer-events:auto}
