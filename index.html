@@ -129,14 +129,17 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .day-body{padding:22px 24px 26px}
 
 /* day summary */
-.daysum{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
-.ds{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:10px 12px}
-.ds .k{font-size:.76rem;color:var(--muted);display:block}
-.ds .v{font-weight:700;font-size:1.02rem;font-variant-numeric:tabular-nums}
-.ds .v small{font-weight:400;color:var(--muted);font-size:.78rem}
-.ds.total{background:var(--brand);border-color:var(--brand);color:#fff}
-.ds.total .k,.ds.total .v small{color:rgba(255,255,255,.85)}
-.ds.wxs{background:var(--sky);border-color:transparent}
+.daysum{display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;margin:0 0 14px;padding:7px 6px;border:1px solid var(--line);border-radius:999px;background:var(--bg);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.daysum .it{display:inline-flex;align-items:center;gap:4px;padding:0 10px;white-space:nowrap;border-inline-end:1px solid var(--line)}
+.daysum .it:last-of-type{border-inline-end:none}
+.daysum .it b{color:var(--ink);font-weight:600}
+.daysum .tot{margin-inline-start:auto;background:var(--brand);color:#fff;border-radius:999px;padding:3px 12px;font-weight:700;white-space:nowrap}
+.daysum .tot small{font-weight:400;opacity:.8;margin-inline-start:4px}
+.wx-badge{position:absolute;z-index:3;top:14px;left:14px;display:flex;align-items:center;gap:8px;padding:6px 12px 6px 10px;border-radius:14px;color:#fff;
+  background:rgba(10,25,30,.42);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);font-variant-numeric:tabular-nums;line-height:1.15}
+.wx-badge .i{font-size:1.5rem}
+.wx-badge b{display:block;font-size:.98rem}
+.wx-badge small{display:block;font-size:.68rem;opacity:.85}
 
 .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:.86rem;padding:5px 12px;border-radius:99px;background:var(--bg);border:1px solid var(--line)}
@@ -308,7 +311,8 @@ footer a{color:var(--muted)}
   .day-body{padding:18px 16px 22px}
   .day-title{padding:18px 16px}
   .hero-inner{padding-bottom:40px}
-  .daysum{grid-template-columns:repeat(2,1fr)}
+  .daysum{border-radius:16px}
+  .daysum .tot{margin-inline-start:0}
   .wx-strip{grid-template-columns:repeat(3,1fr)}
   .panel{padding:16px}
 }
@@ -1155,14 +1159,21 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
       var el = document.querySelector('.daysum[data-day="'+d+'"]');
       if (el){
         var dayEur = at + f + day.parking + meals, dayIls = dayEur * rate;
+        var e = function(x){ return ' title="' + eur(x) + '"'; };
         el.innerHTML =
-          '<div class="ds wxs"><span class="k">מזג אוויר (' + (day.fc ? 'תחזית' : 'ממוצע') + ')</span><span class="v"><bdi dir="ltr">'+day.wx+'</bdi></span></div>'+
-          '<div class="ds"><span class="k">🚗 זמן נסיעה</span><span class="v"><bdi dir="ltr">'+day.drive+'</bdi> <small>ש׳ · '+day.km+' ק״מ</small></span></div>'+
-          '<div class="ds"><span class="k">🎟️ אטרקציות</span><span class="v">'+eur(at)+' <small>'+ils(at*rate)+'</small></span></div>'+
-          '<div class="ds"><span class="k">⛽ דלק</span><span class="v">'+eur(f)+' <small>'+ils(f*rate)+'</small></span></div>'+
-          '<div class="ds"><span class="k">🅿️ חניה</span><span class="v">'+eur(day.parking)+' <small>'+ils(day.parking*rate)+'</small></span></div>'+
-          '<div class="ds"><span class="k">🍽️ ארוחות</span><span class="v">'+eur(meals)+' <small>'+ils(meals*rate)+'</small></span></div>'+
-          '<div class="ds total"><span class="k">סה״כ היום</span><span class="v">'+ils(dayIls)+' <small>'+eur(dayEur)+'</small></span></div>';
+          '<span class="it" title="' + day.km + ' ק״מ">🚗 <b><bdi dir="ltr">' + day.drive + '</bdi></b> ש׳</span>' +
+          '<span class="it"' + e(at) + '>🎟️ <b>' + ils(at*rate) + '</b></span>' +
+          '<span class="it"' + e(f) + '>⛽ <b>' + ils(f*rate) + '</b></span>' +
+          '<span class="it"' + e(day.parking) + '>🅿️ <b>' + ils(day.parking*rate) + '</b></span>' +
+          '<span class="it"' + e(meals) + '>🍽️ <b>' + ils(meals*rate) + '</b></span>' +
+          '<span class="tot">סה״כ ' + ils(dayIls) + '<small>' + eur(dayEur) + '</small></span>';
+        var head = document.querySelector('#day' + d + ' .day-head');
+        if (head){
+          var wb = head.querySelector('.wx-badge');
+          if (!wb){ wb = document.createElement('div'); wb.className = 'wx-badge'; head.appendChild(wb); }
+          var parts = day.wx.split(' '), ic = parts.shift();
+          wb.innerHTML = '<span class="i">' + ic + '</span><span><b><bdi dir="ltr">' + parts.join(' ') + '</bdi></b><small>' + (day.fc ? 'תחזית' : 'ממוצע היסטורי') + ' · ' + day.place + '</small></span>';
+        }
       }
     });
 
