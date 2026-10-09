@@ -217,6 +217,8 @@ dialog.menu-dlg .rest{margin:0;position:relative;padding:18px 18px 14px;box-shad
 .dlg-x{position:absolute;top:10px;left:10px;width:30px;height:30px;border-radius:50%;border:none;background:rgba(0,0,0,.08);color:var(--ink);font-size:.95rem;cursor:pointer}
 .dlg-x:hover{background:rgba(0,0,0,.16)}
 
+.open-tbl th{font-size:.82rem;color:var(--muted);font-weight:500}
+.open-tbl td:nth-child(2){white-space:nowrap;color:var(--muted);font-size:.86rem}
 /* back to top */
 .to-top{position:fixed;left:16px;bottom:18px;z-index:40;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
   background:var(--brand);color:#fff;font-size:1.35rem;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.25);
@@ -310,7 +312,7 @@ footer a{color:var(--muted)}
   <div class="hero-inner">
     <span class="kicker">🇩🇪 שישי 23.4 – חמישי 29.4 · <b>בוואריה</b><br><b>חבל אלגוי, גרמיש ומינכן</b></span>
     <h1>הטיול שלנו לגרמניה<br><span class="sub">בוואריה - אלגוי, גרמיש ומינכן</span></h1>
-    <p class="lead">אגמים בצבע טורקיז, טירות כמו מאגדות, רכבל לפסגה הגבוהה בגרמניה, פארק מים, לגולנד והמון ירוק.</p>
+    <p class="lead">אגמים בצבע טורקיז, ערוצי מים בין סלעים, רכבל לפסגה הגבוהה בגרמניה, פארק מים, לגולנד והמון ירוק.</p>
     <div class="hero-weather" title="ממוצע היסטורי לסוף אפריל">
       <span class="big">⛅</span>
       <div><b><bdi dir="ltr">15° / 4°</bdi></b><small>ממוצע היסטורי ל־23.4 · לויטקירך (אלגוי)</small></div>
@@ -337,6 +339,7 @@ footer a{color:var(--muted)}
     <a href="#day5">שלישי <small>27.4</small></a>
     <a href="#day6">רביעי <small>28.4</small></a>
     <a href="#day7">חמישי <small>29.4</small></a>
+    <a href="#open">✅ פתוח?</a>
     <a href="#costs">💰 עלויות</a>
     <a href="#tips">טיפים</a>
   </div>
@@ -391,9 +394,9 @@ footer a{color:var(--muted)}
     <a class="wx" href="#day1"><div class="d">שישי 23.4</div><div class="i">⛅</div><div class="t">15° <span>/ 4°</span></div><div class="p">לויטקירך · 35% 🌧</div></a>
     <a class="wx" href="#day2"><div class="d">שבת 24.4</div><div class="i">🌤️</div><div class="t">16° <span>/ 6°</span></div><div class="p">לינדאו · 35% 🌧</div></a>
     <a class="wx" href="#day3"><div class="d">ראשון 25.4</div><div class="i">⛅</div><div class="t">14° <span>/ 3°</span></div><div class="p">אוברסטדורף · 40% 🌧</div></a>
-    <a class="wx" href="#day4"><div class="d">שני 26.4</div><div class="i">⛅</div><div class="t">15° <span>/ 3°</span></div><div class="p">שוואנגאו · 40% 🌧</div></a>
+    <a class="wx" href="#day4"><div class="d">שני 26.4</div><div class="i">🌤️</div><div class="t">17° <span>/ 5°</span></div><div class="p">גינצבורג · 30% 🌧</div></a>
     <a class="wx" href="#day5"><div class="d">שלישי 27.4</div><div class="i">🏔️</div><div class="t">15° <span>/ 3°</span></div><div class="p">בפסגה −4°/−9°</div></a>
-    <a class="wx" href="#day6"><div class="d">רביעי 28.4</div><div class="i">🌤️</div><div class="t">17° <span>/ 5°</span></div><div class="p">גינצבורג · 30% 🌧</div></a>
+    <a class="wx" href="#day6"><div class="d">רביעי 28.4</div><div class="i">⛅</div><div class="t">15° <span>/ 3°</span></div><div class="p">גרמיש · 40% 🌧</div></a>
     <a class="wx" href="#day7"><div class="d">חמישי 29.4</div><div class="i">✈️</div><div class="t">16° <span>/ 4°</span></div><div class="p">מינכן · 30% 🌧</div></a>
   </div>
 
@@ -520,10 +523,10 @@ footer a{color:var(--muted)}
 <!-- ================= DAY 4 ================= -->
 <article class="day" id="day4">
   <div class="day-head">
-    <div class="ph" data-img="Schloss Neuschwanstein 2013.jpg|Neuschwanstein Castle.jpg|Neuschwanstein-c1.jpg" data-fallback="🏰"></div>
+    <div class="ph" data-img="Miniland - Berlin (Legoland) (1).jpg|Flying Ninjago Legoland Deutschland (207022357).jpeg" data-fallback="🧱"></div>
     <div class="day-title">
       <span class="day-num">יום שני · 26.4</span>
-      <h3>טירת נוישוונשטיין · רכבל טגלברג ← גרמיש</h3>
+      <h3>לגולנד גרמניה ← גרמיש</h3>
     </div>
   </div>
   <div class="day-body">
@@ -535,22 +538,20 @@ footer a{color:var(--muted)}
     <div class="grid">
       <ol class="timeline">
         <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מסנטר פארקס</b><small>להעמיס את הרכב לפני היציאה</small></div></li>
-        <li class="drive"><time>09:00</time><div class="what">🚗 יציאה לשוואנגאו (כשעה ו־20 דק׳)</div></li>
-        <li class="key"><time>10:30</time><div class="what"><b>🏰 טירת נוישוונשטיין<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">העלייה סלולה אבל תלולה. בתוך הטירה יש מדרגות ואין כניסה עם עגלה</small><small>עולים ברגל (כ־40 דק׳), באוטובוס או בכרכרה. סיור מודרך בתוך הטירה בשעה שהוזמנה מראש, ותצפית מגשר מריה (Marienbrücke) · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Neuschwanstein+Castle">🗺️ גוגל מפות</a></small></div></li>
-        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Restaurant Café Kainz<button class="menu-btn" type="button" data-menu="menu-day4">📋 תפריט</button></b><small>Alpseestraße 5, הוהנשוואנגאו. יש מרפסת עם נוף לטירה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Restaurant+Cafe+Kainz+Hohenschwangau">🗺️ גוגל מפות</a></small></div></li>
-        <li class="drive"><time>14:00</time><div class="what">🚗 לרכבל טגלברג (5 דק׳)</div></li>
-        <li class="key"><time>14:15</time><div class="what"><b>🚡 רכבל טגלברג (Tegelbergbahn)<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">לא מצאנו מידע רשמי על עגלות ברכבל. אזור המשחקים למטה מתאים</small><small>עולים לתצפית מעל הטירה והאגמים. למטה יש מגלשות, מגלשת הרים (Sommerrodelbahn), דשא ופרות · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Tegelbergbahn+Schwangau">🗺️ גוגל מפות</a></small></div></li>
-        <li class="drive"><time>16:30</time><div class="what">🚗 נסיעה לגרמיש-פרטנקירכן (כשעה)</div></li>
-        <li class="key"><time>17:30</time><div class="what"><b>צ׳ק־אין ב־Hotel Rheinischer Hof</b><small><a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Hotel+Rheinischer+Hof+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
-        <li class="food"><time>18:30</time><div class="what"><b>🍕 ארוחת ערב קלה: פיצה מ־Pizzeria Puoro<button class="menu-btn" type="button" data-menu="menu-dinner4">📋 תפריט</button></b><small>Schornstraße 9. אפשר לשבת במקום או לקחת למלון · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Pizzeria+Puoro+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
+        <li class="drive"><time>09:00</time><div class="what">🚗 לגינצבורג בכביש A7 (כשעה)</div></li>
+        <li class="key"><time>10:05</time><div class="what"><b>🧱 לגולנד גרמניה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">כל הפארק נגיש, ויש גם השכרת עגלות</small><small>מגיעים כשהפארק נפתח. מינילנד, עולם נינג׳גו, ארץ הפיראטים, האבירים ועוד, יום כיף מלא · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=LEGOLAND+Deutschland+Resort+G%C3%BCnzburg">🗺️ גוגל מפות</a></small></div></li>
+        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Schnitzel Depot בתוך הפארק<button class="menu-btn" type="button" data-menu="menu-day4">📋 תפריט</button></b><small>יש גם ארוחות ילדים קבועות במסעדות האחרות של הפארק</small></div></li>
+        <li class="food"><time>16:45</time><div class="what"><b>🍕 ארוחת ערב קלה בפארק לפני היציאה<button class="menu-btn" type="button" data-menu="menu-day4">📋 תפריט</button></b><small>פיצה, פסטה או ארוחת ילדים. ככה אפשר לנסוע ישר למלון</small></div></li>
+        <li class="drive"><time>17:30</time><div class="what">🚗 נסיעה לגרמיש-פרטנקירכן (כשעתיים ורבע). הקטנים כנראה יירדמו באוטו</div></li>
+        <li class="key"><time>19:45</time><div class="what"><b>צ׳ק־אין ב־Hotel Rheinischer Hof</b><small><a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Hotel+Rheinischer+Hof+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
       </ol>
       <div>
         <div class="gallery">
-          <div class="ph wide" data-img="Neuschwanstein-c1.jpg|Neuschwanstein Castle.jpg" data-label="נוישוונשטיין מגשר מריה" data-fallback="🏰"></div>
-          <div class="ph" data-img="Neue Kabine (2021) der Tegelbergbahn.jpg" data-label="רכבל טגלברג" data-fallback="🚡"></div>
-          <div class="ph" data-img="Garmisch-Partenkirchen.JPG|Garmisch-Partenkirchen-Panorama.jpg" data-label="גרמיש-פרטנקירכן" data-fallback="🏔️"></div>
+          <div class="ph wide" data-img="Flying Ninjago Legoland Deutschland (207022357).jpeg|Miniland - Berlin (Legoland) (1).jpg" data-label="לגולנד גרמניה" data-fallback="🧱"></div>
+          <div class="ph" data-img="Miniland - Berlin (Legoland) (2).jpg|Miniland - Berlin (Legoland) (1).jpg" data-label="מינילנד" data-fallback="🧱"></div>
+          <div class="ph" data-img="Lageplan Legoland Deutschland.jpg" data-label="מפת הפארק" data-fallback="🗺️"></div>
         </div>
-        <div class="tip"><b>⚠️ חובה להזמין מראש:</b> כרטיסים לטירה עם שעת כניסה באתר הרשמי hohenschwangau.de. ילדים עד גיל 18 נכנסים בחינם, אבל גם הם צריכים כרטיס (דמי הזמנה €2.50).</div>
+        <div class="tip"><b>💡 טיפ:</b> לקנות כרטיסים לגולנד באונליין מראש. זה זול בהרבה מהקופה (כ־€39–45 במקום כ־€64), ואפשר לשלם על החניה מראש (€12). לפני שקונים, לבדוק בלוח הפתיחה שהפארק פתוח ביום שני 26.4.</div>
       </div>
     </div>
   </div>
@@ -573,13 +574,14 @@ footer a{color:var(--muted)}
     </div>
     <div class="grid">
       <ol class="timeline">
-        <li class="drive"><time>09:00</time><div class="what">🚗 לתחנת הרכבל באיבזה (כ־20 דק׳)</div></li>
-        <li class="key"><time>09:30</time><div class="what"><b>🚡 רכבל Seilbahn Zugspitze לפסגה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">הרכבל והמרפסות בפסגה נגישים. על השלג בקרחון כבר לא</small><small>10 דקות עד גובה 2,962 מ׳, הנקודה הגבוהה בגרמניה. מהפסגה רואים 4 מדינות, ויש שלג גם באפריל · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Seilbahn+Zugspitze+Talstation+Eibsee">🗺️ גוגל מפות</a></small></div></li>
-        <li><time>10:00</time><div class="what"><b>🏔️ בפסגה ובקרחון</b><small>אפשר לרדת לרמת הקרחון (Zugspitzplatt) ברכבל הקרחון, ולחזור לאיבזה ברכבת השיניים</small></div></li>
-        <li class="food"><time>12:30</time><div class="what"><b>🍽️ צהריים ב־Seerestaurant Eibsee Pavillon<button class="menu-btn" type="button" data-menu="menu-day5">📋 תפריט</button></b><small>על שפת האגם (Seeweg 2). כדאי לשבת בחוץ בשביל הנוף · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Eibsee+Pavillon+Grainau">🗺️ גוגל מפות</a></small></div></li>
-        <li class="key"><time>13:30</time><div class="what"><b>💙 טיול קצר לאורך אגם איבזה<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">החלק הצפוני נוח, ובשאר המסלול יש קטעים עם שורשים ומדרגות</small><small>ובעונה גם סירות פדלים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Eibsee">🗺️ גוגל מפות</a></small></div></li>
-        <li class="drive"><time>14:30</time><div class="what">🚗 לרויטה שבאוסטריה (כ־40 דק׳, דרך ארוואלד)</div></li>
-        <li class="key"><time>15:15</time><div class="what"><b>🌉 גשר היילין 179 (Highline179)<span class="pram no">👶 לא לעגלה</span></b><small class="pn">לפי האתר הרשמי אסור לעלות עם עגלה על הגשר. מגיל 4 משלמים</small><small>גשר תלוי להולכי רגל באורך 406 מ׳ ובגובה 114 מ׳, בין חורבות טירת ארנברג · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=highline179+Reutte">🗺️ גוגל מפות</a></small></div></li>
+        <li class="drive"><time>09:00</time><div class="what">🚗 לאיבזה (כ־20 דק׳)</div></li>
+        <li class="key"><time>09:30</time><div class="what"><b>🚡 עולים לצוגשפיצה: ברכבל, או ברכבת השיניים<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">הרכבל, הרכבת והמרפסות בפסגה נגישים. על השלג בקרחון כבר לא</small><small>⚠️ ב־2026 הרכבל (Seilbahn Zugspitze) היה סגור לתחזוקה בימי חול בין 13.4 ל־30.4. אם זה יחזור ב־2027, עולים ברכבת השיניים (Zahnradbahn) מתחנת איבזה לרמת הקרחון Zugspitzplatt, בגובה 2,600 מ׳ (כ־40 דק׳). שם יש שלג אמיתי לילדים. מהרמה ממשיכים לפסגה ברכבל הקרחון, אם הוא פועל באותו יום · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Seilbahn+Zugspitze+Talstation+Eibsee">🗺️ גוגל מפות</a></small></div></li>
+        <li><time>10:15</time><div class="what"><b>🏔️ על ההר: שלג, תצפית ומרפסות</b><small>הכרטיס כולל את הרכבל, רכבת השיניים ורכבל הקרחון</small></div></li>
+        <li class="drive"><time>12:15</time><div class="what">🚡 ירידה חזרה לאיבזה</div></li>
+        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Seerestaurant Eibsee Pavillon<button class="menu-btn" type="button" data-menu="menu-day5">📋 תפריט</button></b><small>על שפת האגם (Seeweg 2). כדאי לשבת בחוץ בשביל הנוף · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Eibsee+Pavillon+Grainau">🗺️ גוגל מפות</a></small></div></li>
+        <li class="key"><time>14:00</time><div class="what"><b>💙 טיול קצר לאורך אגם איבזה<span class="pram part">👶 חלקית לעגלה</span></b><small class="pn">החלק הצפוני נוח, ובשאר המסלול יש קטעים עם שורשים ומדרגות</small><small>ובעונה גם סירות פדלים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Eibsee">🗺️ גוגל מפות</a></small></div></li>
+        <li class="drive"><time>14:45</time><div class="what">🚗 לרויטה שבאוסטריה (כ־40 דק׳, דרך ארוואלד)</div></li>
+        <li class="key"><time>15:30</time><div class="what"><b>🌉 גשר היילין 179 (Highline179)<span class="pram no">👶 לא לעגלה</span></b><small class="pn">לפי האתר הרשמי אסור לעלות עם עגלה על הגשר. מגיל 4 משלמים</small><small>גשר תלוי להולכי רגל באורך 406 מ׳ ובגובה 114 מ׳, בין חורבות טירת ארנברג. פתוח כל יום · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=highline179+Reutte">🗺️ גוגל מפות</a></small></div></li>
         <li class="drive"><time>17:15</time><div class="what">🚗 חזרה לגרמיש (כ־45 דק׳)</div></li>
         <li class="food"><time>18:30</time><div class="what"><b>🍔 ארוחת ערב קלה במקדונלדס גרמיש<button class="menu-btn" type="button" data-menu="menu-dinner5">📋 תפריט</button></b><small>יש בו פינת משחקים לקטנים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=McDonald%27s+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
       </ol>
@@ -589,13 +591,8 @@ footer a{color:var(--muted)}
           <div class="ph" data-img="Seilbahn Zugspitze von Eibsee.jpg|Eibsee & Zugspitze.jpg" data-label="אגם איבזה" data-fallback="💙"></div>
           <div class="ph" data-img="Highline179.jpg|Panorama of Highline179 and Burg Ehrenberg.jpg|20150723 ReutteTirol Highline179 BW DSC03837 PtrQs.jpg" data-label="היילין 179" data-fallback="🌉"></div>
         </div>
-        <div class="tip"><b>💡 טיפ:</b> לבדוק בבוקר את מצלמות הרשת של הצוגשפיצה. אם הפסגה בעננים, להפוך את הסדר: בבוקר היילין והאגם, ואחר הצהריים הפסגה.</div>
-        <div class="alt">
-          <b>🚡 רכבל אלפספיקס (AlpspiX):</b><span class="pram part">👶 חלקית לעגלה</span> פלטפורמת תצפית בצורת X מעל תהום של 1,000 מ׳, על הר האלפשפיצה בגרמיש (לא על הצוגשפיצה). אם מעדיפים להישאר בגרמיש אחר הצהריים, אפשר להחליף בו את היילין 179 (תחנת Alpspitzbahn קרובה למלון). לא נכלל בחישוב העלויות.
-          <div class="gallery" style="margin-top:10px">
-            <div class="ph wide" data-img="2016-AlpspiX.jpg|Wetterstein Alpspix 2013-08.jpg|Wetterstein Osterfelderkopf 2013-08.jpg" data-label="AlpspiX" data-fallback="❌"></div>
-          </div>
-        </div>
+        <div class="tip"><b>💡 טיפ:</b> כשבוע לפני, לבדוק באתר zugspitze.de (בעמוד "Betriebszeiten") איזה מתקן פועל ביום שלישי 27.4. בבוקר עצמו כדאי להסתכל במצלמות הרשת. אם הפסגה בעננים, להפוך את הסדר: בבוקר היילין והאגם, ואחר הצהריים ההר.</div>
+        <div class="alt"><b>🚡 רכבל אלפספיקס (AlpspiX):</b> לא נכלל במסלול. רכבל Alpspitzbahn בגרמיש סגור לתחזוקה באביב. ב־2026 הוא היה סגור מ־30.3 עד 13.5, ככה שבתאריכים שלנו הוא כנראה לא יפעל.</div>
       </div>
     </div>
   </div>
@@ -604,10 +601,10 @@ footer a{color:var(--muted)}
 <!-- ================= DAY 6 ================= -->
 <article class="day" id="day6">
   <div class="day-head">
-    <div class="ph" data-img="Miniland - Berlin (Legoland) (1).jpg|Flying Ninjago Legoland Deutschland (207022357).jpeg" data-fallback="🧱"></div>
+    <div class="ph" data-img="Garmisch-Partenkirchen Partnachklamm 02.JPG|Partnachklamm rb.jpg" data-fallback="💦"></div>
     <div class="day-title">
       <span class="day-num">יום רביעי · 28.4</span>
-      <h3>לגולנד גרמניה ← מלון ליד שדה התעופה של מינכן</h3>
+      <h3>יום בגרמיש: ערוץ הפרטנאך · קפיצת הסקי האולימפית · העיר ← מינכן</h3>
     </div>
   </div>
   <div class="day-body">
@@ -618,22 +615,25 @@ footer a{color:var(--muted)}
     </div>
     <div class="grid">
       <ol class="timeline">
-        <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מהמלון בגרמיש</b></div></li>
-        <li class="drive"><time>09:00</time><div class="what">🚗 לגינצבורג (כשעתיים ורבע)</div></li>
-        <li class="key"><time>11:15</time><div class="what"><b>🧱 לגולנד גרמניה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">כל הפארק נגיש, ויש גם השכרת עגלות</small><small>מינילנד, עולם נינג׳גו, ארץ הפיראטים, האבירים ועוד. יום כיף מלא · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=LEGOLAND+Deutschland+Resort+G%C3%BCnzburg">🗺️ גוגל מפות</a></small></div></li>
-        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Schnitzel Depot בתוך הפארק<button class="menu-btn" type="button" data-menu="menu-day6">📋 תפריט</button></b><small>יש גם ארוחות ילדים קבועות במסעדות האחרות של הפארק</small></div></li>
-        <li class="drive"><time>17:30</time><div class="what">🚗 נסיעה לאזור שדה התעופה (כשעה ו־45 דק׳)</div></li>
-        <li class="food"><time>19:15</time><div class="what"><b>🍔 ארוחת ערב קלה במקדונלדס של שדה התעופה<button class="menu-btn" type="button" data-menu="menu-dinner6">📋 תפריט</button></b><small>במרכז MAC, קומה 03, לפני הבידוק הביטחוני. פתוח עד מאוחר · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=McDonald%27s+Munich+Airport+Center">🗺️ גוגל מפות</a></small></div></li>
-        <li><time>20:30</time><div class="what"><b>⛽ תדלוק מלא</b><small>כדי שלא נצטרך לעצור בבוקר</small></div></li>
-        <li class="key"><time>20:45</time><div class="what"><b>צ׳ק־אין ב־Atomis Hotel</b><small>אריזה וסידור המזוודות לטיסה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Atomis+Hotel+Munich+Airport+by+Mercure">🗺️ גוגל מפות</a></small></div></li>
+        <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מהמלון בגרמיש</b><small>המזוודות נשארות באוטו כל היום</small></div></li>
+        <li class="drive"><time>09:00</time><div class="what">🚗 לחניון של האצטדיון האולימפי (Olympia-Skistadion), כ־5 דק׳</div></li>
+        <li class="key"><time>09:10</time><div class="what"><b>⛷️ קפיצת הסקי האולימפית<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">האצטדיון והשביל הסלול לערוץ נוחים לעגלה</small><small>רמפת קפיצה ענקית ממשחקי החורף של 1936. אפשר לעמוד למטה ולהסתכל, בחינם · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Olympia-Skistadion+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
+        <li class="key"><time>09:30</time><div class="what"><b>💦 ערוץ הפרטנאך (Partnachklamm)<span class="pram no">👶 לא לעגלה</span></b><small class="pn">אסור להיכנס לערוץ עם עגלה. משאירים אותה בכניסה ולוקחים מנשא לבן ה־3</small><small>הולכים מהאצטדיון כ־25 דק׳ בשביל סלול, או נוסעים בכרכרה עם סוסים. בתוך הערוץ עוברים במנהרות סלע מעל נהר גועש, כשעה הלוך וחזור. רטוב, אז כדאי מעיל גשם. פתוח 8:00–18:00 · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Partnachklamm">🗺️ גוגל מפות</a></small></div></li>
+        <li class="drive"><time>12:00</time><div class="what">🚗 חזרה לאוטו ונסיעה למרכז העיר (כ־5 דק׳)</div></li>
+        <li class="food"><time>12:30</time><div class="what"><b>🍕 צהריים ב־Pizzeria Puoro<button class="menu-btn" type="button" data-menu="menu-day6">📋 תפריט</button></b><small>Schornstraße 9, עם פיצות לילדים בצורת מיקי מאוס ולב · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Pizzeria+Puoro+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
+        <li class="key"><time>13:45</time><div class="what"><b>🎨 רחוב לודוויג ופארק מיכאל אנדה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">שטוח וסלול</small><small>הבתים המצוירים של פרטנקירכן, גלידה, ובפארק הקורט פסלים מ"הסיפור שאינו נגמר" שאפשר לטפס עליהם, כמו הצב מורלה, וגם מבוך · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Michael-Ende-Kurpark+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
+        <li class="drive"><time>15:30</time><div class="what">🚗 נסיעה רגועה לאזור שדה התעופה של מינכן (כשעה וחצי, כביש A95)</div></li>
+        <li><time>17:00</time><div class="what"><b>⛽ תדלוק מלא</b><small>כדי שלא נצטרך לעצור בבוקר</small></div></li>
+        <li class="key"><time>17:15</time><div class="what"><b>צ׳ק־אין ב־Atomis Hotel</b><small>אריזה וסידור המזוודות לטיסה · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Atomis+Hotel+Munich+Airport+by+Mercure">🗺️ גוגל מפות</a></small></div></li>
+        <li class="food"><time>18:30</time><div class="what"><b>🍔 ארוחת ערב קלה במקדונלדס של שדה התעופה<button class="menu-btn" type="button" data-menu="menu-dinner6">📋 תפריט</button></b><small>במרכז MAC, קומה 03, לפני הבידוק הביטחוני. פתוח עד מאוחר · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=McDonald%27s+Munich+Airport+Center">🗺️ גוגל מפות</a></small></div></li>
       </ol>
       <div>
         <div class="gallery">
-          <div class="ph wide" data-img="Flying Ninjago Legoland Deutschland (207022357).jpeg|Miniland - Berlin (Legoland) (1).jpg" data-label="לגולנד גרמניה" data-fallback="🧱"></div>
-          <div class="ph" data-img="Miniland - Berlin (Legoland) (2).jpg|Miniland - Berlin (Legoland) (1).jpg" data-label="מינילנד" data-fallback="🧱"></div>
-          <div class="ph" data-img="Lageplan Legoland Deutschland.jpg" data-label="מפת הפארק" data-fallback="🗺️"></div>
+          <div class="ph wide" data-img="Garmisch-Partenkirchen Partnachklamm 02.JPG|Partnachklamm rb.jpg" data-label="ערוץ הפרטנאך" data-fallback="💦"></div>
+          <div class="ph" data-img="Garmisch-Partenkirchen - Grosse Olympiaschanze.jpg|Partenkirchen Olympia Skistadion.JPG" data-label="קפיצת הסקי האולימפית" data-fallback="⛷️"></div>
+          <div class="ph" data-img="Garmisch-Partenkirchen.JPG|Garmisch-Partenkirchen-Panorama.jpg" data-label="גרמיש-פרטנקירכן" data-fallback="🎨"></div>
         </div>
-        <div class="tip"><b>💡 טיפ:</b> לקנות כרטיסים לגולנד באונליין מראש. זה זול בהרבה מהקופה (כ־€39–45 במקום כ־€64), ואפשר לשלם על החניה מראש (€12).</div>
+        <div class="tip"><b>💡 טיפ:</b> כרטיסים לערוץ קונים בקופה בכניסה: €10 למבוגר, €5 לילד בגיל 6–17, ומתחת לגיל 6 בחינם. לפעמים סוגרים את הערוץ בהתראה קצרה בגלל סכנת מפולת, אז כדאי לבדוק באתר partnachklamm.de בבוקר.</div>
       </div>
     </div>
   </div>
@@ -670,6 +670,29 @@ footer a{color:var(--muted)}
 </article>
 
 <!-- ================= COSTS ================= -->
+<section id="open">
+  <h2 class="sec">✅ פתוח בתאריכים שלנו?</h2>
+  <p class="sec-sub">בדקנו לפי לוחות הזמנים של 2026, כי של 2027 עוד לא פורסמו. כשבוע לפני הטיול כדאי לבדוק שוב באתרים הרשמיים.</p>
+  <div class="panel">
+    <table class="costs open-tbl">
+      <tr><th>אטרקציה</th><th>יום</th><th>סטטוס</th></tr>
+      <tr><td>🌊 Aqua Mundo, סנטר פארקס</td><td>שישי–ראשון</td><td>✅ פתוח כל השנה, ואין סגירה מתוכננת שידוע עליה</td></tr>
+      <tr><td>🌳 סקייווק אלגוי (Waldwelt)</td><td>שבת 24.4</td><td>✅ בעונה: ב־2026 פתוח מ־20.3 עד 8.11, כל יום 10:00–18:00</td></tr>
+      <tr><td>⛵ לינדאו</td><td>שבת 24.4</td><td>✅ עיר, פתוחה תמיד</td></tr>
+      <tr><td>🎢 Alpsee Bergwelt</td><td>ראשון 25.4</td><td>✅ מגלשת ההרים פועלת כל השנה. לפני מאי הרכבל פועל בסופי שבוע, ו־25.4 הוא יום ראשון. ⚠️ פארק החבלים נפתח רק כשהשלג נמס</td></tr>
+      <tr><td>💎 אוברסטדורף ואגם כריסטלזה</td><td>ראשון 25.4</td><td>✅ פתוח תמיד. ⚠️ רכבת התיירים לאגם אולי עוד לא פועלת, אז מתכננים ללכת ברגל</td></tr>
+      <tr><td>🧱 לגולנד גרמניה</td><td>שני 26.4</td><td>✅ כנראה: ב־2026 העונה נפתחה ב־28.3, ובאפריל לא היו ימים סגורים. ⚠️ לוח 2027 עוד לא פורסם</td></tr>
+      <tr><td>🚡 רכבל הצוגשפיצה (Seilbahn)</td><td>שלישי 27.4</td><td>⚠️ <b>ייתכן שסגור.</b> ב־2026 הוא היה בתחזוקה בימי חול בין 13.4 ל־30.4. במקרה כזה עולים ברכבת השיניים מאיבזה לרמת הקרחון. הכרטיס זהה</td></tr>
+      <tr><td>🏔️ רכבל הקרחון לפסגה</td><td>שלישי 27.4</td><td>⚠️ לא בטוח שפועל: מקור אחד מ־2026 מציין תחזוקה מ־13.4 עד 22.5. אם הוא סגור, נשארים ברמת הקרחון (2,600 מ׳)</td></tr>
+      <tr><td>💙 אגם איבזה</td><td>שלישי 27.4</td><td>✅ פתוח תמיד. השכרת סירות לפי מזג האוויר</td></tr>
+      <tr><td>🌉 גשר היילין 179</td><td>שלישי 27.4</td><td>✅ פתוח כל יום, לפי האתר הרשמי 08:00–22:00. נסגר לתחזוקה רק בנובמבר</td></tr>
+      <tr><td>💦 ערוץ הפרטנאך</td><td>רביעי 28.4</td><td>✅ פתוח כל השנה. מאוקטובר עד מאי 08:00–18:00. ⚠️ לפעמים סוגרים בהתראה קצרה</td></tr>
+      <tr><td>⛷️ קפיצת הסקי האולימפית ופארק מיכאל אנדה</td><td>רביעי 28.4</td><td>✅ פתוח וחינם</td></tr>
+      <tr><td>🚡 AlpspiX (לא במסלול)</td><td>—</td><td>❌ כנראה סגור: ב־2026 הרכבל היה בתחזוקה מ־30.3 עד 13.5</td></tr>
+    </table>
+  </div>
+</section>
+
 <section id="costs">
   <h2 class="sec">💰 סיכום עלויות</h2>
   <p class="sec-sub">ההוצאות הקבועות כבר שולמו. לחישוב הוספנו דלק, חניה, כניסה לאטרקציות וארוחות (בלי הסופר). ברירת המחדל: 2 מבוגרים וילדים בני 3, 7 ו־10. אפשר לשנות כאן את מספר המשתתפים ואת שער היורו, והסכומים בכל הימים יתעדכנו.</p>
@@ -695,8 +718,8 @@ footer a{color:var(--muted)}
         מחירי הכניסה לפי המחירונים העדכניים שמצאנו. חלקם יכולים להשתנות עד אפריל:
         <ul>
           <li>צוגשפיצה: כרטיס משפחתי הלוך־חזור (€62.50 למבוגר, €31 לילד 6–18, מתחת לגיל 6 בחינם)</li>
-          <li>נוישוונשטיין: €21 למבוגר, ילדים בחינם, ועוד €2.50 דמי הזמנה לכל כרטיס</li>
-          <li>טגלברג: €31 למבוגר, €13 לילד · היילין 179: €10 למבוגר, €6 לילד (4–14)</li>
+          <li>ערוץ הפרטנאך: €10 למבוגר, €5 לילד בגיל 6–17, ומתחת לגיל 6 בחינם</li>
+          <li>היילין 179: €10 למבוגר, €6 לילד (4–14)</li>
           <li>סקייווק: €15.80 למבוגר, €11.70 לילד · Alpsee Bergwelt (רכבל ומגלשה): כ־€17 למבוגר, כ־€14.50 לילד</li>
           <li>לגולנד: כ־€45 לאדם באונליין · Aqua Mundo כלול בלינה</li>
           <li>ארוחות: צהריים במסעדה (כ־€17 למבוגר, כ־€10 לילד). בימי גרמיש ומינכן גם ערב קל של פיצה או מקדונלדס (כ־€10 למבוגר, כ־€7 לילד). הילד בן ה־3 לא נספר</li>
@@ -715,9 +738,9 @@ footer a{color:var(--muted)}
   <h2 class="sec">טיפים חשובים לפני שיוצאים</h2>
   <p class="sec-sub">סוף אפריל באלפים: אביב למטה, שלג למעלה.</p>
   <div class="tips">
-    <div class="tipcard"><div class="ico">🎟️</div><h3>להזמין מראש</h3><p>טירת נוישוונשטיין (חובה, עם שעת כניסה), לגולנד (זול יותר באונליין), ורצוי גם את הרכבל לצוגשפיצה.</p></div>
+    <div class="tipcard"><div class="ico">🎟️</div><h3>להזמין מראש</h3><p>לגולנד (זול יותר באונליין) והכרטיס לצוגשפיצה. לפני כן לבדוק שהם פתוחים בתאריכים שלנו, לפי הטבלה למעלה.</p></div>
     <div class="tipcard"><div class="ico">🧥</div><h3>שכבות</h3><p>בעמקים 14–17° ביום ו־3–6° בלילה. בפסגת הצוגשפיצה מתחת לאפס. צריך מעיל, כובע, כפפות ומשקפי שמש לכל אחד.</p></div>
-    <div class="tipcard"><div class="ico">🌦️</div><h3>פתיחת העונה</h3><p>חלק מהאטרקציות (מגלשות הרים, גשר מריה, רכבת התיירים לכריסטלזה) נפתחות לפי מזג האוויר. כדאי לבדוק יום לפני.</p></div>
+    <div class="tipcard"><div class="ico">🌦️</div><h3>פתיחת העונה</h3><p>חלק מהאטרקציות (מגלשות הרים, רכבלים, רכבת התיירים לכריסטלזה) נפתחות לפי מזג האוויר. כדאי לבדוק יום לפני.</p></div>
     <div class="tipcard"><div class="ico">🇦🇹</div><h3>יציאה לאוסטריה</h3><p>היילין 179 נמצא באוסטריה. בכבישים הרגילים דרך ארוואלד לא צריך ויניטה (מדבקת כבישים מהירים). לא להיכנס לאוטובאן האוסטרי בלי ויניטה.</p></div>
     <div class="tipcard"><div class="ico">🅿️</div><h3>חניה</h3><p>ברוב החניונים משלמים במטבעות או באפליקציה. כדאי להחזיק ברכב מטבעות של יורו.</p></div>
     <div class="tipcard"><div class="ico">🛒</div><h3>יום ראשון סגור</h3><p>ביום ראשון 25.4 הסופרים בגרמניה סגורים. לכן קונים ביום שישי, בדרך לסנטר פארקס. בסופר שבתוך סנטר פארקס אפשר להשלים חוסרים.</p></div>
@@ -776,21 +799,6 @@ footer a{color:var(--muted)}
   </div>
 </dialog>
 
-<dialog class="menu-dlg" id="menu-day4" aria-label="תפריט">
-  <div class="rest">
-    <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
-          <span class="tag">📋 תפריט צהריים</span>
-          <h4>Restaurant Café Kainz, הוהנשוואנגאו</h4>
-          <p>במסעדה יש תפריט ילדים מיוחד ומרפסת גדולה עם נוף לנוישוונשטיין. מנות חמות מוגשות ברצף מ־10:30 עד 16:00.</p>
-          <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
-            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9</td></tr>
-            <tr><td>אצבעות דג עם צ׳יפס<i>Fischstäbchen mit Pommes</i></td><td class="pr">~€9</td></tr>
-            <tr><td>נאגטס עוף עם צ׳יפס<i>Chicken Nuggets mit Pommes</i></td><td class="pr">~€9</td></tr>
-          </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
-  </div>
-</dialog>
 
 <dialog class="menu-dlg" id="menu-day5" aria-label="תפריט">
   <div class="rest">
@@ -808,7 +816,7 @@ footer a{color:var(--muted)}
   </div>
 </dialog>
 
-<dialog class="menu-dlg" id="menu-day6" aria-label="תפריט">
+<dialog class="menu-dlg" id="menu-day4" aria-label="תפריט">
   <div class="rest">
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
           <span class="tag">📋 תפריט צהריים</span>
@@ -822,12 +830,12 @@ footer a{color:var(--muted)}
   </div>
 </dialog>
 
-<dialog class="menu-dlg" id="menu-dinner4" aria-label="תפריט">
+<dialog class="menu-dlg" id="menu-day6" aria-label="תפריט">
   <div class="rest">
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
-          <span class="tag">📋 תפריט ארוחת ערב</span>
+          <span class="tag">📋 תפריט צהריים</span>
           <h4>פיצה מ־Pizzeria Puoro, גרמיש</h4>
-          <p>פיצריה פשוטה עם פיצות לילדים בצורת מיקי מאוס ולב. אפשר גם לקחת למלון · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Pizzeria+Puoro+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></p>
+          <p>פיצריה פשוטה עם פיצות לילדים בצורת מיקי מאוס ולב. אפשר לשבת במקום או לקחת · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Pizzeria+Puoro+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></p>
           <table class="menu">
             <tr><td>פיצה לילדים (מיקי / לב)<i>Kinderpizza Margherita</i></td><td class="pr">~€8</td></tr>
             <tr><td>פיצה מרגריטה<i>Pizza Margherita</i></td><td class="pr">~€10.5</td></tr>
@@ -1013,8 +1021,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   var ATTR = {
     skywalk:  { name: "סקייווק אלגוי",           p: [15.8, 11.7, 0] },
     alpsee:   { name: "Alpsee Bergwelt",          p: [17, 14.5, 0] },
-    neusch:   { name: "טירת נוישוונשטיין",       p: [23.5, 2.5, 2.5] },
-    tegel:    { name: "רכבל טגלברג",             p: [31, 13, 0] },
+    partnach: { name: "ערוץ הפרטנאך",            p: [10, 5, 0] },
     zug:      { name: "רכבל הצוגשפיצה",          p: [62.5, 31, 0] },
     highline: { name: "גשר היילין 179",           p: [10, 6, 0] },
     lego:     { name: "לגולנד",                   p: [45, 45, 45] }
@@ -1025,9 +1032,9 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     1: { lat: 47.826, lon: 10.022, place: "לויטקירך", drive: "~2:10", km: 200, parking: 0,  attr: [], wx: "⛅ 15°/4°",  lunch: "rest", dinner: "home" },
     2: { lat: 47.546, lon: 9.684, place: "לינדאו", drive: "~2:10", km: 130, parking: 12, attr: ["skywalk"], wx: "🌤️ 16°/6°", lunch: "rest", dinner: "home" },
     3: { lat: 47.409, lon: 10.279, place: "אוברסטדורף", drive: "~2:30", km: 150, parking: 11, attr: ["alpsee"], wx: "⛅ 14°/3°", lunch: "rest", dinner: "home" },
-    4: { lat: 47.577, lon: 10.738, place: "שוואנגאו", drive: "~2:30", km: 160, parking: 14, attr: ["neusch","tegel"], wx: "⛅ 15°/3°", lunch: "rest", dinner: "light" },
+    4: { lat: 48.453, lon: 10.278, place: "גינצבורג", drive: "~3:20", km: 300, parking: 12, attr: ["lego"], wx: "🌤️ 17°/5°", lunch: "rest", dinner: "light" },
     5: { lat: 47.492, lon: 11.095, place: "גרמיש", drive: "~1:45", km: 90,  parking: 15, attr: ["zug","highline"], wx: "🏔️ 15°/3°", lunch: "rest", dinner: "light" },
-    6: { lat: 48.453, lon: 10.278, place: "גינצבורג", drive: "~4:00", km: 355, parking: 12, attr: ["lego"], wx: "🌤️ 17°/5°", lunch: "rest", dinner: "light" },
+    6: { lat: 47.492, lon: 11.095, place: "גרמיש", drive: "~1:45", km: 140, parking: 8, attr: ["partnach"], wx: "⛅ 15°/3°", lunch: "rest", dinner: "light" },
     7: { lat: 48.354, lon: 11.786, place: "מינכן", drive: "~0:15", km: 10,  parking: 0,  attr: [], wx: "✈️ 16°/4°", lunch: "home", dinner: "home" }
   };
   var FIXED = [
@@ -1277,12 +1284,12 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     { n: "Alpsee Bergwelt", ph: "Immenstadt - Gr Alpsee v N, Bühl a Alpsee.JPG|Grosser Alpsee (2).JPG", e: "🎢", d: "ראשון 25.4", ll: [47.5565, 10.1405], day: "day3" },
     { n: "אוברסטדורף", ph: "Oberstdorf - Trettach, Mädelegabel, Hochfrottspitze.JPG", e: "🏘️", d: "ראשון 25.4", ll: [47.4097, 10.2793], day: "day3" },
     { n: "אגם כריסטלזה", ph: "Christlessee.JPG|Edward Theodore Compton Christlessee bei Gerstruben mit Blick auf die Trettachspitze 1907.jpg", e: "💎", d: "ראשון 25.4", ll: [47.3836, 10.2964], day: "day3" },
-    { n: "טירת נוישוונשטיין", ph: "Schloss Neuschwanstein 2013.jpg|Neuschwanstein Castle.jpg|Neuschwanstein-c1.jpg", e: "🏰", d: "שני 26.4", ll: [47.5576, 10.7498], day: "day4" },
-    { n: "רכבל טגלברג", ph: "Neue Kabine (2021) der Tegelbergbahn.jpg", e: "🚡", d: "שני 26.4", ll: [47.5686, 10.7586], day: "day4" },
     { n: "פסגת הצוגשפיצה", ph: "Zugspitze Gipfelkreuz 2021.jpg|Gipfelkreuz Zugspitze.jpg|Zugspitze Westansicht.JPG", e: "🏔️", d: "שלישי 27.4", ll: [47.4211, 10.9853], day: "day5" },
     { n: "אגם איבזה ותחנת הרכבל", ph: "Eibsee & Zugspitze.jpg|Seilbahn Zugspitze von Eibsee.jpg", e: "💙", d: "שלישי 27.4", ll: [47.4567, 10.9917], day: "day5" },
     { n: "גשר היילין 179", ph: "Highline179.jpg|Panorama of Highline179 and Burg Ehrenberg.jpg", e: "🌉", d: "שלישי 27.4", ll: [47.4747, 10.7369], day: "day5" },
-    { n: "לגולנד גרמניה", ph: "Flying Ninjago Legoland Deutschland (207022357).jpeg|Miniland - Berlin (Legoland) (1).jpg", e: "🧱", d: "רביעי 28.4", ll: [48.4253, 10.2988], day: "day6" }
+    { n: "לגולנד גרמניה", ph: "Flying Ninjago Legoland Deutschland (207022357).jpeg|Miniland - Berlin (Legoland) (1).jpg", e: "🧱", d: "שני 26.4", ll: [48.4253, 10.2988], day: "day4" },
+    { n: "ערוץ הפרטנאך", ph: "Garmisch-Partenkirchen Partnachklamm 02.JPG|Partnachklamm rb.jpg", e: "💦", d: "רביעי 28.4", ll: [47.4693, 11.1203], day: "day6" },
+    { n: "קפיצת הסקי האולימפית", ph: "Garmisch-Partenkirchen - Grosse Olympiaschanze.jpg|Partenkirchen Olympia Skistadion.JPG", e: "⛷️", d: "רביעי 28.4", ll: [47.4825, 11.1218], day: "day6" }
   ];
 
   var map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
@@ -1309,7 +1316,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   }
 
   // drive route between the stays
-  L.polyline([AIRPORT.ll, HOTELS[0].ll, HOTELS[1].ll, HOTELS[2].ll], { color: "#1f6f68", weight: 3, opacity: .8, dashArray: "8 8" }).addTo(map);
+  L.polyline([AIRPORT.ll, HOTELS[0].ll, [48.4253, 10.2988], HOTELS[1].ll, HOTELS[2].ll], { color: "#1f6f68", weight: 3, opacity: .8, dashArray: "8 8" }).addTo(map);
 
   var all = [];
   ATTR.forEach(function(o){
