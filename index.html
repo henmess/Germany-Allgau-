@@ -1286,10 +1286,21 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   ];
 
   var map = L.map(el, { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
-    maxZoom: 18, subdomains: "abcd",
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+  // base map: OpenStreetMap (no API key). If its tiles fail to load, switch to Esri World Street Map (also keyless).
+  var osm = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
+  var tileErrors = 0, switched = false;
+  osm.on("tileerror", function(){
+    if (switched || ++tileErrors < 4) return;
+    switched = true;
+    map.removeLayer(osm);
+    L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
+      maxZoom: 19,
+      attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; OpenStreetMap contributors'
+    }).addTo(map);
+  });
 
   function popup(o){
     return (o.ph ? commonsImg(o.ph, 400, "pop-img", o.n) : "") + "<b>" + o.n + "</b><span class='pd'>" + o.d + "</span><br><a href='#" + o.day + "'>לפרטי היום ←</a>" +
