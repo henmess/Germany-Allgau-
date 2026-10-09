@@ -234,6 +234,18 @@ a.tel:hover{border-color:#c2412d}
 .sos-note{font-size:.8rem;color:var(--muted);margin:8px 0 0}
 .chip.sos{background:color-mix(in srgb,#c2412d 12%,var(--surface));border-color:color-mix(in srgb,#c2412d 35%,transparent);text-decoration:none;color:var(--ink)}
 @media (max-width:860px){ .sos-grid{grid-template-columns:1fr} }
+/* flights */
+.flights{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:0 0 16px;max-width:640px}
+.flt{flex:1 1 240px;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:10px 14px;text-align:right}
+.flt-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.flt-no{font-weight:800;font-size:1.05rem;letter-spacing:.02em}
+.flt-st{font-size:.74rem;padding:2px 9px;border-radius:999px;background:rgba(255,255,255,.18);white-space:nowrap}
+.flt-st.ok{background:#2f8a4f}.flt-st.warn{background:#d9a21b;color:#1d2a2e}.flt-st.bad{background:#c2412d}
+.flt-route{font-size:.95rem;margin-top:4px}
+.flt-route .arr{opacity:.7;margin:0 4px}
+.flt small{display:block;opacity:.85;font-size:.76rem}
+.flt-links{flex-basis:100%;font-size:.76rem;opacity:.9}
+.flt-links a{color:#fff}
 /* back to top */
 .to-top{position:fixed;left:16px;bottom:18px;z-index:1100;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
   background:var(--brand);color:#fff;font-size:1.35rem;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.25);
@@ -330,6 +342,7 @@ footer a{color:var(--muted)}
 .print-only{display:none}
 
 @media print{
+  .flights{color:#1d2a2e}.flt{border-color:#ccc}.flt-links{display:none}
   @page{size:A4;margin:11mm}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   :root{--bg:#fff;--surface:#fff;--ink:#1d2a2e;--muted:#5d6b6f;--line:#ddd;--shadow:none}
@@ -380,6 +393,19 @@ footer a{color:var(--muted)}
       <div><b><bdi dir="ltr">15° / 4°</bdi></b><small>ממוצע היסטורי ל־23.4 · לויטקירך (אלגוי)</small></div>
       <div><b><bdi dir="ltr">~35%</bdi></b><small>סיכוי לגשם ביום ממוצע</small></div>
       <div><b><bdi dir="ltr">−4° / −9°</bdi></b><small>בפסגת הצוגשפיצה (יום 28.4)</small></div>
+    </div>
+    <div class="flights">
+      <div class="flt" id="flt-LY353">
+        <div class="flt-top"><span class="flt-no">✈️ LY353</span><span class="flt-st" data-st>⏳ בודק…</span></div>
+        <div class="flt-route"><b><bdi dir="ltr">06:00</bdi></b> תל אביב <span class="arr">←</span> מינכן <b><bdi dir="ltr">09:05</bdi></b></div>
+        <small>הלוך · שישי 23.4 · אל על</small>
+      </div>
+      <div class="flt" id="flt-LY354">
+        <div class="flt-top"><span class="flt-no">✈️ LY354</span><span class="flt-st" data-st>⏳ בודק…</span></div>
+        <div class="flt-route"><b><bdi dir="ltr">10:20</bdi></b> מינכן <span class="arr">←</span> תל אביב <b><bdi dir="ltr">15:05</bdi></b></div>
+        <small>חזור · חמישי 29.4 · אל על</small>
+      </div>
+      <div class="flt-links"><a target="_blank" rel="noopener" href="https://www.iaa.gov.il/airports/ben-gurion/flight-board/">לוח הטיסות של נתב״ג ↗</a> · <a target="_blank" rel="noopener" href="https://www.elal.com/heb/flight-status">סטטוס טיסה באל על ↗</a></div>
     </div>
     <div class="hero-stats">
       <div class="stat"><b>7</b><span>ימים</span></div>
@@ -480,7 +506,7 @@ footer a{color:var(--muted)}
     </div>
     <div class="grid">
       <ol class="timeline">
-        <li class="key"><time>09:05</time><div class="what"><b>נחיתה בשדה התעופה מינכן (MUC)</b><small>ביקורת דרכונים ואיסוף מזוודות</small></div></li>
+        <li class="key"><time>09:05</time><div class="what"><b>נחיתה בשדה התעופה מינכן (MUC), טיסה LY353</b><small>ביקורת דרכונים ואיסוף מזוודות</small></div></li>
         <li><time>10:15</time><div class="what"><b>איסוף הרכב השכור: VW Tiguan<span data-car></span></b><small>מרכז השכרת הרכב (Mietwagenzentrum) בשדה. לוודא שהבוסטר מותקן ושיש וסט זוהר ומשולש ברכב</small></div></li>
         <li class="drive"><time>10:30</time><div class="what">🚗 נסיעה מערבה בכבישים A92 ← A99 ← A96 לכיוון לויטקירך (כ־190 ק״מ, כשעתיים)</div></li>
         <li class="key"><time>12:30</time><div class="what"><b>🛒 קניות לבית בסופר ALDI SÜD לויטקירך</b><small>Künkelinstraße 9, Leutkirch, בערך 10 דקות מסנטר פארקס · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=ALDI+S%C3%9CD+K%C3%BCnkelinstra%C3%9Fe+9+Leutkirch">🗺️ גוגל מפות</a></small></div></li>
@@ -732,7 +758,7 @@ footer a{color:var(--muted)}
         <li class="drive"><time>07:15</time><div class="what">🚗 יציאה לשדה התעופה (10–15 דק׳)</div></li>
         <li class="key"><time>07:30</time><div class="what"><b>🚗 החזרת הרכב השכור</b><small>בחניון החזרת הרכבים בשדה התעופה מינכן (Mietwagenrückgabe) · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Mietwagenr%C3%BCckgabe+Flughafen+M%C3%BCnchen">🗺️ גוגל מפות</a></small></div></li>
         <li><time>08:00</time><div class="what"><b>צ׳ק־אין ובידוק ביטחוני</b><small>כשעתיים ו־20 דקות לפני הטיסה</small></div></li>
-        <li class="key"><time>10:20</time><div class="what"><b>🛫 המראה הביתה</b><small>להתראות, אלגוי!</small></div></li>
+        <li class="key"><time>10:20</time><div class="what"><b>🛫 המראה הביתה, טיסה LY354</b><small>נחיתה בתל אביב בסביבות 15:05. להתראות, אלגוי!</small></div></li>
       </ol>
       <div>
         <div class="tip"><b>💡 טיפ:</b> אם רוצים בוקר רגוע יותר, אפשר להחזיר את הרכב כבר בערב יום רביעי ולהגיע לטרמינל בבוקר במונית או בשאטל. כדאי לבדוק מול המלון אם יש שאטל לשדה.</div>
@@ -1152,6 +1178,44 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   });
 })();
 
+/* ---------- flight check against the Ben Gurion flight board (data.gov.il, Israel Airports Authority) ---------- */
+(function(){
+  var FLIGHTS = [
+    { no: "353", id: "flt-LY353", date: "2027-04-23", tlvTime: "06:00", dir: "D", label: "המראה מנתב״ג" },
+    { no: "354", id: "flt-LY354", date: "2027-04-29", tlvTime: "15:05", dir: "A", label: "נחיתה בנתב״ג" }
+  ];
+  function setSt(f, cls, txt){ var el = document.querySelector("#" + f.id + " [data-st]"); el.className = "flt-st " + (cls || ""); el.textContent = txt; }
+  function vals(r){ return Object.keys(r).map(function(k){ return String(r[k] == null ? "" : r[k]).trim(); }); }
+  function dt(r){ // all datetime-looking values in the record, in field order
+    return vals(r).filter(function(v){ return /^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}/.test(v); });
+  }
+  function daysTo(d){ return Math.ceil((new Date(d + "T00:00:00+03:00") - new Date()) / 86400000); }
+
+  FLIGHTS.forEach(function(f){
+    var url = "https://data.gov.il/api/3/action/datastore_search?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5&limit=50&q=" + encodeURIComponent("LY " + f.no);
+    fetch(url).then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(j){
+      var recs = (j.result && j.result.records) || [];
+      var mine = recs.filter(function(r){ var v = vals(r); return v.indexOf("LY") >= 0 && (v.indexOf(f.no) >= 0 || v.indexOf("LY" + f.no) >= 0 || v.indexOf("LY " + f.no) >= 0); });
+      var onDay = mine.filter(function(r){ return dt(r).some(function(x){ return x.slice(0, 10) === f.date; }); })[0];
+      if (!onDay){
+        var n = daysTo(f.date);
+        if (mine.length) setSt(f, "ok", "✅ הטיסה פעילה בלוח נתב״ג · התאריך שלנו יופיע כמה ימים לפני");
+        else setSt(f, "", n > 0 ? "📅 יופיע בלוח נתב״ג כמה ימים לפני הטיסה" : "לא נמצא בלוח");
+        return;
+      }
+      var times = dt(onDay), sched = times[0] || "", upd = times[1] || sched;
+      var hhS = sched.slice(11, 16), hhU = upd.slice(11, 16);
+      var status = onDay.CHRMINH || onDay.CHRMINE || "";
+      if (/בוטל|CANCEL/i.test(status)) setSt(f, "bad", "❌ " + status);
+      else if (hhS && hhS !== f.tlvTime) setSt(f, "warn", "⚠️ " + f.label + " " + hhS + " (במקום " + f.tlvTime + ")");
+      else if (hhU && hhU !== hhS) setSt(f, "warn", "⏱️ " + f.label + " מעודכנת ל־" + hhU + (status ? " · " + status : ""));
+      else setSt(f, "ok", "✅ בלוח נתב״ג בשעה " + (hhS || f.tlvTime) + (status ? " · " + status : ""));
+    }).catch(function(){
+      setSt(f, "", "📅 בדיקה מול נתב״ג לא זמינה כרגע");
+    });
+  });
+})();
+
 /* ---------- back to top ---------- */
 (function(){
   var btn = document.getElementById("toTop");
@@ -1345,7 +1409,8 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     else { var fbT = fuelType(), fbP = DEFAULT_PRICE[fbT]; items.push('⛽ ' + (fbT === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>~€' + fbP.toFixed(2) + '</b> לליטר' + (state.done ? ' (הערכה)' : '') + (state.rate ? ' (≈₪' + (fbP * state.rate).toFixed(2) + ')' : '')); }
     if (state.updated) items.push('🔄 עודכן ב־<b>' + hhmm(state.updated) + '</b>' + (state.rateLive || state.fuelLive ? '' : ' (מוצגים ערכים שמורים)'));
     items.push('הרכב שלנו: <b>VW Tiguan</b> אוטומט' + commonsImg(CAR_IMG, 120, 'car-thumb sm', 'VW Tiguan'));
-    items.push('🛫 נחיתה במינכן: שישי 23.4 · 09:05');
+    items.push('✈️ הלוך <b>LY353</b> · שישי 23.4 · 06:00 ← 09:05');
+    items.push('✈️ חזור <b>LY354</b> · חמישי 29.4 · 10:20 ← 15:05');
     var one = items.map(function(t){ return '<span class="item"><span class="live"></span>' + t + '</span>'; }).join("");
     $("tickerTrack").innerHTML = one + one;
   }
