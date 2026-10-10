@@ -263,6 +263,33 @@ a.tel:hover{border-color:#c2412d}
 .flt small{display:block;opacity:.85;font-size:.76rem}
 .flt-links{flex-basis:100%;font-size:.76rem;opacity:.9}
 .flt-links a{color:#fff}
+/* tools: parking + fuel */
+dialog.tool-dlg{border:none;padding:0;border-radius:18px;max-width:min(440px,calc(100vw - 32px));width:100%;background:transparent;color:var(--ink)}
+dialog.tool-dlg::backdrop{background:rgba(10,20,22,.55);backdrop-filter:blur(2px)}
+.tool-box{position:relative;background:var(--surface);border-radius:18px;padding:18px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.tool-box h3{margin:0 0 10px;font-size:1.15rem}
+.tool-box p{margin:0 0 10px;color:var(--muted);font-size:.92rem}
+.tool-btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.tool-btns .act-btn{text-decoration:none;box-shadow:none}
+.act-btn.waze-btn{color:#05a5d6}
+.act-btn.is-off{opacity:.45;pointer-events:none}
+.tool-note{font-size:.8rem;color:var(--muted);margin:6px 0 0;line-height:1.6}
+.park-info{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.92rem}
+.park-info b{color:var(--brand)}
+.park-note{display:flex;flex-direction:column;gap:4px;font-size:.82rem;color:var(--muted);margin-top:10px}
+.park-note input{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+/* webcams */
+.cams{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cam{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:var(--shadow)}
+.cam-img{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#2c8c7f,#1f4f6f)}
+.cam-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cam-live{position:absolute;top:8px;left:8px;font-size:.66rem;font-weight:700;color:#fff;background:#c2412d;padding:1px 7px;border-radius:99px}
+.cam-off{position:absolute;inset:0;display:none;place-items:center;color:#fff;font-size:.8rem}
+.cam.off .cam-off{display:grid}.cam.off img,.cam.off .cam-live{display:none}
+.cam-cap{padding:8px 10px}
+.cam-cap b{display:block;font-size:.88rem}
+.cam-cap small{color:var(--muted);font-size:.74rem}
+@media (max-width:860px){ .cams{grid-template-columns:repeat(2,minmax(0,1fr))} }
 /* back to top */
 .to-top{position:fixed;left:16px;bottom:18px;z-index:1100;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
   background:var(--brand);color:#fff;font-size:1.35rem;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.25);
@@ -383,7 +410,7 @@ footer a{color:var(--muted)}
   :root{--bg:#fff;--surface:#fff;--ink:#1d2a2e;--muted:#5d6b6f;--line:#ddd;--shadow:none}
   html{scroll-behavior:auto}
   body{background:#fff;font-size:11pt}
-  nav.days,.actions,.to-top,.toast,.menu-btn,.map-card,.gallery,.ph a.credit,#open .sec-sub,.inputs,.live-note,a.waze,.chip.sos,#overview > .sec-sub{display:none !important}
+  nav.days,.actions,.to-top,#cams,dialog.tool-dlg,.toast,.menu-btn,.map-card,.gallery,.ph a.credit,#open .sec-sub,.inputs,.live-note,a.waze,.chip.sos,#overview > .sec-sub{display:none !important}
   .print-only{display:block}
   .hero{min-height:0;height:62mm;margin-bottom:6mm;border-radius:0}
   .hero-inner{padding-bottom:6mm}
@@ -462,6 +489,7 @@ footer a{color:var(--muted)}
     <a href="#day5">שלישי <small>27.4</small></a>
     <a href="#day6">רביעי <small>28.4</small></a>
     <a href="#day7">חמישי <small>29.4</small></a>
+    <a href="#cams">📷 מצלמות</a>
     <a href="#open">✅ פתוח?</a>
     <a href="#costs">💰 עלויות</a>
     <a href="#sos">🚨 חירום</a>
@@ -473,7 +501,41 @@ footer a{color:var(--muted)}
 <div class="actions" role="toolbar" aria-label="שיתוף וייצוא">
   <button class="act-btn primary" id="shareBtn" type="button">📤 שתף את המסלול</button>
   <button class="act-btn" id="pdfBtn" type="button">📄 שמור כ־PDF</button>
+  <button class="act-btn" id="parkBtn" type="button">🚗 איפה חנינו?</button>
+  <button class="act-btn" id="fuelBtn" type="button">⛽ תחנת דלק קרובה</button>
 </div>
+
+<dialog class="tool-dlg" id="parkDlg" aria-label="איפה חנינו">
+  <div class="tool-box">
+    <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
+    <h3>🚗 איפה חנינו?</h3>
+    <div id="parkInfo" class="park-info">עוד לא נשמר מיקום.</div>
+    <label class="park-note">הערה (לא חובה)<input id="parkNote" type="text" placeholder="למשל: קומה 2, שורה C, ליד המעלית"></label>
+    <div class="tool-btns">
+      <button class="act-btn primary" id="parkSave" type="button">📍 שמור את המיקום שלי עכשיו</button>
+      <a class="act-btn" id="parkGo" target="_blank" rel="noopener">🗺️ נווט לרכב (גוגל)</a>
+      <a class="act-btn waze-btn" id="parkWaze" target="_blank" rel="noopener">🚙 Waze</a>
+      <button class="act-btn" id="parkClear" type="button">🗑️ מחק</button>
+    </div>
+    <p class="tool-note">המיקום נשמר רק בטלפון הזה. צריך לאשר לאתר גישה למיקום. הניווט לרכב פותח מסלול הליכה.</p>
+  </div>
+</dialog>
+
+<dialog class="tool-dlg" id="fuelDlg" aria-label="תחנת דלק קרובה">
+  <div class="tool-box">
+    <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
+    <h3>⛽ תחנת דלק קרובה</h3>
+    <p>יפתח מפה עם תחנות הדלק הקרובות אליכם (Tankstelle).</p>
+    <div class="tool-btns">
+      <a class="act-btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/search/Tankstelle/">🗺️ תחנות קרובות בגוגל מפות</a>
+      <a class="act-btn waze-btn" target="_blank" rel="noopener" href="https://waze.com/ul?q=Tankstelle&amp;navigate=no">🚙 תחנות קרובות ב־Waze</a>
+    </div>
+    <div class="tool-note">
+      <b>⚠️ הטיגואן על דיזל:</b> בוחרים את המשאבה שכתוב עליה <b>Diesel</b>, שבדרך כלל יש לה ידית שחורה. <b>לא</b> Super, E10 או Super Plus, שהם בנזין.
+      <br>💳 ברוב התחנות מתדלקים ומשלמים בקופה בפנים, לפי מספר המשאבה (Säule). בדרך המהירה (Autobahn) הדלק יקר יותר. עדיף לתדלק בתחנה בעיר.
+    </div>
+  </div>
+</dialog>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <main>
@@ -803,6 +865,46 @@ footer a{color:var(--muted)}
 </article>
 
 <!-- ================= COSTS ================= -->
+<section id="cams">
+  <h2 class="sec">📷 מצלמות לייב</h2>
+  <p class="sec-sub">תמונה עדכנית מההרים, מתחדשת כל כמה דקות. טוב לבדוק בבוקר אם הפסגה בעננים לפני שעולים. לחיצה על תמונה פותחת את המצלמה בגדול. מקור: foto-webcam.eu</p>
+  <div class="cams">
+    <a class="cam" target="_blank" rel="noopener" href="https://www.foto-webcam.eu/webcam/zugspitze/">
+      <div class="cam-img"><img data-cam="zugspitze" alt="🏔️ פסגת הצוגשפיצה" loading="lazy"><span class="cam-live">● LIVE</span><span class="cam-off">📷 המצלמה לא זמינה כרגע</span></div>
+      <div class="cam-cap"><b>🏔️ פסגת הצוגשפיצה</b><small>רביעי 28.4</small></div>
+    </a>
+    <a class="cam" target="_blank" rel="noopener" href="https://www.foto-webcam.eu/webcam/zugspitze-sued/">
+      <div class="cam-img"><img data-cam="zugspitze-sued" alt="❄️ רמת הקרחון Zugspitzplatt" loading="lazy"><span class="cam-live">● LIVE</span><span class="cam-off">📷 המצלמה לא זמינה כרגע</span></div>
+      <div class="cam-cap"><b>❄️ רמת הקרחון Zugspitzplatt</b><small>רביעי 28.4</small></div>
+    </a>
+    <a class="cam" target="_blank" rel="noopener" href="https://www.foto-webcam.eu/webcam/eibsee-nord/">
+      <div class="cam-img"><img data-cam="eibsee-nord" alt="💙 אגם איבזה ותחנת הרכבל" loading="lazy"><span class="cam-live">● LIVE</span><span class="cam-off">📷 המצלמה לא זמינה כרגע</span></div>
+      <div class="cam-cap"><b>💙 אגם איבזה ותחנת הרכבל</b><small>רביעי 28.4</small></div>
+    </a>
+    <a class="cam" target="_blank" rel="noopener" href="https://www.foto-webcam.eu/webcam/eibsee-hotel/">
+      <div class="cam-img"><img data-cam="eibsee-hotel" alt="🏞️ איבזה, מבט לצוגשפיצה" loading="lazy"><span class="cam-live">● LIVE</span><span class="cam-off">📷 המצלמה לא זמינה כרגע</span></div>
+      <div class="cam-cap"><b>🏞️ איבזה, מבט לצוגשפיצה</b><small>רביעי 28.4</small></div>
+    </a>
+    <a class="cam" target="_blank" rel="noopener" href="https://www.foto-webcam.eu/webcam/wank/">
+      <div class="cam-img"><img data-cam="wank" alt="🏘️ גרמיש-פרטנקירכן מלמעלה" loading="lazy"><span class="cam-live">● LIVE</span><span class="cam-off">📷 המצלמה לא זמינה כרגע</span></div>
+      <div class="cam-cap"><b>🏘️ גרמיש-פרטנקירכן מלמעלה</b><small>שני–רביעי</small></div>
+    </a>
+    <a class="cam" target="_blank" rel="noopener" href="https://www.foto-webcam.eu/webcam/tegelberg/">
+      <div class="cam-img"><img data-cam="tegelberg" alt="🚡 טגלברג: שוואנגאו ופיסן" loading="lazy"><span class="cam-live">● LIVE</span><span class="cam-off">📷 המצלמה לא זמינה כרגע</span></div>
+      <div class="cam-cap"><b>🚡 טגלברג: שוואנגאו ופיסן</b><small>שלישי 27.4</small></div>
+    </a>
+    <a class="cam" target="_blank" rel="noopener" href="https://www.foto-webcam.eu/webcam/scheibenhaus/">
+      <div class="cam-img"><img data-cam="scheibenhaus" alt="🏘️ אוברסטדורף" loading="lazy"><span class="cam-live">● LIVE</span><span class="cam-off">📷 המצלמה לא זמינה כרגע</span></div>
+      <div class="cam-cap"><b>🏘️ אוברסטדורף</b><small>ראשון 25.4</small></div>
+    </a>
+    <a class="cam" target="_blank" rel="noopener" href="https://www.foto-webcam.eu/webcam/nebelhorn/">
+      <div class="cam-img"><img data-cam="nebelhorn" alt="⛰️ הרי אוברסטדורף (נבלהורן)" loading="lazy"><span class="cam-live">● LIVE</span><span class="cam-off">📷 המצלמה לא זמינה כרגע</span></div>
+      <div class="cam-cap"><b>⛰️ הרי אוברסטדורף (נבלהורן)</b><small>ראשון 25.4</small></div>
+    </a>
+  </div>
+  <p class="tool-note" style="margin-top:10px">🌊 לינדאו: מצלמות הנמל באגם בודן נמצאות באתר <a target="_blank" rel="noopener" href="https://www.echt-bodensee.de/service/wetter/webcams">echt-bodensee.de</a>.</p>
+</section>
+
 <section id="open">
   <h2 class="sec">✅ פתוח בתאריכים שלנו?</h2>
   <p class="sec-sub">בדקנו לפי לוחות הזמנים של 2026, כי של 2027 עוד לא פורסמו. כשבוע לפני הטיול כדאי לבדוק שוב באתרים הרשמיים.</p>
@@ -1249,6 +1351,70 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
       setSt(f, "", "📅 בדיקה מול נתב״ג לא זמינה כרגע");
     });
   });
+})();
+
+/* ---------- parking spot ---------- */
+(function(){
+  var dlg = document.getElementById("parkDlg"), info = document.getElementById("parkInfo"), note = document.getElementById("parkNote");
+  var go = document.getElementById("parkGo"), wz = document.getElementById("parkWaze");
+  function get(){ try { return JSON.parse(localStorage.getItem("trip.parking")); } catch(e){ return null; } }
+  function put(v){ try { v ? localStorage.setItem("trip.parking", JSON.stringify(v)) : localStorage.removeItem("trip.parking"); } catch(e){} }
+  function dist(a, b){ var R = 6371000, t = Math.PI/180, dLa = (b.lat-a.lat)*t, dLo = (b.lon-a.lon)*t;
+    var h = Math.sin(dLa/2)*Math.sin(dLa/2) + Math.cos(a.lat*t)*Math.cos(b.lat*t)*Math.sin(dLo/2)*Math.sin(dLo/2); return 2*R*Math.asin(Math.sqrt(h)); }
+  function fmtDist(m){ return m < 1000 ? Math.round(m) + " מ׳" : (m/1000).toFixed(1) + " ק״מ"; }
+  function render(){
+    var p = get();
+    [go, wz].forEach(function(a){ a.classList.toggle("is-off", !p); });
+    if (!p){ info.textContent = "עוד לא נשמר מיקום. כשמחנים, לוחצים \"שמור\"."; note.value = ""; return; }
+    var d = new Date(p.t);
+    info.innerHTML = "📍 הרכב חונה כאן מ־<b>" + d.toLocaleDateString("he-IL") + " " + ("0"+d.getHours()).slice(-2) + ":" + ("0"+d.getMinutes()).slice(-2) + "</b>" +
+      (p.note ? "<br>📝 " + p.note.replace(/[<>&]/g, "") : "") + '<br><span id="parkDist" class="tool-note">מחשב מרחק…</span>';
+    note.value = p.note || "";
+    go.href = "https://www.google.com/maps/dir/?api=1&travelmode=walking&destination=" + p.lat + "," + p.lon;
+    wz.href = "https://waze.com/ul?ll=" + p.lat + "," + p.lon + "&navigate=yes";
+    if (navigator.geolocation) navigator.geolocation.getCurrentPosition(function(pos){
+      var el = document.getElementById("parkDist"); if (el) el.textContent = "🚶 במרחק כ־" + fmtDist(dist({lat: pos.coords.latitude, lon: pos.coords.longitude}, p)) + " מכם";
+    }, function(){ var el = document.getElementById("parkDist"); if (el) el.textContent = ""; }, { enableHighAccuracy: true, timeout: 8000, maximumAge: 0 });
+  }
+  document.getElementById("parkBtn").addEventListener("click", function(){ render(); dlg.showModal ? dlg.showModal() : dlg.setAttribute("open", ""); });
+  document.getElementById("parkSave").addEventListener("click", function(){
+    if (!navigator.geolocation){ info.textContent = "הטלפון לא מאפשר גישה למיקום."; return; }
+    info.textContent = "⏳ מאתר את המיקום…";
+    navigator.geolocation.getCurrentPosition(function(pos){
+      put({ lat: +pos.coords.latitude.toFixed(6), lon: +pos.coords.longitude.toFixed(6), acc: Math.round(pos.coords.accuracy), t: Date.now(), note: note.value.trim() });
+      render();
+    }, function(err){
+      info.textContent = err.code === 1 ? "צריך לאשר לאתר גישה למיקום, בהגדרות הדפדפן." : "לא הצלחנו לאתר מיקום. נסו שוב בשטח פתוח.";
+    }, { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 });
+  });
+  note.addEventListener("change", function(){ var p = get(); if (p){ p.note = note.value.trim(); put(p); } });
+  document.getElementById("parkClear").addEventListener("click", function(){ put(null); render(); });
+})();
+
+/* ---------- tool dialogs: open / close ---------- */
+(function(){
+  var fuel = document.getElementById("fuelDlg");
+  document.getElementById("fuelBtn").addEventListener("click", function(){ fuel.showModal ? fuel.showModal() : fuel.setAttribute("open", ""); });
+  document.querySelectorAll("dialog.tool-dlg").forEach(function(d){
+    d.querySelector(".dlg-x").addEventListener("click", function(){ d.close(); });
+    d.addEventListener("click", function(e){ if (e.target === d) d.close(); });
+  });
+})();
+
+/* ---------- live webcams (foto-webcam.eu current images, refreshed every 5 minutes) ---------- */
+(function(){
+  var imgs = Array.prototype.slice.call(document.querySelectorAll("img[data-cam]"));
+  function load(){
+    var t = Math.floor(Date.now() / 300000);
+    imgs.forEach(function(img){
+      var card = img.closest(".cam");
+      img.onload = function(){ card.classList.remove("off"); };
+      img.onerror = function(){ card.classList.add("off"); };
+      img.src = "https://www.foto-webcam.eu/webcam/" + img.getAttribute("data-cam") + "/current/640.jpg?t=" + t;
+    });
+  }
+  load();
+  setInterval(load, 5 * 60 * 1000);
 })();
 
 /* ---------- back to top ---------- */
