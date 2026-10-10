@@ -21,7 +21,7 @@
       ],
       "name": "🌲 סנטר פארקס אלגוי (3 לילות)",
       "paid": 2520,
-      "exact": true,
+      "exact": false,
       "link": "https://www.centerparcs.de/de-de/deutschland/fp_AG_ferienpark-park-allgaeu"
     },
     "garmisch": {
@@ -37,5 +37,5 @@
       "error": "hotel found but no price"
     }
   },
-  "checked": "2026-10-10T05:53:57.357Z"
+  "checked": "2026-10-10T06:00:53.217Z"
 }
