@@ -4,14 +4,14 @@
       "history": [
         {
           "d": "2026-10-10",
-          "p": 17152
+          "p": 18661
         }
       ],
       "name": "✈️ טיסות אל על LY353 / LY354",
       "paid": 8760,
       "exact": true,
       "link": "https://www.google.com/travel/flights?hl=en&gl=il&curr=ILS&tfs=CBwQAhoiEgoyMDI3LTA0LTIzMgJMWWoHCAESA1RMVnIHCAESA01VQxoiEgoyMDI3LTA0LTI5MgJMWWoHCAESA01VQ3IHCAESA1RMVkABQAFAAkACQAJIAXABmAEB&tfu=EgIIAQ",
-      "fare": "המחיר הזול ביותר (כנראה לייט לכולם)"
+      "fare": "המחיר באתר אל על לתעריף לייט לכל 5 הנוסעים (אנחנו קנינו 2 קלאסיק + 3 לייט)"
     },
     "centerparcs": {
       "history": [
@@ -29,14 +29,14 @@
       "history": [],
       "name": "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)",
       "paid": 1355,
-      "error": "{\"status_code\":401,\"message\":\"This endpoint is available only for RapidAPI (see more at https://rapidapi.com/anastue-pGK7lGUO-Wo/api/xotelo-hotel-prices)\"}"
+      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     },
     "atomis": {
       "history": [],
       "name": "🛏️ מלון Atomis ליד שדה התעופה (לילה)",
       "paid": 643,
-      "error": "{\"status_code\":401,\"message\":\"This endpoint is available only for RapidAPI (see more at https://rapidapi.com/anastue-pGK7lGUO-Wo/api/xotelo-hotel-prices)\"}"
+      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     }
   },
-  "checked": "2026-10-10T06:06:42.004Z"
+  "checked": "2026-10-10T06:07:39.143Z"
 }
