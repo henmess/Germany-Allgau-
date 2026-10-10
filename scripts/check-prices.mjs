@@ -37,8 +37,14 @@ async function flightPrice(p) {
   return { price: pick.price, exact: !!ours, link: j.search_metadata?.google_flights_url };
 }
 
-function hotelTotal(h) {
-  return h?.total_rate?.extracted_lowest ?? h?.prices?.[0]?.total_rate?.extracted_lowest ?? null;
+function nightsOf(p) { return Math.round((new Date(p.check_out_date) - new Date(p.check_in_date)) / 86400000); }
+function hotelTotal(h, p) {
+  if (!h) return null;
+  const n = nightsOf(p), offers = [...(h.featured_prices || []), ...(h.prices || [])];
+  const totals = [h.total_rate?.extracted_lowest, ...offers.map(o => o.total_rate?.extracted_lowest)].filter(Number.isFinite);
+  if (totals.length) return Math.min(...totals);
+  const nightly = [h.rate_per_night?.extracted_lowest, ...offers.map(o => o.rate_per_night?.extracted_lowest)].filter(Number.isFinite);
+  return nightly.length ? Math.min(...nightly) * n : null;
 }
 
 async function hotelPrice(p) {
@@ -46,8 +52,14 @@ async function hotelPrice(p) {
     adults: PARTY.adults, children: PARTY.children, children_ages: PARTY.ages });
   const matches = h => p.match.every(m => (h?.name || "").toLowerCase().includes(m));
   let h = j.name && matches(j) ? j : (j.properties || []).find(matches);
-  const price = hotelTotal(h);
-  if (!price) throw new Error(h ? "hotel found but no price" : "hotel not found in results");
+  const price = hotelTotal(h, p);
+  if (!price) {
+    // debug: show what the response looked like so the lookup can be adjusted
+    console.log("  top-level keys:", Object.keys(j).join(","));
+    if (h) console.log("  hotel keys:", Object.keys(h).join(","));
+    else console.log("  properties:", (j.properties || []).slice(0, 5).map(x => x.name).join(" | "));
+    throw new Error(h ? "hotel found but no price" : "hotel not found in results");
+  }
   return { price, exact: true, link: h.link || j.search_metadata?.google_hotels_url };
 }
 
