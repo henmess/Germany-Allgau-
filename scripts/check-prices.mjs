@@ -87,8 +87,8 @@ function hotelTotal(h, p) {
 // no room at all, so we retry with 2 adults + 2 kids (the 3-year-old usually shares a bed) — a room that
 // fits 4 is a family room. A room type named "Family…" is preferred when Google lists room types.
 const PARTIES = [
-  { label: "חדר משפחתי ל־5", q: { adults: 2, children: 3, children_ages: "3,7,10" } },
-  { label: "חדר משפחתי (מחיר ל־2 מבוגרים + 2 ילדים)", q: { adults: 2, children: 2, children_ages: "7,10" } }
+  { label: "חדר משפחתי ל־5 · ביטול חינם · בלי ארוחת בוקר", q: { adults: 2, children: 3, children_ages: "3,7,10" } },
+  { label: "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר", q: { adults: 2, children: 2, children_ages: "7,10" } }
 ];
 async function hotelPrice(p) {
   let lastErr;
@@ -107,12 +107,6 @@ async function hotelPriceFor(p, party) {
     ...(p.family ? { free_cancellation: "true" } : {}) });
   const matches = h => p.match.every(m => (h?.name || "").toLowerCase().includes(m));
   let h = j.name && matches(j) ? j : (j.properties || []).find(matches);
-  if (p.family && h) {
-    const offers = [...(h.featured_prices || []), ...(h.prices || [])];
-    console.log("  [debug] hotel keys:", Object.keys(h).filter(k => !/review|image|nearby|amenit|health|sustain/.test(k)).join(","));
-    console.log("  [debug] offers:", JSON.stringify(offers.slice(0, 3)).slice(0, 1500));
-    console.log("  [debug] price fields:", JSON.stringify({ rate: h.rate_per_night, total: h.total_rate, essential: h.essential_info, deal: h.deal }).slice(0, 600));
-  }
   if (p.room && h) {
     // Google lists room types per booking site; pick the cheapest offer for the wanted room
     const n = nightsOf(p), rooms = [...(h.featured_prices || []), ...(h.prices || [])].flatMap(o => (o.rooms || []).map(r => ({ ...r, source: o.source })));
