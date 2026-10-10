@@ -1,0 +1,37 @@
+name: Price tracker
+
+on:
+  schedule:
+    - cron: "17 5 */2 * *"   # every 2 days, ~07:17/08:17 Israel time
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prices
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    env:
+      SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check prices
+        if: env.SERPAPI_KEY != ''
+        run: node scripts/check-prices.mjs
+      - name: Commit updated prices
+        if: env.SERPAPI_KEY != ''
+        run: |
+          if git diff --quiet data/prices.json; then echo "no changes"; exit 0; fi
+          git config user.name "price-tracker"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/prices.json
+          git commit -m "Update tracked prices"
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

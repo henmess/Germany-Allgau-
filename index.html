@@ -341,6 +341,20 @@ dialog.tool-dlg::backdrop{background:rgba(10,20,22,.55);backdrop-filter:blur(2px
 .shop .tag{color:var(--stay-allgau);background:color-mix(in srgb,var(--stay-allgau) 16%,transparent)}
 
 /* ---------- costs ---------- */
+.price-track{margin-top:18px}
+.price-track .pt-sub{margin:-6px 0 12px;color:var(--muted);font-size:.85rem}
+.pt-list{display:grid;gap:8px}
+.pt-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:6px 14px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.pt-row .nm{font-weight:600;font-size:.92rem;min-width:0;overflow-wrap:anywhere}
+.pt-row .nm small{display:block;font-weight:400;color:var(--muted);font-size:.76rem}
+.pt-row .now{font-weight:800;font-size:1.05rem;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:left}
+.pt-row .now small{display:block;font-weight:500;font-size:.74rem;text-align:left}
+.pt-row .up{color:#c0392b}.pt-row .down{color:#1e8449}.pt-row .same{color:var(--muted)}
+.pt-row svg{display:block;width:84px;height:28px}
+.pt-row a{font-size:.78rem;color:var(--brand);text-decoration:none;white-space:nowrap}
+@media (max-width:480px){.pt-row{grid-template-columns:minmax(0,1fr) auto}.pt-row svg{grid-column:1;width:100%;max-width:160px}}
+@media print{.price-track{display:none}}
+
 .cost-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:start}
 .panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px}
 .panel h3{margin:0 0 12px;font-size:1.1rem}
@@ -982,6 +996,11 @@ footer a{color:var(--muted)}
       </div>
     </div>
   </div>
+  <div class="panel price-track" id="priceTrack">
+    <h3>📉 מעקב מחירים</h3>
+    <p class="pt-sub" id="ptSub">⏳ טוען…</p>
+    <div class="pt-list" id="ptList"></div>
+  </div>
 </section>
 
 <!-- ================= TIPS ================= -->
@@ -1607,7 +1626,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   ["inAdults","inKids","inSmall","inRate","inFuel","inCons"].forEach(function(id){
     $(id).addEventListener("input", function(){ $(id).dataset.touched = "1"; calc(); });
   });
-  window.TRIP = { DAYS: DAYS, calc: calc };
+  window.TRIP = { DAYS: DAYS, calc: calc, ils: ils };
   calc();
   /* during the trip, keep the sunrise/sunset countdown fresh */
   var tripEnd = new Date("2027-04-29T23:59:00+02:00");
@@ -1657,6 +1676,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     if (state.fuel) items.push('⛽ ' + (fuelType() === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>€' + state.fuel.toFixed(2) + '</b> לליטר' + (state.rate ? ' (≈₪' + (state.fuel * state.rate).toFixed(2) + ')' : ''));
     else { var fbT = fuelType(), fbP = DEFAULT_PRICE[fbT]; items.push('⛽ ' + (fbT === 'diesel' ? 'דיזל' : 'בנזין') + ' בגרמניה: <b>~€' + fbP.toFixed(2) + '</b> לליטר' + (state.done ? ' (הערכה)' : '') + (state.rate ? ' (≈₪' + (fbP * state.rate).toFixed(2) + ')' : '')); }
     if (state.updated) items.push('🔄 עודכן ב־<b>' + hhmm(state.updated) + '</b>' + (state.rateLive || state.fuelLive ? '' : ' (מוצגים ערכים שמורים)'));
+    (window.PRICE_DROPS || []).forEach(function(t){ items.push(t); });
     items.push('הרכב שלנו: <b>VW Tiguan</b> אוטומט' + commonsImg(CAR_IMG, 120, 'car-thumb sm', 'VW Tiguan'));
     items.push('✈️ הלוך <b>LY353</b> · שישי 23.4 · 06:00 ← 09:05');
     items.push('✈️ חזור <b>LY354</b> · חמישי 29.4 · 10:20 ← 15:05');
@@ -1793,6 +1813,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
       return updateForecasts();
     }).then(function(){ if (window.TRIP) window.TRIP.calc(); busy = false; }, function(){ busy = false; });
   }
+  window.TRIP_TICKER = renderTicker;
   renderTicker();
   refresh();
   setInterval(refresh, 30 * 60 * 1000);
@@ -1871,6 +1892,55 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   map.fitBounds(L.latLngBounds(all), { padding: [28, 28] });
   map.on("click", function(){ map.scrollWheelZoom.enable(); });
   window.addEventListener("resize", function(){ map.invalidateSize(); });
+})();
+
+/* ---------- price tracker: data/prices.json is refreshed every 2 days by a GitHub Action ---------- */
+(function(){
+  var list = document.getElementById("ptList"), sub = document.getElementById("ptSub");
+  if (!list) return;
+  var ORDER = ["flights", "centerparcs", "garmisch", "atomis"];
+  function ils(n){ return "₪" + Math.round(n).toLocaleString("he-IL"); }
+  function dm(d){ var p = d.split("-"); return +p[2] + "." + +p[1]; }
+  function diff(a, b){
+    var x = a - b, pc = b ? Math.round(Math.abs(x) / b * 100) : 0;
+    if (Math.abs(x) < 1) return '<span class="same">ללא שינוי</span>';
+    return '<span class="' + (x > 0 ? 'up' : 'down') + '">' + (x > 0 ? '▲ ' : '▼ ') + ils(Math.abs(x)) + ' (' + pc + '%)</span>';
+  }
+  function spark(h, paid){
+    if (h.length < 2) return '';
+    var vals = h.map(function(e){ return e.p; }).concat([paid]), mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals), rg = mx - mn || 1;
+    var X = function(i){ return 2 + i * 80 / (h.length - 1); }, Y = function(v){ return 25 - (v - mn) / rg * 22; };
+    var pts = h.map(function(e, i){ return X(i).toFixed(1) + "," + Y(e.p).toFixed(1); }).join(" ");
+    var last = h[h.length - 1].p, col = last > paid ? "#c0392b" : last < paid ? "#1e8449" : "#888";
+    return '<svg viewBox="0 0 84 28" aria-hidden="true"><line x1="0" x2="84" y1="' + Y(paid).toFixed(1) + '" y2="' + Y(paid).toFixed(1) + '" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="3 3"/>' +
+      '<polyline points="' + pts + '" fill="none" stroke="' + col + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+  }
+  function render(data){
+    var items = data && data.items || {}, drops = [], rows = "";
+    var BASE = { flights: ["✈️ טיסות אל על LY353 / LY354", 8760], centerparcs: ["🌲 סנטר פארקס אלגוי (3 לילות)", 2520],
+      garmisch: ["🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)", 1355], atomis: ["🛏️ מלון Atomis ליד שדה התעופה (לילה)", 643] };
+    ORDER.forEach(function(id){ if (!items[id]) items[id] = { name: BASE[id][0], paid: BASE[id][1], history: [] }; });
+    ORDER.forEach(function(id){
+      var it = items[id]; if (!it) return;
+      var h = it.history || [], last = h[h.length - 1], prev = h[h.length - 2];
+      var link = it.link ? '<a href="' + it.link.replace(/"/g, "&quot;") + '" target="_blank" rel="noopener">בדוק ↗</a>' : '';
+      var nm = '<div class="nm">' + it.name + '<small>שילמנו ' + ils(it.paid) + (last ? ' · נבדק ב־' + dm(last.d) : '') + (it.exact === false ? ' · מחיר הטיסה הקרובה של אל על' : '') + (it.error && !last ? ' · לא נמצא מחיר בבדיקה האחרונה' : '') + ' ' + link + '</small></div>';
+      if (!last){ rows += '<div class="pt-row">' + nm + '<div class="now same">—</div></div>'; return; }
+      rows += '<div class="pt-row">' + nm + spark(h, it.paid) +
+        '<div class="now">' + ils(last.p) + '<small>' + (prev ? 'מהבדיקה הקודמת: ' + diff(last.p, prev.p) + '<br>' : '') + 'מול מה ששילמנו: ' + diff(last.p, it.paid) + '</small></div></div>';
+      if (last.p < it.paid - 1) drops.push('📉 ' + it.name.replace(/\s*\(.*\)$/, '') + ': <b>' + ils(last.p) + '</b> · זול ב־' + ils(it.paid - last.p) + ' ממה ששילמנו');
+    });
+    list.innerHTML = rows;
+    sub.textContent = data && data.checked
+      ? "המחירים נבדקים אוטומטית כל יומיים ב־Google Flights וב־Google Hotels, ל־2 מבוגרים ו־3 ילדים. בדיקה אחרונה: " + new Date(data.checked).toLocaleString("he-IL", { day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" }) + ". ▼ ירוק = זול יותר, ▲ אדום = יקר יותר."
+      : "המעקב האוטומטי יתחיל אחרי שנחבר את מפתח SerpApi. מעכשיו המחירים ייבדקו כל יומיים.";
+    window.PRICE_DROPS = drops;
+    if (drops.length && window.TRIP_TICKER) window.TRIP_TICKER();
+  }
+  fetch("data/prices.json?t=" + Date.now(), { cache: "no-store" })
+    .then(function(r){ if (!r.ok) throw 0; return r.json(); })
+    .then(render)
+    .catch(function(){ render(null); });
 })();
 </script>
 </body>
