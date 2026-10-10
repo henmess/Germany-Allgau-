@@ -35,7 +35,7 @@
       "name": "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)",
       "paid": 1355,
       "exact": true,
-      "fare": "מחיר לחדר משפחתי ל־2 מבוגרים + 2 ילדים",
+      "fare": "חדר משפחתי (מחיר ל־2 מבוגרים + 2 ילדים)",
       "link": "http://www.rheinischerhof-garmisch.de/"
     },
     "atomis": {
@@ -49,8 +49,9 @@
       "paid": 643,
       "exact": true,
       "fare": "מחיר לחדר ל־2 מבוגרים",
-      "link": "https://www.google.com/travel/search?q=Atomis+Hotel+Munich+Airport&hl=en&gl=il"
+      "link": "https://www.google.com/travel/search?q=Atomis+Hotel+Munich+Airport&hl=en&gl=il",
+      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     }
   },
-  "checked": "2026-10-10T06:34:33.101Z"
+  "checked": "2026-10-10T06:48:24.271Z"
 }
