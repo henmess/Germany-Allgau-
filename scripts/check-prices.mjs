@@ -13,9 +13,9 @@ const ITEMS = [
   { id: "centerparcs", kind: "hotel", name: "🌲 סנטר פארקס אלגוי (3 לילות)", paid: 2520,
     params: { q: "Center Parcs Park Allgäu Leutkirch", check_in_date: "2027-04-23", check_out_date: "2027-04-26", match: ["center parcs", "allg"], room: /premium/i } },
   { id: "garmisch", kind: "hotel", name: "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)", paid: 1355,
-    params: { q: "Hotel Rheinischer Hof Garmisch-Partenkirchen", check_in_date: "2027-04-26", check_out_date: "2027-04-28", match: ["rheinischer"] } },
+    params: { q: "Hotel Rheinischer Hof Garmisch-Partenkirchen", check_in_date: "2027-04-26", check_out_date: "2027-04-28", match: ["rheinischer"], room: /famil/i, family: true } },
   { id: "atomis", kind: "hotel", name: "🛏️ מלון Atomis ליד שדה התעופה (לילה)", paid: 643,
-    params: { q: "Atomis Hotel Munich Airport", check_in_date: "2027-04-28", check_out_date: "2027-04-29", match: ["atomis"] } }
+    params: { q: "Atomis Hotel Munich Airport", check_in_date: "2027-04-28", check_out_date: "2027-04-29", match: ["atomis"], room: /famil/i, family: true } }
 ];
 
 async function serp(params) {
@@ -83,19 +83,20 @@ function hotelTotal(h, p) {
   return nightly.length ? Math.min(...nightly) * n : null;
 }
 
-// A regular hotel room rarely fits 2 adults + 3 kids, so Google may show no price for the whole party.
-// Then retry with smaller occupancies (as if booking two rooms / a family room).
+// We booked family rooms. Google prices one room for the given party: for 2 adults + 3 kids it often has
+// no room at all, so we retry with 2 adults + 2 kids (the 3-year-old usually shares a bed) — a room that
+// fits 4 is a family room. A room type named "Family…" is preferred when Google lists room types.
 const PARTIES = [
-  { label: "", q: { adults: 2, children: 3, children_ages: "3,7,10" } },
-  { label: "מחיר לחדר משפחתי ל־2 מבוגרים + 2 ילדים", q: { adults: 2, children: 2, children_ages: "7,10" } },
-  { label: "מחיר לחדר ל־2 מבוגרים", q: { adults: 2 } }
+  { label: "חדר משפחתי ל־5", q: { adults: 2, children: 3, children_ages: "3,7,10" } },
+  { label: "חדר משפחתי (מחיר ל־2 מבוגרים + 2 ילדים)", q: { adults: 2, children: 2, children_ages: "7,10" } }
 ];
 async function hotelPrice(p) {
   let lastErr;
-  for (const party of p.room ? PARTIES.slice(0, 1) : PARTIES) {
+  for (const party of p.family ? PARTIES : PARTIES.slice(0, 1)) {
     try {
       const r = await hotelPriceFor(p, party.q);
-      if (party.label) { r.fare = party.label; console.log("  priced with smaller party:", JSON.stringify(party.q)); }
+      if (p.family && !r.room) r.fare = party.label;
+      console.log("  priced for", JSON.stringify(party.q));
       return r;
     } catch (e) { lastErr = e; }
   }
@@ -113,7 +114,7 @@ async function hotelPriceFor(p, party) {
       .filter(r => p.room.test(r.name || "") && Number.isFinite(r.price)).sort((a, b) => a.price - b.price)[0];
     if (wanted) return { price: wanted.price, exact: true, room: wanted.name, link: h.link || j.search_metadata?.google_hotels_url };
     const price = hotelTotal(h, p);
-    if (price) return { price, exact: false, link: h.link || j.search_metadata?.google_hotels_url };
+    if (price) return { price, exact: !!p.family, link: h.link || j.search_metadata?.google_hotels_url };
   }
   const price = hotelTotal(h, p);
   if (!price) {
