@@ -290,6 +290,18 @@ dialog.tool-dlg::backdrop{background:rgba(10,20,22,.55);backdrop-filter:blur(2px
 .cam-cap b{display:block;font-size:.88rem}
 .cam-cap small{color:var(--muted);font-size:.74rem}
 @media (max-width:860px){ .cams{grid-template-columns:repeat(2,minmax(0,1fr))} }
+/* compact tools toolbar */
+.tools-bar{display:inline-flex;align-items:stretch;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.tool{font:inherit;display:flex;align-items:center;gap:6px;padding:7px 14px;border:none;background:none;color:var(--ink);cursor:pointer;font-size:.82rem;font-weight:500;white-space:nowrap}
+.tool+.tool{border-inline-start:1px solid var(--line)}
+.tool .ic{font-size:1rem;line-height:1}
+.tool:hover{background:color-mix(in srgb,var(--brand) 9%,transparent);color:var(--brand)}
+.tool[disabled]{opacity:.6;cursor:wait}
+@media (max-width:480px){
+  .tools-bar{display:grid;grid-template-columns:repeat(4,1fr);width:100%;max-width:360px}
+  .tool{flex-direction:column;gap:2px;padding:7px 4px;font-size:.72rem}
+  .tool .ic{font-size:1.05rem}
+}
 /* back to top */
 .to-top{position:fixed;left:16px;bottom:18px;z-index:1100;width:46px;height:46px;border-radius:50%;border:none;cursor:pointer;
   background:var(--brand);color:#fff;font-size:1.35rem;line-height:1;box-shadow:0 6px 18px rgba(0,0,0,.25);
@@ -498,11 +510,13 @@ footer a{color:var(--muted)}
   <div class="ticker" aria-label="עדכונים חיים"><div class="track" id="tickerTrack"></div></div>
 </nav>
 
-<div class="actions" role="toolbar" aria-label="שיתוף וייצוא">
-  <button class="act-btn primary" id="shareBtn" type="button">📤 שתף את המסלול</button>
-  <button class="act-btn" id="pdfBtn" type="button">📄 שמור כ־PDF</button>
-  <button class="act-btn" id="parkBtn" type="button">🚗 איפה חנינו?</button>
-  <button class="act-btn" id="fuelBtn" type="button">⛽ תחנת דלק קרובה</button>
+<div class="actions" role="toolbar" aria-label="כלים">
+  <div class="tools-bar">
+    <button class="tool" id="shareBtn" type="button" title="שתף את המסלול"><span class="ic">📤</span><span class="lb">שיתוף</span></button>
+    <button class="tool" id="pdfBtn" type="button" title="שמור כ־PDF"><span class="ic">📄</span><span class="lb">PDF</span></button>
+    <button class="tool" id="parkBtn" type="button" title="איפה חנינו?"><span class="ic">🚗</span><span class="lb">חנייה</span></button>
+    <button class="tool" id="fuelBtn" type="button" title="תחנת דלק קרובה"><span class="ic">⛽</span><span class="lb">דלק</span></button>
+  </div>
 </div>
 
 <dialog class="tool-dlg" id="parkDlg" aria-label="איפה חנינו">
@@ -1306,9 +1320,9 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   }
   var pdfBtn = document.getElementById("pdfBtn");
   pdfBtn.addEventListener("click", function(){
-    pdfBtn.disabled = true; pdfBtn.textContent = "⏳ מכין PDF…";
+    pdfBtn.disabled = true; pdfBtn.querySelector(".lb").textContent = "מכין…";
     loadAllImages(4000).then(function(){
-      pdfBtn.disabled = false; pdfBtn.textContent = "📄 שמור כ־PDF";
+      pdfBtn.disabled = false; pdfBtn.querySelector(".lb").textContent = "PDF";
       toast("בחלון ההדפסה בחרו \"שמירה כ־PDF\"");
       setTimeout(function(){ window.print(); }, 300);
     });
