@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+      RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
