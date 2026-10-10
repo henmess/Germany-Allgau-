@@ -39,18 +39,12 @@
       "link": "http://www.rheinischerhof-garmisch.de/"
     },
     "atomis": {
-      "history": [
-        {
-          "d": "2026-10-10",
-          "p": 371
-        }
-      ],
+      "history": [],
       "name": "🛏️ מלון Atomis ליד שדה התעופה (לילה)",
       "paid": 643,
       "exact": true,
-      "fare": "מחיר לחדר ל־2 מבוגרים",
       "link": "https://www.google.com/travel/search?q=Atomis+Hotel+Munich+Airport&hl=en&gl=il",
-      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
+      "error": "no family-room price on Google yet"
     }
   },
   "checked": "2026-10-10T06:48:24.271Z"
