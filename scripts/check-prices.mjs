@@ -83,9 +83,26 @@ function hotelTotal(h, p) {
   return nightly.length ? Math.min(...nightly) * n : null;
 }
 
+// A regular hotel room rarely fits 2 adults + 3 kids, so Google may show no price for the whole party.
+// Then retry with smaller occupancies (as if booking two rooms / a family room).
+const PARTIES = [
+  { label: "", q: { adults: 2, children: 3, children_ages: "3,7,10" } },
+  { label: "מחיר לחדר משפחתי ל־2 מבוגרים + 2 ילדים", q: { adults: 2, children: 2, children_ages: "7,10" } },
+  { label: "מחיר לחדר ל־2 מבוגרים", q: { adults: 2 } }
+];
 async function hotelPrice(p) {
-  const j = await serp({ engine: "google_hotels", q: p.q, check_in_date: p.check_in_date, check_out_date: p.check_out_date,
-    adults: PARTY.adults, children: PARTY.children, children_ages: PARTY.ages });
+  let lastErr;
+  for (const party of p.room ? PARTIES.slice(0, 1) : PARTIES) {
+    try {
+      const r = await hotelPriceFor(p, party.q);
+      if (party.label) { r.fare = party.label; console.log("  priced with smaller party:", JSON.stringify(party.q)); }
+      return r;
+    } catch (e) { lastErr = e; }
+  }
+  throw lastErr;
+}
+async function hotelPriceFor(p, party) {
+  const j = await serp({ engine: "google_hotels", q: p.q, check_in_date: p.check_in_date, check_out_date: p.check_out_date, ...party });
   const matches = h => p.match.every(m => (h?.name || "").toLowerCase().includes(m));
   let h = j.name && matches(j) ? j : (j.properties || []).find(matches);
   if (p.room && h) {
