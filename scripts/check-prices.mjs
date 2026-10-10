@@ -11,7 +11,7 @@ const ITEMS = [
   { id: "flights", kind: "flight", name: "✈️ טיסות אל על LY353 / LY354", paid: 8760,
     params: { departure_id: "TLV", arrival_id: "MUC", outbound_date: "2027-04-23", return_date: "2027-04-29", flight: "LY 353" } },
   { id: "centerparcs", kind: "hotel", name: "🌲 סנטר פארקס אלגוי (3 לילות)", paid: 2520,
-    params: { q: "Center Parcs Park Allgäu Leutkirch", check_in_date: "2027-04-23", check_out_date: "2027-04-26", match: ["center parcs", "allg"] } },
+    params: { q: "Center Parcs Park Allgäu Leutkirch", check_in_date: "2027-04-23", check_out_date: "2027-04-26", match: ["center parcs", "allg"], room: /premium/i } },
   { id: "garmisch", kind: "hotel", name: "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)", paid: 1355,
     params: { q: "Hotel Rheinischer Hof Garmisch-Partenkirchen", check_in_date: "2027-04-26", check_out_date: "2027-04-28", match: ["rheinischer"] } },
   { id: "atomis", kind: "hotel", name: "🛏️ מלון Atomis ליד שדה התעופה (לילה)", paid: 643,
@@ -23,7 +23,7 @@ async function serp(params) {
   for (const [k, v] of Object.entries({ ...params, currency: "ILS", hl: "en", gl: "il", api_key: KEY })) u.searchParams.set(k, v);
   const r = await fetch(u);
   const j = await r.json();
-  if (!r.ok || j.error) throw new Error(j.error || "HTTP " + r.status);
+  if (!r.ok || (j.error && !/hasn't returned any results/i.test(j.error))) throw new Error(j.error || "HTTP " + r.status);
   return j;
 }
 
@@ -52,6 +52,16 @@ async function hotelPrice(p) {
     adults: PARTY.adults, children: PARTY.children, children_ages: PARTY.ages });
   const matches = h => p.match.every(m => (h?.name || "").toLowerCase().includes(m));
   let h = j.name && matches(j) ? j : (j.properties || []).find(matches);
+  if (p.room && h) {
+    // Google lists room types per booking site; pick the cheapest offer for the wanted room
+    const n = nightsOf(p), rooms = [...(h.featured_prices || []), ...(h.prices || [])].flatMap(o => (o.rooms || []).map(r => ({ ...r, source: o.source })));
+    console.log("  room types:", [...new Set(rooms.map(r => r.name))].join(" | ") || "(none listed)");
+    const wanted = rooms.map(r => ({ name: r.name, price: r.total_rate?.extracted_lowest ?? (r.rate_per_night?.extracted_lowest ?? r.extracted_price) * n }))
+      .filter(r => p.room.test(r.name || "") && Number.isFinite(r.price)).sort((a, b) => a.price - b.price)[0];
+    if (wanted) return { price: wanted.price, exact: true, room: wanted.name, link: h.link || j.search_metadata?.google_hotels_url };
+    const price = hotelTotal(h, p);
+    if (price) return { price, exact: false, link: h.link || j.search_metadata?.google_hotels_url };
+  }
   const price = hotelTotal(h, p);
   if (!price) {
     // debug: show what the response looked like so the lookup can be adjusted
@@ -81,6 +91,7 @@ for (const it of ITEMS) {
     rec.history.push({ d: today, p: Math.round(r.price) });
     rec.history = rec.history.slice(-120);
     rec.exact = r.exact;
+    if (r.room) rec.room = r.room; else delete rec.room;
     if (r.link) rec.link = r.link;
     delete rec.error;
     ok++;

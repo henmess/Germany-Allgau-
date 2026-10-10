@@ -341,8 +341,6 @@ dialog.tool-dlg::backdrop{background:rgba(10,20,22,.55);backdrop-filter:blur(2px
 .shop .tag{color:var(--stay-allgau);background:color-mix(in srgb,var(--stay-allgau) 16%,transparent)}
 
 /* ---------- costs ---------- */
-.price-track{margin-top:18px}
-.price-track .pt-sub{margin:-6px 0 12px;color:var(--muted);font-size:.85rem}
 .pt-list{display:grid;gap:8px}
 .pt-row{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:6px 14px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
 .pt-row .nm{font-weight:600;font-size:.92rem;min-width:0;overflow-wrap:anywhere}
@@ -353,7 +351,7 @@ dialog.tool-dlg::backdrop{background:rgba(10,20,22,.55);backdrop-filter:blur(2px
 .pt-row svg{display:block;width:84px;height:28px}
 .pt-row a{font-size:.78rem;color:var(--brand);text-decoration:none;white-space:nowrap}
 @media (max-width:480px){.pt-row{grid-template-columns:minmax(0,1fr) auto}.pt-row svg{grid-column:1;width:100%;max-width:160px}}
-@media print{.price-track{display:none}}
+@media print{#prices{display:none}}
 
 .cost-wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;align-items:start}
 .panel{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px 22px}
@@ -520,6 +518,7 @@ footer a{color:var(--muted)}
     <a href="#cams">📷 מצלמות</a>
     <a href="#open">✅ פתוח?</a>
     <a href="#costs">💰 עלויות</a>
+    <a href="#prices">📉 מחירים</a>
     <a href="#sos">🚨 חירום</a>
     <a href="#tips">טיפים</a>
   </div>
@@ -996,9 +995,12 @@ footer a{color:var(--muted)}
       </div>
     </div>
   </div>
+</section>
+
+<section id="prices">
+  <h2 class="sec">📉 מעקב מחירים</h2>
+  <p class="sec-sub" id="ptSub">⏳ טוען…</p>
   <div class="panel price-track" id="priceTrack">
-    <h3>📉 מעקב מחירים</h3>
-    <p class="pt-sub" id="ptSub">⏳ טוען…</p>
     <div class="pt-list" id="ptList"></div>
   </div>
 </section>
@@ -1924,7 +1926,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
       var it = items[id]; if (!it) return;
       var h = it.history || [], last = h[h.length - 1], prev = h[h.length - 2];
       var link = it.link ? '<a href="' + it.link.replace(/"/g, "&quot;") + '" target="_blank" rel="noopener">בדוק ↗</a>' : '';
-      var nm = '<div class="nm">' + it.name + '<small>שילמנו ' + ils(it.paid) + (last ? ' · נבדק ב־' + dm(last.d) : '') + (it.exact === false ? ' · מחיר הטיסה הקרובה של אל על' : '') + (it.error && !last ? ' · לא נמצא מחיר בבדיקה האחרונה' : '') + ' ' + link + '</small></div>';
+      var nm = '<div class="nm">' + it.name + '<small>שילמנו ' + ils(it.paid) + (last ? ' · נבדק ב־' + dm(last.d) : '') + (it.room ? ' · ' + it.room : '') + (it.exact === false ? (id === 'flights' ? ' · מחיר הטיסה הקרובה של אל על' : ' · לא נמצאה בקתת פרימיום, מוצג המחיר הזול ביותר') : '') + (it.error && !last ? ' · לא נמצא מחיר בבדיקה האחרונה' : '') + ' ' + link + '</small></div>';
       if (!last){ rows += '<div class="pt-row">' + nm + '<div class="now same">—</div></div>'; return; }
       rows += '<div class="pt-row">' + nm + spark(h, it.paid) +
         '<div class="now">' + ils(last.p) + '<small>' + (prev ? 'מהבדיקה הקודמת: ' + diff(last.p, prev.p) + '<br>' : '') + 'מול מה ששילמנו: ' + diff(last.p, it.paid) + '</small></div></div>';
