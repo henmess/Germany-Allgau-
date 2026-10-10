@@ -6,5 +6,6 @@
 |---|---|
 | `rheinischer-hof.jpg` | Hotel Rheinischer Hof, גרמיש |
 | `atomis.jpg` | Atomis Hotel Munich Airport |
+| `aqua-mundo.jpg` | Aqua Mundo, סנטר פארקס אלגוי (כרטיס הלינה, יום שישי, הריבוע במפה) |
 
 כל עוד הקבצים לא קיימים, מוצגת תמונה כללית של האזור (בכרטיס הלינה) או ריבוע צבעוני עם 🛏️ (במפה).
