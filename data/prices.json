@@ -1,3 +1,35 @@
 {
-  "items": {}
+  "items": {
+    "flights": {
+      "history": [
+        {
+          "d": "2026-10-10",
+          "p": 18661
+        }
+      ],
+      "name": "✈️ טיסות אל על LY353 / LY354",
+      "paid": 8760,
+      "exact": true,
+      "link": "https://www.google.com/travel/flights?hl=en&gl=il&curr=ILS&tfs=CBwQAhoiEgoyMDI3LTA0LTIzMgJMWWoHCAESA1RMVnIHCAESA01VQxoiEgoyMDI3LTA0LTI5MgJMWWoHCAESA01VQ3IHCAESA1RMVkABQAFAAkACQAJIAXABmAEB&tfu=EgIIAQ"
+    },
+    "centerparcs": {
+      "history": [],
+      "name": "🌲 סנטר פארקס אלגוי (3 לילות)",
+      "paid": 2520,
+      "error": "hotel found but no price"
+    },
+    "garmisch": {
+      "history": [],
+      "name": "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)",
+      "paid": 1355,
+      "error": "hotel found but no price"
+    },
+    "atomis": {
+      "history": [],
+      "name": "🛏️ מלון Atomis ליד שדה התעופה (לילה)",
+      "paid": 643,
+      "error": "hotel found but no price"
+    }
+  },
+  "checked": "2026-10-10T05:53:14.583Z"
 }
