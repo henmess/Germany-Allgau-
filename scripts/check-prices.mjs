@@ -9,7 +9,7 @@ const PARTY = { adults: 2, children: 3, ages: "3,7,10" };
 
 const ITEMS = [
   { id: "flights", kind: "flight", name: "✈️ טיסות אל על LY353 / LY354", paid: 8760,
-    params: { departure_id: "TLV", arrival_id: "MUC", outbound_date: "2027-04-23", return_date: "2027-04-29", flight: "LY 353" } },
+    params: { departure_id: "TLV", arrival_id: "MUC", outbound_date: "2027-04-23", return_date: "2027-04-29", flight: "LY 353", back: "LY 354" } },
   { id: "centerparcs", kind: "hotel", name: "🌲 סנטר פארקס אלגוי (3 לילות)", paid: 2520,
     params: { q: "Center Parcs Park Allgäu Leutkirch", check_in_date: "2027-04-23", check_out_date: "2027-04-26", match: ["center parcs", "allg"], room: /premium/i } },
   { id: "garmisch", kind: "hotel", name: "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)", paid: 1355,
@@ -27,14 +27,67 @@ async function serp(params) {
   return j;
 }
 
+const norm = x => (x || "").replace(/\s/g, "").toUpperCase();
+const hasFlight = (o, fn) => (o.flights || []).some(f => norm(f.flight_number) === norm(fn));
+
+// Our booking: 2 "Classic" + 3 "Lite" tickets. Google prices every fare for the whole party,
+// so the mix is estimated as 2/5 of the Classic total + 3/5 of the Lite total.
 async function flightPrice(p) {
-  const j = await serp({ engine: "google_flights", type: 1, departure_id: p.departure_id, arrival_id: p.arrival_id,
-    outbound_date: p.outbound_date, return_date: p.return_date, adults: PARTY.adults, children: PARTY.children, include_airlines: "LY" });
+  const base = { engine: "google_flights", type: 1, departure_id: p.departure_id, arrival_id: p.arrival_id,
+    outbound_date: p.outbound_date, return_date: p.return_date, adults: PARTY.adults, children: PARTY.children, include_airlines: "LY" };
+  const j = await serp(base);
+  const link = j.search_metadata?.google_flights_url;
   const all = [...(j.best_flights || []), ...(j.other_flights || [])];
-  const ours = all.find(o => (o.flights || []).some(f => (f.flight_number || "").replace(/\s/g, "") === p.flight.replace(/\s/g, "")));
+  const ours = all.find(o => hasFlight(o, p.flight));
   const pick = ours || all.filter(o => o.price).sort((a, b) => a.price - b.price)[0];
   if (!pick || !pick.price) throw new Error("no LY flight price in results");
-  return { price: pick.price, exact: !!ours, link: j.search_metadata?.google_flights_url };
+  const fallback = { price: pick.price, exact: false, fare: "המחיר הזול ביותר (כנראה לייט לכולם)", link };
+  if (!ours || !ours.departure_token) return fallback;
+  try {
+    // step 2: return flights for our outbound -> booking_token of LY354
+    const j2 = await serp({ ...base, departure_token: ours.departure_token });
+    const rets = [...(j2.best_flights || []), ...(j2.other_flights || [])];
+    const back = rets.find(o => hasFlight(o, p.back)) || rets[0];
+    if (!back?.booking_token) { console.log("  no booking_token for return"); return fallback; }
+    // step 3: booking options = fare brands (Lite / Classic / Flex …)
+    const j3 = await serp({ ...base, booking_token: back.booking_token });
+    const opts = (j3.booking_options || []).map(b => b.together || b.departing || {}).filter(o => Number.isFinite(o.price));
+    console.log("  fare options:", opts.map(o => `${o.book_with || "?"}: ${o.option_title || "-"} = ${o.price}`).join(" | ") || "(none)");
+    const pickFare = re => opts.filter(o => re.test(o.option_title || "")).sort((a, b) => a.price - b.price)[0];
+    const lite = pickFare(/lite|light|basic/i), classic = pickFare(/classic|standard/i);
+    if (lite && classic) {
+      const n = PARTY.adults + PARTY.children;
+      return { price: Math.round(classic.price * 2 / n + lite.price * 3 / n), exact: true, fare: "2 קלאסיק + 3 לייט",
+        fares: { classic: classic.price, lite: lite.price }, link };
+    }
+    const cheapest = opts.sort((a, b) => a.price - b.price)[0];
+    return cheapest ? { ...fallback, price: cheapest.price, exact: true } : fallback;
+  } catch (e) {
+    console.log("  fare lookup failed:", e.message);
+    return fallback;
+  }
+}
+
+// Fallback for hotels Google shows without a price: Xotelo (free, no key; rates from Booking.com & co.)
+async function xotelo(p) {
+  const get = async u => { const r = await fetch(u); const j = await r.json(); if (j.error) throw new Error(JSON.stringify(j.error)); return j.result; };
+  const found = await get("https://data.xotelo.com/api/search?query=" + encodeURIComponent(p.xq || p.q));
+  const list = found?.list || [];
+  console.log("  xotelo search:", list.slice(0, 4).map(x => `${x.name} [${x.hotel_key}]`).join(" | ") || "(none)");
+  const hit = list.find(x => p.match.every(m => (x.name || "").toLowerCase().includes(m)));
+  if (!hit) throw new Error("xotelo: hotel not found");
+  const res = await get(`https://data.xotelo.com/api/rates?hotel_key=${hit.hotel_key}&chk_in=${p.check_in_date}&chk_out=${p.check_out_date}&currency=ILS&adults=2&rooms=1`);
+  const rates = (res?.rates || []).filter(r => Number.isFinite(r.rate));
+  console.log("  xotelo rates (" + (res?.currency || "?") + "):", rates.map(r => `${r.name}: ${r.rate}+${r.tax || 0}`).join(" | ") || "(none)");
+  const booking = rates.find(r => /booking/i.test(r.name || r.code || ""));
+  const best = booking || rates.sort((a, b) => a.rate - b.rate)[0];
+  if (!best) throw new Error("xotelo: no rates");
+  let total = (best.rate + (best.tax || 0)) * nightsOf(p);
+  if (res.currency && res.currency !== "ILS") {
+    const fx = await (await fetch("https://open.er-api.com/v6/latest/" + res.currency)).json();
+    total *= fx.rates.ILS;
+  }
+  return { price: total, exact: true, via: best.name || "Booking.com" };
 }
 
 function nightsOf(p) { return Math.round((new Date(p.check_out_date) - new Date(p.check_in_date)) / 86400000); }
@@ -86,12 +139,17 @@ for (const it of ITEMS) {
   const rec = data.items[it.id] ||= { history: [] };
   Object.assign(rec, { name: it.name, paid: it.paid });
   try {
-    const r = it.kind === "flight" ? await flightPrice(it.params) : await hotelPrice(it.params);
+    let r;
+    if (it.kind === "flight") r = await flightPrice(it.params);
+    else {
+      try { r = await hotelPrice(it.params); }
+      catch (e) { console.log("  google:", e.message, "-> trying Xotelo"); r = { ...(await xotelo(it.params)), link: undefined }; }
+    }
     rec.history = rec.history.filter(h => h.d !== today);
     rec.history.push({ d: today, p: Math.round(r.price) });
     rec.history = rec.history.slice(-120);
     rec.exact = r.exact;
-    if (r.room) rec.room = r.room; else delete rec.room;
+    for (const k of ["room", "fare", "fares", "via"]) { if (r[k]) rec[k] = r[k]; else delete rec[k]; }
     if (r.link) rec.link = r.link;
     delete rec.error;
     ok++;

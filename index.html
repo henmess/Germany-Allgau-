@@ -1926,7 +1926,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
       var it = items[id]; if (!it) return;
       var h = it.history || [], last = h[h.length - 1], prev = h[h.length - 2];
       var link = it.link ? '<a href="' + it.link.replace(/"/g, "&quot;") + '" target="_blank" rel="noopener">בדוק ↗</a>' : '';
-      var nm = '<div class="nm">' + it.name + '<small>שילמנו ' + ils(it.paid) + (last ? ' · נבדק ב־' + dm(last.d) : '') + (it.room ? ' · ' + it.room : '') + (it.exact === false ? (id === 'flights' ? ' · מחיר הטיסה הקרובה של אל על' : ' · לא נמצאה בקתת פרימיום, מוצג המחיר הזול ביותר') : '') + (it.error && !last ? ' · לא נמצא מחיר בבדיקה האחרונה' : '') + ' ' + link + '</small></div>';
+      var nm = '<div class="nm">' + it.name + '<small>שילמנו ' + ils(it.paid) + (last ? ' · נבדק ב־' + dm(last.d) : '') + (it.room ? ' · ' + it.room : '') + (it.fare ? ' · ' + it.fare : '') + (it.fares ? ' (קלאסיק ' + ils(it.fares.classic) + ' / לייט ' + ils(it.fares.lite) + ' לכל המשפחה)' : '') + (it.via ? ' · מחיר מ־' + it.via : '') + (it.exact === false && !it.fare ? (id === 'flights' ? ' · מחיר הטיסה הקרובה של אל על' : ' · לא נמצאה בקתת פרימיום, מוצג המחיר הזול ביותר') : '') + (it.error && !last ? ' · לא נמצא מחיר בבדיקה האחרונה' : '') + ' ' + link + '</small></div>';
       if (!last){ rows += '<div class="pt-row">' + nm + '<div class="now same">—</div></div>'; return; }
       rows += '<div class="pt-row">' + nm + spark(h, it.paid) +
         '<div class="now">' + ils(last.p) + '<small>' + (prev ? 'מהבדיקה הקודמת: ' + diff(last.p, prev.p) + '<br>' : '') + 'מול מה ששילמנו: ' + diff(last.p, it.paid) + '</small></div></div>';
@@ -1934,7 +1934,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
     });
     list.innerHTML = rows;
     sub.textContent = data && data.checked
-      ? "המחירים נבדקים אוטומטית כל יומיים ב־Google Flights וב־Google Hotels, ל־2 מבוגרים ו־3 ילדים. בדיקה אחרונה: " + new Date(data.checked).toLocaleString("he-IL", { day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" }) + ". ▼ ירוק = זול יותר, ▲ אדום = יקר יותר."
+      ? "המחירים נבדקים אוטומטית כל יומיים ב־Google Flights וב־Google Hotels (ואם שם אין מחיר, דרך Booking.com), ל־2 מבוגרים ו־3 ילדים. בדיקה אחרונה: " + new Date(data.checked).toLocaleString("he-IL", { day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" }) + ". ▼ ירוק = זול יותר, ▲ אדום = יקר יותר."
       : "המעקב האוטומטי יתחיל אחרי שנחבר את מפתח SerpApi. מעכשיו המחירים ייבדקו כל יומיים.";
     window.PRICE_DROPS = drops;
     if (drops.length && window.TRIP_TICKER) window.TRIP_TICKER();
