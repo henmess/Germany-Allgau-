@@ -26,17 +26,31 @@
       "link": "https://www.centerparcs.de/de-de/deutschland/fp_AG_ferienpark-park-allgaeu"
     },
     "garmisch": {
-      "history": [],
+      "history": [
+        {
+          "d": "2026-10-10",
+          "p": 1399
+        }
+      ],
       "name": "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)",
       "paid": 1355,
-      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
+      "exact": true,
+      "fare": "מחיר לחדר משפחתי ל־2 מבוגרים + 2 ילדים",
+      "link": "http://www.rheinischerhof-garmisch.de/"
     },
     "atomis": {
-      "history": [],
+      "history": [
+        {
+          "d": "2026-10-10",
+          "p": 371
+        }
+      ],
       "name": "🛏️ מלון Atomis ליד שדה התעופה (לילה)",
       "paid": 643,
-      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
+      "exact": true,
+      "fare": "מחיר לחדר ל־2 מבוגרים",
+      "link": "https://www.google.com/travel/search?q=Atomis+Hotel+Munich+Airport&hl=en&gl=il"
     }
   },
-  "checked": "2026-10-10T06:07:39.143Z"
+  "checked": "2026-10-10T06:34:33.101Z"
 }
