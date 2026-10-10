@@ -157,6 +157,8 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 .wx-badge .i{font-size:1.5rem}
 .wx-badge b{display:block;font-size:.98rem}
 .wx-badge small{display:block;font-size:.68rem;opacity:.85}
+.wx-badge .sun{display:block;margin-top:3px;padding-top:3px;border-top:1px solid rgba(255,255,255,.22);font-size:.7rem;opacity:.95;white-space:nowrap}
+.wx-badge .sun em{font-style:normal;color:#ffd98a}
 
 .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
 .chip{display:inline-flex;align-items:center;gap:6px;font-size:.86rem;padding:5px 12px;border-radius:99px;background:var(--bg);border:1px solid var(--line)}
@@ -1510,6 +1512,35 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   function ils(n){ return "₪" + Math.round(n).toLocaleString("he-IL"); }
   function eur(n){ return "€" + (Math.round(n * 10) / 10).toLocaleString("he-IL"); }
 
+  /* sunrise / sunset (NOAA formula, computed locally — works offline) */
+  var SUN_DATES = { 1:"2027-04-23", 2:"2027-04-24", 3:"2027-04-25", 4:"2027-04-26", 5:"2027-04-27", 6:"2027-04-28", 7:"2027-04-29" };
+  function sunTimes(dateStr, lat, lon){
+    var rad = Math.PI / 180, p = dateStr.split("-");
+    var noonUTC = Date.UTC(+p[0], +p[1] - 1, +p[2], 12);
+    var n = noonUTC / 86400000 + 2440587.5 - 2451545.0 + 0.0008;
+    var J = n - lon / 360;
+    var M = (357.5291 + 0.98560028 * J) % 360;
+    var C = 1.9148 * Math.sin(M*rad) + 0.02 * Math.sin(2*M*rad) + 0.0003 * Math.sin(3*M*rad);
+    var L = (M + C + 180 + 102.9372) % 360;
+    var Jt = 2451545.0 + J + 0.0053 * Math.sin(M*rad) - 0.0069 * Math.sin(2*L*rad);
+    var dec = Math.asin(Math.sin(L*rad) * Math.sin(23.4397*rad));
+    var cosw = (Math.sin(-0.833*rad) - Math.sin(lat*rad) * Math.sin(dec)) / (Math.cos(lat*rad) * Math.cos(dec));
+    var w = Math.acos(cosw) / rad;
+    var toDate = function(jd){ return new Date((jd - 2440587.5) * 86400000); };
+    return { rise: toDate(Jt - w / 360), set: toDate(Jt + w / 360) };
+  }
+  function hm(dt){ return dt.toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone: "Europe/Berlin" }); }
+  function sunLine(d, day){
+    var t = sunTimes(SUN_DATES[d], day.lat, day.lon), now = new Date(), extra = "";
+    var mins = Math.round((t.set - t.rise) / 60000);
+    if (now >= t.rise - 6*3600000 && now < t.set){
+      var left = now < t.rise ? t.rise - now : t.set - now, h = Math.floor(left / 3600000), m = Math.round(left % 3600000 / 60000);
+      extra = ' · <em>' + (now < t.rise ? 'זריחה' : 'שקיעה') + ' בעוד ' + (h ? h + ' ש׳ ' : '') + m + ' דק׳</em>';
+    }
+    return '<span class="sun" title="אור יום: ' + Math.floor(mins/60) + ' ש׳ ' + (mins%60) + ' דק׳">🌅 <bdi dir="ltr">' + hm(t.rise) + '</bdi> · 🌇 <bdi dir="ltr">' + hm(t.set) + '</bdi>' + extra + '</span>';
+  }
+  window.TRIP_SUN = sunTimes;
+
   function calc(){
     var a = num("inAdults",2), k = num("inKids",2), s = num("inSmall",1);
     var rate = num("inRate",3.8), fuel = num("inFuel",1.7), cons = num("inCons",6.3);
@@ -1544,7 +1575,7 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
           var wb = head.querySelector('.wx-badge');
           if (!wb){ wb = document.createElement('div'); wb.className = 'wx-badge'; head.appendChild(wb); }
           var parts = day.wx.split(' '), ic = parts.shift();
-          wb.innerHTML = '<span class="i">' + ic + '</span><span><b><bdi dir="ltr">' + parts.join(' ') + '</bdi></b><small>' + (day.fc ? 'תחזית' : 'ממוצע היסטורי') + ' · ' + day.place + '</small></span>';
+          wb.innerHTML = '<span class="i">' + ic + '</span><span><b><bdi dir="ltr">' + parts.join(' ') + '</bdi></b><small>' + (day.fc ? 'תחזית' : 'ממוצע היסטורי') + ' · ' + day.place + '</small>' + sunLine(d, day) + '</span>';
         }
       }
     });
@@ -1578,6 +1609,9 @@ document.querySelectorAll("dialog.menu-dlg").forEach(function(d){
   });
   window.TRIP = { DAYS: DAYS, calc: calc };
   calc();
+  /* during the trip, keep the sunrise/sunset countdown fresh */
+  var tripEnd = new Date("2027-04-29T23:59:00+02:00");
+  if (new Date() > new Date("2027-04-22T00:00:00+02:00") && new Date() < tripEnd) setInterval(calc, 60000);
 })();
 
 /* ---------- live data: euro rate, fuel price, weather + ticker ---------- */
