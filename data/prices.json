@@ -5,6 +5,10 @@
         {
           "d": "2026-10-10",
           "p": 18661
+        },
+        {
+          "d": "2026-10-11",
+          "p": 18661
         }
       ],
       "name": "✈️ טיסות אל על LY353 / LY354",
@@ -18,17 +22,26 @@
         {
           "d": "2026-10-10",
           "p": 6964
+        },
+        {
+          "d": "2026-10-11",
+          "p": 3369
         }
       ],
       "name": "🌲 סנטר פארקס אלגוי (3 לילות)",
       "paid": 2520,
-      "exact": false,
-      "link": "https://www.centerparcs.de/de-de/deutschland/fp_AG_ferienpark-park-allgaeu"
+      "exact": true,
+      "link": "https://www.centerparcs.de/de-de/deutschland/fp_AG_ferienpark-park-allgaeu",
+      "room": "Premium Cottage (6 adults)"
     },
     "garmisch": {
       "history": [
         {
           "d": "2026-10-10",
+          "p": 1476
+        },
+        {
+          "d": "2026-10-11",
           "p": 1476
         }
       ],
@@ -49,8 +62,9 @@
       "paid": 643,
       "exact": true,
       "link": "https://www.google.com/travel/search?q=Atomis+Hotel+Munich+Airport&hl=en&gl=il",
-      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר"
+      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר",
+      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     }
   },
-  "checked": "2026-10-10T06:51:54.202Z"
+  "checked": "2026-10-11T11:24:09.699Z"
 }
