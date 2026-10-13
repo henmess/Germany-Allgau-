@@ -9,6 +9,10 @@
         {
           "d": "2026-10-11",
           "p": 18661
+        },
+        {
+          "d": "2026-10-13",
+          "p": 18733
         }
       ],
       "name": "✈️ טיסות אל על LY353 / LY354",
@@ -26,13 +30,17 @@
         {
           "d": "2026-10-11",
           "p": 3369
+        },
+        {
+          "d": "2026-10-13",
+          "p": 4070
         }
       ],
       "name": "🌲 סנטר פארקס אלגוי (3 לילות)",
       "paid": 2520,
       "exact": true,
       "link": "https://www.centerparcs.de/de-de/deutschland/fp_AG_ferienpark-park-allgaeu",
-      "room": "Premium Cottage (6 adults)"
+      "room": "Premium Cottage (8 Adults)"
     },
     "garmisch": {
       "history": [
@@ -43,6 +51,10 @@
         {
           "d": "2026-10-11",
           "p": 1476
+        },
+        {
+          "d": "2026-10-13",
+          "p": 1480
         }
       ],
       "name": "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)",
@@ -56,15 +68,18 @@
         {
           "d": "2026-10-10",
           "p": 583
+        },
+        {
+          "d": "2026-10-13",
+          "p": 581
         }
       ],
       "name": "🛏️ מלון Atomis ליד שדה התעופה (לילה)",
       "paid": 643,
       "exact": true,
       "link": "https://www.google.com/travel/search?q=Atomis+Hotel+Munich+Airport&hl=en&gl=il",
-      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר",
-      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
+      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר"
     }
   },
-  "checked": "2026-10-11T11:24:09.699Z"
+  "checked": "2026-10-13T12:42:18.598Z"
 }
