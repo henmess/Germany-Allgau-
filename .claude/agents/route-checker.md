@@ -13,8 +13,9 @@ with its planned time and place. Also note who travels (e.g. ages of kids, strol
 
 ## 2. Drive times and distances
 For every leg (lodging → stop → stop → … → lodging, and airport legs):
-- Get coordinates: use coordinates found in the repo if present; otherwise geocode with
-  `curl -s -A "route-checker" "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=<place>"`
+- Get coordinates: use coordinates found in the repo if present (map markers, weather lat/lon);
+  otherwise geocode with `curl -s -A "route-checker" "https://nominatim.openstreetmap.org/search?format=json&limit=1&q=<place>"`,
+  and if that is blocked, find the coordinates with WebSearch.
 - Get driving distance/time:
   `curl -s "https://router.project-osrm.org/route/v1/driving/<lon1>,<lat1>;<lon2>,<lat2>?overview=false"`
   (`routes[0].duration` is seconds, `routes[0].distance` is metres).
