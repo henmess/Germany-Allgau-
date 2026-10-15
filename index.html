@@ -197,7 +197,7 @@ p.sec-sub{color:var(--muted);margin:0 0 24px}
 :root[data-theme="dark"] .bk.need .tg{color:#f19584} :root[data-theme="dark"] .bk.rec .tg{color:#f0c75a} :root[data-theme="dark"] .bk.no .tg{color:#7fd39a}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .bk.need .tg{color:#f19584} :root:not([data-theme="light"]) .bk.rec .tg{color:#f0c75a} :root:not([data-theme="light"]) .bk.no .tg{color:#7fd39a}}
 .hrs{display:block;margin-top:4px;font-size:.8rem;color:var(--ink)}
-.hrs b{font-weight:600;font-variant-numeric:tabular-nums}
+.hrs b{font-weight:600;font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
 .hrs em{font-style:normal;color:var(--muted)}
 .nopork{margin:10px 0 0;padding:8px 12px;border-radius:12px;font-size:.85rem;background:color-mix(in srgb,#2f8a4f 10%,var(--surface));border:1px solid color-mix(in srgb,#2f8a4f 30%,transparent)}
 /* stroller badges */
@@ -649,7 +649,7 @@ footer a{color:var(--muted)}
         <li class="drive"><time>11:00</time><div class="what">🚗 נסיעה מערבה בכבישים A92 ← A99 ← A96 לכיוון לויטקירך (כ־190 ק״מ, כשעתיים)</div></li>
         <li class="key"><time>13:00</time><div class="what"><b>🛒 קניות לבית בסופר ALDI SÜD לויטקירך</b><small>Künkelinstraße 9, Leutkirch, בערך 10 דקות מסנטר פארקס · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=ALDI+S%C3%9CD+K%C3%BCnkelinstra%C3%9Fe+9+Leutkirch">🗺️ גוגל מפות</a></small></div></li>
         <li class="drive"><time>13:45</time><div class="what">🚗 לסנטר פארקס (כ־10 דק׳)</div></li>
-        <li class="food"><time>14:00</time><div class="what"><b>🍔 צהריים בסנטר פארקס, במסעדת Rocket's בפארק המים<button class="menu-btn" type="button" data-menu="menu-day1">📋 תפריט</button></b><small>המבורגר, צ׳יפס, נאגטס וגלידה</small></div></li>
+        <li class="food"><time>14:00</time><div class="what"><b>🍔 צהריים בסנטר פארקס, במסעדת Rocket's בפארק המים<button class="menu-btn" type="button" data-menu="menu-day1">📋 תפריט</button></b><small>המבורגר בקר, צ׳יפס, נאגטס וגלידה</small></div></li>
         <li><time>14:45</time><div class="what"><b>🌊 פארק המים Aqua Mundo</b><small class="hrs">🕘 <b>10:00–20:00</b> <em>(בסופ״ש עד 21:00 · לפי מקורות לא רשמיים, לבדוק באפליקציה של סנטר פארקס)</em></small><small>מגלשות, בריכת גלים ומסלול מים גועשים באורך 165 מ׳. זה הזמן לפרוק אנרגיה אחרי הטיסה</small></div></li>
         <li class="key"><time>16:00</time><div class="what"><b>קבלת הבית בסנטר פארקס</b><small>את הבית מקבלים מ־16:00, אבל לפארק ולפארק המים אפשר להיכנס כבר מ־10:00 · Center Parcs Park Allgäu · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Center+Parcs+Park+Allg%C3%A4u+Leutkirch">🗺️ גוגל מפות</a></small></div></li>
       </ol>
@@ -693,7 +693,7 @@ footer a{color:var(--muted)}
         <li class="food"><time>13:00</time><div class="what"><b>🍽️ ארוחת צהריים בלינדאו ב־Gasthaus zum Sünfzen<button class="menu-btn" type="button" data-menu="menu-day2">📋 תפריט</button></b><small>Maximilianstraße 1, בלב האי · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Gasthaus+zum+S%C3%BCnfzen+Lindau">🗺️ גוגל מפות</a></small></div></li>
         <li class="key"><time>14:15</time><div class="what"><b>⛵ העיר העתיקה של לינדאו<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">שטוח, עם קצת אבני מרצפת</small><small>אי באגם בודן: הנמל עם האריה הבווארי והמגדלור, סמטאות ציוריות וגלידה על הטיילת · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Lindau+Hafen">🗺️ גוגל מפות</a></small></div></li>
         <li class="drive"><time>16:30</time><div class="what">🚗 חזרה לסנטר פארקס (כ־50 דק׳)</div></li>
-        <li class="key"><time>17:30</time><div class="what"><b>🌊 פארק המים Aqua Mundo</b><small>מגלשות, בריכת גלים ומסלול מים גועשים</small></div></li>
+        <li class="key"><time>17:30</time><div class="what"><b>🌊 פארק המים Aqua Mundo</b><small class="hrs">🕘 <b>10:00–21:00</b> <em>(בסופ״ש, לפי מקורות לא רשמיים, לבדוק באפליקציה)</em></small><small>מגלשות, בריכת גלים ומסלול מים גועשים</small></div></li>
       </ol>
       <div>
         <div class="gallery">
@@ -766,8 +766,8 @@ footer a{color:var(--muted)}
         <li><time>08:30</time><div class="what"><b>צ׳ק־אאוט מסנטר פארקס</b><small>להעמיס את הרכב לפני היציאה</small></div></li>
         <li class="drive"><time>09:00</time><div class="what">🚗 לגינצבורג בכביש A7 (כשעה)</div></li>
         <li class="key"><time>10:05</time><div class="what"><b>🧱 לגולנד גרמניה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">כל הפארק נגיש, ויש גם השכרת עגלות</small><small class="bk need"><span class="tg">🔴 נדרשת הזמנה מראש</span>הכרטיסים המוזלים נמכרים רק באונליין, לתאריך מסוים. בקופה המחיר גבוה בהרבה. כדאי להזמין גם חניה · <a href="https://www.legoland.de/en/tickets/day-tickets/buy-1-day-tickets" target="_blank" rel="noopener">לאתר (EN) ↗</a></small><small class="hrs">🕘 <b>10:00–18:00</b> · <em>המתקנים נסגרים כשעה לפני סגירת הפארק (בערך 17:00)</em></small><small>מגיעים כשהפארק נפתח. מינילנד, עולם נינג׳גו, ארץ הפיראטים, האבירים ועוד, יום כיף מלא · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=LEGOLAND+Deutschland+Resort+G%C3%BCnzburg">🗺️ גוגל מפות</a></small></div></li>
-        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Schnitzel Depot בתוך הפארק<button class="menu-btn" type="button" data-menu="menu-day4">📋 תפריט</button></b><small>יש גם ארוחות ילדים קבועות במסעדות האחרות של הפארק</small></div></li>
-        <li class="food"><time>16:45</time><div class="what"><b>🍕 ארוחת ערב קלה בפארק לפני היציאה<button class="menu-btn" type="button" data-menu="menu-day4">📋 תפריט</button></b><small>פיצה, פסטה או ארוחת ילדים. ככה אפשר לנסוע ישר למלון</small></div></li>
+        <li class="food"><time>13:00</time><div class="what"><b>🍽️ צהריים ב־Pizza Mania! בתוך הפארק<button class="menu-btn" type="button" data-menu="menu-day4">📋 תפריט</button></b><small>פיצה מרגריטה או ספגטי ברוטב עגבניות לילדים, בלי חזיר. באזור Imagination</small></div></li>
+        <li class="food"><time>16:45</time><div class="what"><b>🍕 ארוחת ערב קלה בפארק לפני היציאה<button class="menu-btn" type="button" data-menu="menu-day4">📋 תפריט</button></b><small>פיצה מרגריטה, פסטה ברוטב עגבניות או המבורגר בקר בלי בייקון. ככה אפשר לנסוע ישר למלון</small></div></li>
         <li class="drive"><time>17:30</time><div class="what">🚗 נסיעה לגרמיש-פרטנקירכן (כשעתיים ורבע). הקטנים כנראה יירדמו באוטו</div></li>
         <li class="key"><time>19:45</time><div class="what"><b>צ׳ק־אין ב־Hotel Rheinischer Hof</b><small><a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Hotel+Rheinischer+Hof+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
       </ol>
@@ -813,7 +813,7 @@ footer a{color:var(--muted)}
         <li class="drive"><time>15:15</time><div class="what">🚌 ירידה להוהנשוואנגאו: באוטובוס ההסעות מהתחנה שליד גשר מריה (כ־€2, כמה דקות), או ברגל כ־40 דק׳ בירידה סלולה עם העגלה</div></li>
         <li class="key"><time>15:30</time><div class="what"><b>🦢 אגם אלפזה (Alpsee) למרגלות הטירה<span class="pram ok">👶 מתאים לעגלה</span></b><small class="pn">טיילת שטוחה לאורך המים</small><small>ברבורים, מים צלולים ונוף לשתי הטירות. לפעמים אפשר לשכור סירות פדלים · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Alpsee+Hohenschwangau">🗺️ גוגל מפות</a></small></div></li>
         <li class="drive"><time>16:30</time><div class="what">🚗 חזרה לגרמיש (כשעה)</div></li>
-        <li class="food"><time>18:15</time><div class="what"><b>🍕 ארוחת ערב קלה: פיצה מ־Pizzeria Puoro<button class="menu-btn" type="button" data-menu="menu-dinner5">📋 תפריט</button></b><small>Schornstraße 9. אפשר לשבת במקום או לקחת למלון · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Pizzeria+Puoro+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
+        <li class="food"><time>18:15</time><div class="what"><b>🍕 ארוחת ערב קלה: פיצה מ־Pizzeria Colosseo<button class="menu-btn" type="button" data-menu="menu-dinner5">📋 תפריט</button></b><small>Klammstraße 7, פתוחה גם ביום שלישי. אפשר לשבת במקום או לקחת למלון · <a class="nav" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Pizzeria+Colosseo+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></small></div></li>
       </ol>
       <div>
         <div class="gallery">
@@ -1094,6 +1094,7 @@ footer a{color:var(--muted)}
     <div class="tipcard"><div class="ico">🌦️</div><h3>פתיחת העונה</h3><p>חלק מהאטרקציות (מגלשות הרים, רכבלים, מגלשות במים) נפתחות לפי מזג האוויר. כדאי לבדוק יום לפני.</p></div>
     <div class="tipcard"><div class="ico">🇦🇹</div><h3>יציאה לאוסטריה</h3><p>היילין 179 נמצא באוסטריה. בכבישים הרגילים דרך ארוואלד לא צריך ויניטה (מדבקת כבישים מהירים). לא להיכנס לאוטובאן האוסטרי בלי ויניטה.</p></div>
     <div class="tipcard"><div class="ico">🅿️</div><h3>חניה</h3><p>ברוב החניונים משלמים במטבעות או באפליקציה. כדאי להחזיק ברכב מטבעות של יורו.</p></div>
+    <div class="tipcard"><div class="ico">🚫🐷</div><h3>להזמין בלי חזיר ושרימפס</h3><p>„Schnitzel Wiener Art“ הוא כמעט תמיד מחזיר. שניצל עגל נקרא „vom Kalb“, עוף „Hähnchen“, הודו „Pute“. מילים שמשמען חזיר: Schwein, Speck, Schinken, Bacon, Salami, Wurst, Leberkäse, Maultaschen. שרימפס: Garnelen, Gambas, Scampi, Meeresfrüchte.<br><b>Wir essen kein Schweinefleisch und keine Garnelen.</b> (אנחנו לא אוכלים חזיר ושרימפס)<br><b>Ist das Schnitzel vom Schwein oder von der Pute?</b> (השניצל מחזיר או מהודו?)<br><b>Ist in der Soße Schweinefleisch?</b> (יש חזיר ברוטב?)</p></div>
     <div class="tipcard"><div class="ico">🛒</div><h3>יום ראשון סגור</h3><p>ביום ראשון 25.4 הסופרים בגרמניה סגורים. לכן קונים ביום שישי, בדרך לסנטר פארקס. בסופר שבתוך סנטר פארקס אפשר להשלים חוסרים.</p></div>
   </div>
 </section>
@@ -1106,15 +1107,17 @@ footer a{color:var(--muted)}
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
           <span class="tag">📋 תפריט צהריים</span>
           <h4>Rocket's, בתוך פארק המים</h4>
-          <p>מזנון בתוך Aqua Mundo, עם המבורגרים, צ׳יפס, סלטים וגלידה. אוכלים בלי לצאת מהמים.</p>
+          <p>מזנון בתוך Aqua Mundo: המבורגרים מבקר אירי, עוף פריך, צ׳יפס מסולסל ומילקשייק. אוכלים בלי לצאת מהמים. פתוח מהצהריים.</p>
           <table class="menu">
-            <tr><td>ארוחת ילדים: נאגטס עם צ׳יפס<i>Kids Menu: Chicken Nuggets mit Pommes</i></td><td class="pr">~€8</td></tr>
-            <tr><td>המבורגר ילדים עם צ׳יפס<i>Kids Burger mit Pommes</i></td><td class="pr">~€8.5</td></tr>
-            <tr><td>המבורגר למבוגרים<i>Burger</i></td><td class="pr">~€12</td></tr>
-            <tr><td>מנת צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€4.5</td></tr>
+            <tr><td>נאגטס עוף עם צ׳יפס<i>Chicken Nuggets mit Pommes</i></td><td class="pr">~€6</td></tr>
+            <tr><td>המבורגר בקר לילדים<i>Kinder-Hamburger (Rind)</i></td><td class="pr">~€8.5</td></tr>
+            <tr><td>עוף פריך<i>Buttermilk Chicken</i></td><td class="pr">~€10</td></tr>
+            <tr><td>המבורגר בקר למבוגרים, בלי בייקון<i>Burger ohne Bacon</i></td><td class="pr">~€13</td></tr>
+            <tr><td>צ׳יפס מסולסל<i>Curly Fries</i></td><td class="pr">~€4.5</td></tr>
             <tr><td>גלידה / מאפין<i>Eis · Muffin</i></td><td class="pr">~€3.5</td></tr>
           </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+          <div class="nopork">🚫🐷 <b>בלי חזיר ושרימפס:</b> להימנע מכל מנה עם Bacon, וממנות נקניקייה (Hot Dog, Würstchen).</div>
+          <div class="note">* לפי תיאור המסעדה וביקורות, המחירים משוערים. לבדוק במקום.</div>
   </div>
 </dialog>
 
@@ -1123,15 +1126,17 @@ footer a{color:var(--muted)}
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
           <span class="tag">📋 תפריט צהריים</span>
           <h4>Gasthaus zum Sünfzen, לינדאו</h4>
-          <p>אחד הבתים הוותיקים והמוכרים באי, עם אוכל בווארי ביתי. המיקום מרכזי, ומשם ממשיכים לטייל ברגל.</p>
+          <p>אחד הבתים הוותיקים והמוכרים באי, עם אוכל בווארי ביתי. אין תפריט ילדים נפרד, אבל אפשר לבקש מנה קטנה (Kinderportion). פתוח כל יום <bdi dir="ltr">10:30–22:30</bdi>.</p>
           <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
-            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9</td></tr>
-            <tr><td>שפצלה עם רוטב<i>Spätzle mit Soße</i></td><td class="pr">~€8</td></tr>
-            <tr><td>נקניקיות עם צ׳יפס<i>Wiener Würstchen mit Pommes</i></td><td class="pr">~€7.5</td></tr>
+            <tr><td>שניצל עגל מקורי (לחלוק או לבקש מנה קטנה)<i>Original Wiener Schnitzel vom Kalb</i></td><td class="pr">~€28</td></tr>
+            <tr><td>שפצלה בגבינה, בלי בייקון<i>Kässpätzle ohne Speck</i></td><td class="pr">~€16</td></tr>
+            <tr><td>שפצלה תרד עם פטריות וגבינה<i>Spinatspätzle mit Champignons und Bergkäse</i></td><td class="pr">~€18</td></tr>
+            <tr><td>מגש דגי אגם בודן (זנדר, פרץ׳)<i>Bodensee Fischteller</i></td><td class="pr">~€29</td></tr>
+            <tr><td>צ׳יפס<i>Pommes frites</i></td><td class="pr">~€5</td></tr>
             <tr><td>גלידת ילדים<i>Kinder-Eis</i></td><td class="pr">~€4.5</td></tr>
           </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום. ליד הסקייווק יש גם מסעדה בשירות עצמי, אם מישהו רעב באמצע הבוקר.</div>
+          <div class="nopork">🚫🐷 <b>בלי חזיר ושרימפס:</b> להימנע ממגש הגריל (Grillteller), ממאולטשן (Maultaschen, ממולאים בדרך כלל בחזיר), מנקניקיות ומכל דבר עם Speck או Schinken.</div>
+          <div class="note">* לפי התפריט באתר המסעדה (2026). אין תפריט ילדים מתועד, והמחירים יכולים להשתנות. ליד הסקייווק יש גם מסעדה בשירות עצמי, אם מישהו רעב באמצע הבוקר.</div>
   </div>
 </dialog>
 
@@ -1140,14 +1145,15 @@ footer a{color:var(--muted)}
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
           <span class="tag">📋 תפריט צהריים</span>
           <h4>Berghütte Bärenfalle, ב־Alpsee Bergwelt</h4>
-          <p>בקתת הרים גדולה ליד התחנה העליונה, עם נוף לאגם. אוכלים בין סיבוב אחד במגלשה לסיבוב הבא, בלי לנסוע.</p>
+          <p>בקתת הרים גדולה בשירות עצמי ליד התחנה העליונה, עם נוף לאגם וגן משחקים. אוכלים בין סיבוב אחד במגלשה לסיבוב הבא. פתוחה מ־9:30 בימים שהרכבל פועל.</p>
           <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
-            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9.5</td></tr>
-            <tr><td>מנת צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€4.5</td></tr>
-            <tr><td>קייזרשמארן (פנקייק קרוע עם רסק תפוחים)<i>Kaiserschmarrn mit Apfelmus</i></td><td class="pr">~€12</td></tr>
+            <tr><td>שפצלה בגבינה של אלגוי, בקערת עץ<i>Allgäuer Kässpatzen (ohne Speck)</i></td><td class="pr">~€14</td></tr>
+            <tr><td>פנקייק קרוע עם רסק תפוחים<i>Kaiserschmarrn mit Apfelmus</i></td><td class="pr">~€12</td></tr>
+            <tr><td>צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€4.5</td></tr>
+            <tr><td>מגש גבינות (רק בגרסת הגבינה)<i>Käseplatte</i></td><td class="pr">~€13</td></tr>
           </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+          <div class="nopork">🚫🐷 <b>בלי חזיר ושרימפס:</b> לבקש את השפצלה „ohne Speck“. להימנע מ־Brotzeit/Jause עם נקניק, מ־Currywurst ומ־Leberkäse.</div>
+          <div class="note">* אין תפריט ילדים מתועד. המנות לפי ההתמחויות הידועות של הבקתה, והמחירים משוערים.</div>
   </div>
 </dialog>
 
@@ -1157,14 +1163,16 @@ footer a{color:var(--muted)}
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
           <span class="tag">📋 תפריט צהריים</span>
           <h4>Restaurant Café Kainz, הוהנשוואנגאו</h4>
-          <p>במסעדה יש תפריט ילדים מיוחד ומרפסת גדולה עם נוף לנוישוונשטיין. מנות חמות מוגשות ברצף מ־10:30 עד 16:00.</p>
+          <p>יש תפריט ילדים ומרפסת גדולה עם נוף לנוישוונשטיין. פתוח כל יום <bdi dir="ltr">10:00–17:00</bdi>, ומנות חמות מוגשות <bdi dir="ltr">10:30–16:00</bdi>.</p>
           <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€10</td></tr>
-            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€9</td></tr>
-            <tr><td>אצבעות דג עם צ׳יפס<i>Fischstäbchen mit Pommes</i></td><td class="pr">~€9</td></tr>
-            <tr><td>נאגטס עוף עם צ׳יפס<i>Chicken Nuggets mit Pommes</i></td><td class="pr">~€9</td></tr>
+            <tr><td>חזה עוף בפנקו עם צ׳יפס (טוב לחלוק לילדים)<i>Hähnchenbrust im Panko mit Pommes</i></td><td class="pr">~€18</td></tr>
+            <tr><td>אצבעות דג עם צ׳יפס (מתפריט הילדים)<i>Fischstäbchen mit Pommes</i></td><td class="pr">~€9</td></tr>
+            <tr><td>קממבר אפוי<i>Gebackener Camembert</i></td><td class="pr">~€16.5</td></tr>
+            <tr><td>סלט גדול<i>Großer gemischter Salat</i></td><td class="pr">~€13.5</td></tr>
+            <tr><td>עוגה מהקפה<i>Kuchen</i></td><td class="pr">~€4.5</td></tr>
           </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+          <div class="nopork">🚫🐷 <b>בלי חזיר ושרימפס:</b> השניצל כאן הוא Schnitzel Wiener Art, כלומר מחזיר. להימנע גם מ־Schweinebraten, Weißwurst וקרבונרה. מתפריט הילדים לשאול מה בלי חזיר.</div>
+          <div class="note">* לפי התפריט של המסעדה מ־2024. תפריט הילדים עצמו לא פורסם, והמחירים יכולים להשתנות.</div>
   </div>
 </dialog>
 <dialog class="menu-dlg" id="menu-day6" aria-label="תפריט">
@@ -1172,14 +1180,16 @@ footer a{color:var(--muted)}
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
           <span class="tag">📋 תפריט צהריים</span>
           <h4>Seerestaurant Eibsee Pavillon</h4>
-          <p>מסעדה ממש על שפת האגם, על שביל ההליכה ולא רחוק מהשכרת סירות הפדלים.</p>
+          <p>מסעדה ממש על שפת האגם. אין תפריט ילדים נפרד, אבל יש מנות קטנות (kleine Portion). פתוח <bdi dir="ltr">10:00–17:00/18:00</bdi>, בעונה מאפריל. כדאי להתקשר לפני: <bdi dir="ltr">+49 8821 8913</bdi></p>
           <table class="menu">
-            <tr><td>שניצל ילדים עם צ׳יפס<i>Kinderschnitzel mit Pommes</i></td><td class="pr">~€11</td></tr>
-            <tr><td>אצבעות דג עם צ׳יפס<i>Fischstäbchen mit Pommes</i></td><td class="pr">~€9.5</td></tr>
-            <tr><td>מנת צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€5</td></tr>
-            <tr><td>קייזרשמארן<i>Kaiserschmarrn</i></td><td class="pr">~€13</td></tr>
+            <tr><td>שניצל עגל, יש גם מנה קטנה<i>Wiener Schnitzel vom Kalb</i></td><td class="pr">~€19.5</td></tr>
+            <tr><td>פילה זנדר, יש גם מנה קטנה<i>Gebratenes Zanderfilet</i></td><td class="pr">~€18</td></tr>
+            <tr><td>דג מעושן מהאגם<i>Räucherfisch / Forelle</i></td><td class="pr">~€14</td></tr>
+            <tr><td>פנקייק קרוע עם רסק תפוחים<i>Kaiserschmarrn</i></td><td class="pr">~€13</td></tr>
+            <tr><td>צ׳יפס<i>Portion Pommes</i></td><td class="pr">~€5</td></tr>
           </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+          <div class="nopork">🚫🐷 <b>בלי חזיר ושרימפס:</b> השניצל הרגיל כאן הוא מחזיר (Schweineschnitzel Wiener Art), אז להזמין את שניצל העגל. להימנע גם מ־Weißwurst, Leberkäse ו־Currywurst. חלופה אם סגור: Berggasthof Eibsee Alm.</div>
+          <div class="note">* לפי התפריט באתר המסעדה. המחירים יכולים להשתנות.</div>
   </div>
 </dialog>
 
@@ -1187,13 +1197,17 @@ footer a{color:var(--muted)}
   <div class="rest">
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
           <span class="tag">📋 תפריט צהריים</span>
-          <h4>Schnitzel Depot ומסעדות הפארק</h4>
+          <h4>Pizza Mania! בלגולנד (במקום Schnitzel Depot)</h4>
+          <p>באזור Imagination. יש שתי ארוחות ילדים קבועות, בר סלטים ופסטה. זו הבחירה הבטוחה, כי השניצל ב־Schnitzel Depot כנראה מחזיר.</p>
           <table class="menu">
-            <tr><td>ארוחת ילדים (מנה, שתייה והפתעה)<i>Kindermenü</i></td><td class="pr">~€10</td></tr>
-            <tr><td>שניצל עם צ׳יפס<i>Schnitzel mit Pommes</i></td><td class="pr">~€14</td></tr>
-            <tr><td>פיצה / פסטה<i>Pizza · Pasta</i></td><td class="pr">~€12</td></tr>
+            <tr><td>ארוחת ילדים: פיצה מרגריטה + סלט פירות + שתייה<i>Kindermenü Pizza Margherita</i></td><td class="pr">~€10</td></tr>
+            <tr><td>ארוחת ילדים: ספגטי ברוטב עגבניות<i>Kids Vital Spaghetti mit Tomatensoße</i></td><td class="pr">~€10</td></tr>
+            <tr><td>פיצה מרגריטה / פטריות / טונה<i>Pizza Margherita · Funghi · Tonno</i></td><td class="pr">~€12</td></tr>
+            <tr><td>בר סלטים<i>Salatbar</i></td><td class="pr">~€9</td></tr>
+            <tr><td>המבורגר בקר, ב־STARS Grill House, בלי בייקון<i>Burger (Rind) ohne Bacon</i></td><td class="pr">~€13</td></tr>
           </table>
-          <div class="note">* תפריט ילדים טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+          <div class="nopork">🚫🐷 <b>בלי חזיר ושרימפס:</b> להימנע מפיצה עם סלמי או חזיר (Salami, Schinken). על הבולונז לשאול. ב־Schnitzel Depot לשאול: „Ist das Schnitzel vom Schwein oder von der Pute?“</div>
+          <div class="note">* לפי אתר לגולנד (2026). המחירים משוערים.</div>
   </div>
 </dialog>
 
@@ -1201,16 +1215,17 @@ footer a{color:var(--muted)}
   <div class="rest">
     <button class="dlg-x" type="button" aria-label="סגירה">✕</button>
           <span class="tag">📋 תפריט ארוחת ערב</span>
-          <h4>פיצה מ־Pizzeria Puoro, גרמיש</h4>
-          <p>פיצריה פשוטה עם פיצות לילדים בצורת מיקי מאוס ולב. אפשר לשבת במקום או לקחת · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Pizzeria+Puoro+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></p>
+          <h4>Pizzeria Colosseo, גרמיש</h4>
+          <p>פיצריה פופולרית עם מרפסת, פתוחה כל יום, גם ביום שלישי. Puoro שתכננו קודם סגורה בימי שני ושלישי. פתוחה <bdi dir="ltr">17:00–22:00</bdi>, כדאי להתקשר לפני: <bdi dir="ltr">08821 52809</bdi> · Klammstraße 7 · <a target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=Pizzeria+Colosseo+Garmisch-Partenkirchen">🗺️ גוגל מפות</a></p>
           <table class="menu">
-            <tr><td>פיצה לילדים (מיקי / לב)<i>Kinderpizza Margherita</i></td><td class="pr">~€8</td></tr>
-            <tr><td>פיצה מרגריטה<i>Pizza Margherita</i></td><td class="pr">~€10.5</td></tr>
-            <tr><td>פיצה סלמי<i>Pizza Salami</i></td><td class="pr">~€12</td></tr>
-            <tr><td>ספגטי בולונז<i>Spaghetti Bolognese</i></td><td class="pr">~€11</td></tr>
-            <tr><td>פסטה ברוטב עגבניות<i>Pasta Pomodoro</i></td><td class="pr">~€9</td></tr>
+            <tr><td>פיצה מרגריטה<i>Pizza Margherita</i></td><td class="pr">~€10</td></tr>
+            <tr><td>פיצה פטריות / טונה / ירקות<i>Pizza Funghi · Tonno · Verdure</i></td><td class="pr">~€12</td></tr>
+            <tr><td>ספגטי ברוטב עגבניות<i>Spaghetti al Pomodoro</i></td><td class="pr">~€10</td></tr>
+            <tr><td>פסטה עם סלמון<i>Pasta mit Lachs</i></td><td class="pr">~€14</td></tr>
+            <tr><td>פיצת נוטלה לקינוח<i>Pizza Nutella</i></td><td class="pr">~€9</td></tr>
           </table>
-          <div class="note">* תפריט טיפוסי, והמחירים משוערים. לבדוק במקום.</div>
+          <div class="nopork">🚫🐷 <b>בלי חזיר ושרימפס:</b> להימנע מ־Salami, Diavola, Prosciutto/Schinken, Hawaii וקרבונרה, ומפירות ים (Frutti di Mare, Gamberi). בולונז ולזניה עשויים בדרך כלל מבשר מעורב, אז לשאול.</div>
+          <div class="note">* תפריט טיפוסי של פיצריה, והמחירים משוערים. לבדוק במקום.</div>
   </div>
 </dialog>
 
@@ -1228,6 +1243,7 @@ footer a{color:var(--muted)}
             <tr><td>צ׳יפס בינוני<i>Pommes Frites mittel</i></td><td class="pr">~€4</td></tr>
             <tr><td>מקפלורי<i>McFlurry</i></td><td class="pr">~€4.5</td></tr>
           </table>
+          <div class="nopork">🚫🐷 <b>בלי חזיר ושרימפס:</b> מכילים חזיר: McRib וכל מנה עם Bacon. בטוחים: המבורגר, צ׳יזבורגר, ביג מק, נאגטס, McChicken ו־Filet-O-Fish. בקינוחים יכולה להיות ג׳לטין, אז לבדוק באפליקציה.</div>
           <div class="note">* מחירים משוערים לפי מקדונלדס בגרמניה. המחירים והמבצעים משתנים בין סניפים, ובשדה התעופה הם בדרך כלל קצת יותר יקרים.</div>
   </div>
 </dialog>
