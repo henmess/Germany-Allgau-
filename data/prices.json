@@ -13,6 +13,10 @@
         {
           "d": "2026-10-13",
           "p": 18733
+        },
+        {
+          "d": "2026-10-15",
+          "p": 18888
         }
       ],
       "name": "✈️ טיסות אל על LY353 / LY354",
@@ -40,7 +44,8 @@
       "paid": 2520,
       "exact": true,
       "link": "https://www.centerparcs.de/de-de/deutschland/fp_AG_ferienpark-park-allgaeu",
-      "room": "Premium Cottage (8 Adults)"
+      "room": "Premium Cottage (8 Adults)",
+      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     },
     "garmisch": {
       "history": [
@@ -55,6 +60,10 @@
         {
           "d": "2026-10-13",
           "p": 1480
+        },
+        {
+          "d": "2026-10-15",
+          "p": 1494
         }
       ],
       "name": "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)",
@@ -72,6 +81,10 @@
         {
           "d": "2026-10-13",
           "p": 581
+        },
+        {
+          "d": "2026-10-15",
+          "p": 587
         }
       ],
       "name": "🛏️ מלון Atomis ליד שדה התעופה (לילה)",
@@ -81,5 +94,5 @@
       "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר"
     }
   },
-  "checked": "2026-10-13T12:42:18.598Z"
+  "checked": "2026-10-15T09:53:22.176Z"
 }
