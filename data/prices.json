@@ -33,6 +33,10 @@
         {
           "d": "2026-10-23",
           "p": 18951
+        },
+        {
+          "d": "2026-10-25",
+          "p": 18920
         }
       ],
       "name": "✈️ טיסות אל על LY353 / LY354",
@@ -104,6 +108,10 @@
         {
           "d": "2026-10-23",
           "p": 1497
+        },
+        {
+          "d": "2026-10-25",
+          "p": 1496
         }
       ],
       "name": "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)",
@@ -147,8 +155,9 @@
       "paid": 643,
       "exact": true,
       "link": "https://www.google.com/travel/search?q=Atomis+Hotel+Munich+Airport&hl=en&gl=il",
-      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר"
+      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר",
+      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     }
   },
-  "checked": "2026-10-23T10:02:13.311Z"
+  "checked": "2026-10-25T09:48:08.086Z"
 }
