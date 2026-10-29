@@ -41,6 +41,10 @@
         {
           "d": "2026-10-27",
           "p": 21378
+        },
+        {
+          "d": "2026-10-29",
+          "p": 21734
         }
       ],
       "name": "✈️ טיסות אל על LY353 / LY354",
@@ -126,7 +130,8 @@
       "paid": 1355,
       "exact": true,
       "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר",
-      "link": "http://www.rheinischerhof-garmisch.de/"
+      "link": "http://www.rheinischerhof-garmisch.de/",
+      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     },
     "atomis": {
       "history": [
@@ -161,6 +166,10 @@
         {
           "d": "2026-10-27",
           "p": 612
+        },
+        {
+          "d": "2026-10-29",
+          "p": 622
         }
       ],
       "name": "🛏️ מלון Atomis ליד שדה התעופה (לילה)",
@@ -170,5 +179,5 @@
       "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר"
     }
   },
-  "checked": "2026-10-27T10:31:45.563Z"
+  "checked": "2026-10-29T11:30:25.170Z"
 }
