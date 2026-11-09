@@ -65,6 +65,10 @@
         {
           "d": "2026-11-07",
           "p": 22252
+        },
+        {
+          "d": "2026-11-09",
+          "p": 22145
         }
       ],
       "name": "✈️ טיסות אל על LY353 / LY354",
@@ -177,7 +181,8 @@
       "paid": 1355,
       "exact": true,
       "link": "http://www.rheinischerhof-garmisch.de/",
-      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר"
+      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר",
+      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     },
     "atomis": {
       "history": [
@@ -242,5 +247,5 @@
       "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     }
   },
-  "checked": "2026-11-07T11:42:48.374Z"
+  "checked": "2026-11-09T13:53:09.454Z"
 }
