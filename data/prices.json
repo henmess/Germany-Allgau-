@@ -69,6 +69,10 @@
         {
           "d": "2026-11-09",
           "p": 22145
+        },
+        {
+          "d": "2026-11-11",
+          "p": 22209
         }
       ],
       "name": "✈️ טיסות אל על LY353 / LY354",
@@ -106,13 +110,16 @@
         {
           "d": "2026-11-03",
           "p": 3634
+        },
+        {
+          "d": "2026-11-11",
+          "p": 3284
         }
       ],
       "name": "🌲 סנטר פארקס אלגוי (3 לילות)",
       "paid": 2520,
       "exact": false,
-      "link": "https://www.centerparcs.de/de-de/deutschland/fp_AG_ferienpark-park-allgaeu",
-      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
+      "link": "https://www.centerparcs.de/de-de/deutschland/fp_AG_ferienpark-park-allgaeu"
     },
     "garmisch": {
       "history": [
@@ -175,14 +182,17 @@
         {
           "d": "2026-11-07",
           "p": 1528
+        },
+        {
+          "d": "2026-11-11",
+          "p": 1409
         }
       ],
       "name": "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)",
       "paid": 1355,
       "exact": true,
       "link": "http://www.rheinischerhof-garmisch.de/",
-      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר",
-      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
+      "fare": "חדר משפחתי (2 מבוגרים + 2 ילדים) · ביטול חינם · בלי ארוחת בוקר"
     },
     "atomis": {
       "history": [
@@ -247,5 +257,5 @@
       "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     }
   },
-  "checked": "2026-11-09T13:53:09.454Z"
+  "checked": "2026-11-11T12:42:20.914Z"
 }
