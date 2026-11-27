@@ -101,6 +101,10 @@
         {
           "d": "2026-11-25",
           "p": 23642
+        },
+        {
+          "d": "2026-11-27",
+          "p": 23257
         }
       ],
       "name": "✈️ טיסות אל על LY353 / LY354",
@@ -164,7 +168,8 @@
       "paid": 2520,
       "exact": true,
       "link": "https://www.centerparcs.de/de-de/deutschland/fp_AG_ferienpark-park-allgaeu",
-      "room": "Premium Cottage (6 adults)"
+      "room": "Premium Cottage (6 adults)",
+      "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     },
     "garmisch": {
       "history": [
@@ -259,6 +264,10 @@
         {
           "d": "2026-11-25",
           "p": 1591
+        },
+        {
+          "d": "2026-11-27",
+          "p": 1559
         }
       ],
       "name": "🏔️ מלון Rheinischer Hof בגרמיש (2 לילות)",
@@ -330,5 +339,5 @@
       "error": "no price on Google (Booking fallback needs RAPIDAPI_KEY)"
     }
   },
-  "checked": "2026-11-25T15:34:54.501Z"
+  "checked": "2026-11-27T15:02:41.735Z"
 }
